@@ -1,19 +1,8 @@
-# mall-frontend
+# 在线商城前端
 
-## Project setup
-```
-npm install
-```
+JavaWeb期末大作业前端部分。  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+技术栈：
+- Vue2
+- VueRouter
+- ElementUI
