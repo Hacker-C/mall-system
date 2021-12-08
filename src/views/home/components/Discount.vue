@@ -9,9 +9,9 @@
         <img src="../../../assets/upload/seckill.png" alt="" />
         <p>距离本场结束还剩</p>
         <div class="time">
-          <div>01</div>
-          <div>02</div>
-          <div>03</div>
+          <div>{{ hours }}</div>
+          <div>{{ minutes }}</div>
+          <div>{{ seconds }}</div>
         </div>
       </el-col>
       <el-col :span="4">
@@ -36,6 +36,40 @@
 <script>
 const DiscountItem = () => import('./DiscountItem.vue')
 export default {
+  data() {
+    return {
+      count: '', //倒计时
+      leftSeconds: 36000, // 10天的秒数
+      hours: '',
+      minutes: '',
+      seconds: ''
+    }
+  },
+  mounted() {
+    this.Time() //调用定时器
+  },
+  methods: {
+    // 天 时 分 秒 格式化函数
+    countDown() {
+      let h = parseInt((this.seconds / (60 * 60)) % 24)
+      h = h < 10 ? '0' + h : h
+      let m = parseInt((this.leftSeconds / 60) % 60)
+      this.hours = h
+      m = m < 10 ? '0' + m : m
+      this.minutes = m
+      let s = parseInt(this.leftSeconds % 60)
+      s = s < 10 ? '0' + s : s
+      this.seconds = s
+      // this.count = d + '天' + h + '时' + m + '分' + s + '秒'
+    },
+    //定时器没过1秒参数减1
+    Time() {
+      setInterval(() => {
+        this.leftSeconds -= 1
+        this.countDown()
+      }, 1000)
+    }
+  },
   components: {
     DiscountItem
   }
@@ -47,6 +81,7 @@ export default {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
   margin-bottom: 100px;
+  height: 240px;
 }
 .header {
   font-weight: 400;

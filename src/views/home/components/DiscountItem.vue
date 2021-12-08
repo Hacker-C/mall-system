@@ -16,6 +16,10 @@ export default {}
 <style scoped>
 .discount-item {
   padding: 10px;
+  transition: all 0.3s;
+}
+.discount-item:hover img {
+  transform: scale(1.05);
 }
 .discount-item img {
   width: 100%;
