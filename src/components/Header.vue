@@ -11,8 +11,8 @@
         @select="handleSelect"
         router
       >
-        <el-menu-item index="/home" style="padding: 0">首页</el-menu-item>
-        <el-menu-item index="/category">商品分类</el-menu-item>
+        <el-menu-item index="/home">首页</el-menu-item>
+        <el-menu-item index="/product_list">所有商品</el-menu-item>
         <el-submenu index="">
           <template slot="title">更多</template>
           <el-menu-item index="/about">关于本网站</el-menu-item>
@@ -27,13 +27,15 @@
           ></el-input>
         </el-menu-item>
 
-        <el-menu-item index="5"
+        <el-menu-item index="5" class="el-menu-right"
           ><i class="el-icon-star-on"></i> 收藏夹</el-menu-item
         >
-        <el-menu-item index="6"
+        <el-menu-item index="6" class="el-menu-right"
           ><i class="el-icon-shopping-cart-1"></i> 购物车</el-menu-item
         >
-        <el-menu-item index="7">订单</el-menu-item>
+        <el-menu-item index="7" class="el-menu-right">
+          <i class="el-icon-s-order"></i> 订单</el-menu-item
+        >
       </el-menu>
     </el-col>
     <el-col :span="3" style="margin-top: 20px">
@@ -88,5 +90,9 @@ export default {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.el-menu-right {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 </style>
