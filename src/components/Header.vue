@@ -22,11 +22,22 @@
           ></el-input>
           <el-button style="margin-left: 5px">搜索</el-button>
         </el-col>
-        <el-menu-item index="5" class="el-menu-right" :offset="2"
-          >收藏夹</el-menu-item
+        <el-menu-item
+          index="5"
+          class="el-menu-right"
+          :offset="2"
+          style="line-height: 38px"
         >
-        <el-menu-item index="6" class="el-menu-right">购物车</el-menu-item>
-        <el-menu-item index="7" class="el-menu-right">我的订单</el-menu-item>
+          <el-badge :value="12" class="item"> 收藏夹 </el-badge>
+        </el-menu-item>
+        <el-menu-item index="6" class="el-menu-right" style="line-height: 38px">
+          <el-badge :value="12" class="item"> 购物车 </el-badge>
+        </el-menu-item>
+        <el-menu-item index="7" class="el-menu-right" style="line-height: 38px">
+          <el-badge :value="12" class="item" style="height: 20px">
+            我的订单
+          </el-badge>
+        </el-menu-item>
         <el-menu-item index="8" class="el-menu-right">我的</el-menu-item>
         <el-submenu index="">
           <template slot="title">更多</template>
@@ -76,6 +87,9 @@ export default {
 </script>
 
 <style scoped>
+.item {
+  height: 20px;
+}
 .line {
   border-bottom: 1px solid #ccc;
 }
@@ -90,5 +104,10 @@ export default {
 .el-menu-right {
   padding-left: 5px;
   padding-right: 5px;
+  margin-left: 12px;
+}
+.badge__content {
+  position: absolute;
+  left: 0;
 }
 </style>
