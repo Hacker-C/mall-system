@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Header />
+    <Layout />
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
+import Layout from './layout/Layout.vue'
 
 export default {
   name: 'app',
   components: {
-    Header
+    Layout
   }
 }
 </script>

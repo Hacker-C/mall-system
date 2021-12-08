@@ -1,9 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const Home = () => import('../views/Home.vue')
+
 Vue.use(VueRouter)
 
-const routes = []
+const routes = [
+  {
+    path: '',
+    redirect: 'home',
+    children: [
+      {
+        path: '/home',
+        componen: Home
+      }
+    ]
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',
