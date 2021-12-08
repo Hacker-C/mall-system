@@ -1,17 +1,20 @@
 <template>
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <Carousel />
-    <Hot />
+    <Category />
+    <Test />
   </div>
 </template>
 
 <script>
 const Carousel = () => import('./components/Carousel.vue')
-const Hot = () => import('./components/Category.vue')
+const Category = () => import('./components/Category.vue')
+const Test = () => import('./Test.vue')
 export default {
   components: {
     Carousel,
-    Hot
+    Category,
+    Test
   }
 }
 </script>

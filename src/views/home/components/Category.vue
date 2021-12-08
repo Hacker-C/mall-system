@@ -4,8 +4,8 @@
       <h3 class="header">商品分类</h3>
     </el-row>
     <el-row class="classify-container">
-      <el-tabs :tab-position="tabPosition">
-        <el-tab-pane label="零食蔬菜" style="display: block; padding-right: 0">
+      <el-tabs :tab-position="tabPosition" :lazy="true">
+        <el-tab-pane label="零食蔬菜" class="tab-pane">
           <div class="card-bd">
             <el-card class="card" v-for="i in 7" :key="i">
               <img
@@ -26,7 +26,7 @@
             </el-card>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="图书教育" style="display: block; padding-right: 0">
+        <el-tab-pane label="图书教育" class="tab-pane">
           <div class="card-bd">
             <el-card class="card" v-for="item in books" :key="item.id">
               <img :src="item.src" class="image" />
@@ -44,7 +44,9 @@
             </el-card>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="家用电器">家用电器</el-tab-pane>
+        <el-tab-pane label="家用电器">
+          <div class="card-bd3">123</div>
+        </el-tab-pane>
         <el-tab-pane label="个护清洁">个护清洁</el-tab-pane>
         <el-tab-pane label="电子数码">电子数码</el-tab-pane>
         <el-tab-pane label="医药保健">医药保健</el-tab-pane>
@@ -76,13 +78,19 @@ export default {
           desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
         },
         {
-          id: 1,
+          id: 2,
           name: '活着',
           src: require('../../../assets/upload/book1.png'),
           desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
         },
         {
-          id: 1,
+          id: 3,
+          name: '活着',
+          src: require('../../../assets/upload/book1.png'),
+          desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
+        },
+        {
+          id: 4,
           name: '活着',
           src: require('../../../assets/upload/book1.png'),
           desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
@@ -133,5 +141,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+}
+
+.tab-pane {
+  padding-right: 0;
 }
 </style>

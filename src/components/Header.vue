@@ -3,7 +3,7 @@
     <el-col :span="4">
       <h3 style="padding-left: 20px; padding-top: 15px">在线商城</h3>
     </el-col>
-    <el-col flex="1" :push="0" style="">
+    <el-col flex="1">
       <el-menu
         :default-active="path"
         class="el-menu-demo"
@@ -13,45 +13,40 @@
       >
         <el-menu-item index="/home">首页</el-menu-item>
         <el-menu-item index="/product_list">所有商品</el-menu-item>
+        <el-col :span="10" style="text-align: center">
+          <el-input
+            v-model="search"
+            placeholder="请输入搜索内容"
+            suffix-icon="el-icon-search"
+            style="width: 200px; margin-top: 10px"
+          ></el-input>
+          <el-button style="margin-left: 5px">搜索</el-button>
+        </el-col>
+        <el-menu-item index="5" class="el-menu-right" :offset="2"
+          >收藏夹</el-menu-item
+        >
+        <el-menu-item index="6" class="el-menu-right">购物车</el-menu-item>
+        <el-menu-item index="7" class="el-menu-right">我的订单</el-menu-item>
+        <el-menu-item index="8" class="el-menu-right">我的</el-menu-item>
         <el-submenu index="">
           <template slot="title">更多</template>
           <el-menu-item index="/about">关于本网站</el-menu-item>
           <el-menu-item index="/notice">网站公告</el-menu-item>
+          <el-menu-item index="shopkeeper">
+            <el-link>注册成为商家</el-link>
+          </el-menu-item>
         </el-submenu>
-        <el-menu-item>
-          <el-input
-            v-model="search"
-            style="width: 250px"
-            placeholder="请输入搜索内容"
-            suffix-icon="el-icon-search"
-          ></el-input>
-        </el-menu-item>
-
-        <el-menu-item index="5" class="el-menu-right"
-          ><i class="el-icon-star-on"></i> 收藏夹</el-menu-item
-        >
-        <el-menu-item index="6" class="el-menu-right"
-          ><i class="el-icon-shopping-cart-1"></i> 购物车</el-menu-item
-        >
-        <el-menu-item index="7" class="el-menu-right">
-          <i class="el-icon-s-order"></i> 订单</el-menu-item
-        >
       </el-menu>
     </el-col>
-    <el-col :span="3" style="margin-top: 20px">
-      <el-link>注册成为商家</el-link>
-    </el-col>
     <el-col :span="3">
-      <el-button
-        type="primary"
-        style="height: 35px; line-height: 10px; margin-top: 10px"
+      <el-button style="height: 35px; line-height: 10px; margin-top: 10px"
         >登录</el-button
       >
     </el-col>
     <el-col :span="3" style="padding-right: 0; padding-top: 18px">
       <el-dropdown style="width: 100%; padding: 0">
         <span class="el-dropdown-link">
-          欢迎，请登录！<i class="el-icon-arrow-down el-icon--right"></i>
+          游客<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人信息</el-dropdown-item>
@@ -87,6 +82,7 @@ export default {
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
+  font-size: 12px;
 }
 .el-icon-arrow-down {
   font-size: 12px;
