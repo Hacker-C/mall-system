@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <h3>hello</h3>
-    <el-button>按钮</el-button>
+    <Header />
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue'
+
 export default {
   name: 'app',
-  components: {}
+  components: {
+    Header
+  }
 }
 </script>
 
