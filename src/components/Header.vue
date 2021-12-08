@@ -5,17 +5,18 @@
     </el-col>
     <el-col flex="1" :push="0" style="">
       <el-menu
-        :default-active="activeIndex"
+        :default-active="path"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
+        router
       >
-        <el-menu-item index="1" style="padding: 0">首页</el-menu-item>
-        <el-menu-item index="2">商品分类</el-menu-item>
-        <el-submenu index="3">
+        <el-menu-item index="/home" style="padding: 0">首页</el-menu-item>
+        <el-menu-item index="/category">商品分类</el-menu-item>
+        <el-submenu index="">
           <template slot="title">更多</template>
-          <el-menu-item index="2-1">关于本网站</el-menu-item>
-          <el-menu-item index="2-3">网站公告</el-menu-item>
+          <el-menu-item index="/about">关于本网站</el-menu-item>
+          <el-menu-item index="/notice">网站公告</el-menu-item>
         </el-submenu>
         <el-menu-item>
           <el-input
@@ -45,7 +46,7 @@
         >登录</el-button
       >
     </el-col>
-    <el-col :span="4" style="padding-right: 0; padding-top: 18px">
+    <el-col :span="3" style="padding-right: 0; padding-top: 18px">
       <el-dropdown style="width: 100%; padding: 0">
         <span class="el-dropdown-link">
           欢迎，请登录！<i class="el-icon-arrow-down el-icon--right"></i>
@@ -65,7 +66,8 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      search: ''
+      search: '',
+      path: this.$route.path
     }
   },
   methods: {

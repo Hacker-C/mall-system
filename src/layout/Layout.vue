@@ -1,9 +1,12 @@
 <template>
-  <Header />
+  <div>
+    <Header />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import Header from '../components/Header.vue'
+const Header = () => import('../components/Header.vue')
 
 export default {
   components: {
