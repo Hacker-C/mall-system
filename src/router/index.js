@@ -6,6 +6,10 @@ const Layout = () => import('../layout/Layout.vue')
 const ProductList = () => import('../views/ProductList.vue')
 const About = () => import('../views/About.vue')
 const Notice = () => import('../views/Notice.vue')
+const Like = () => import('../views/Like.vue')
+const Cart = () => import('../views/Cart.vue')
+const Order = () => import('../views/Order.vue')
+const Profile = () => import('../views/Profile.vue')
 
 Vue.use(VueRouter)
 
@@ -34,6 +38,22 @@ const routes = [
       {
         path: '/notice',
         component: Notice
+      },
+      {
+        path: '/like',
+        component: Like
+      },
+      {
+        path: '/cart',
+        component: Cart
+      },
+      {
+        path: '/order',
+        component: Order
+      },
+      {
+        path: '/profile',
+        component: Profile
       }
     ]
   }
