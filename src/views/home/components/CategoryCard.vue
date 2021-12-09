@@ -1,6 +1,6 @@
 <template>
   <a
-    href="void:;"
+    href="javascript:;"
     style="display: block; text-decoration: none"
     @click="getProductDetails"
   >
@@ -36,6 +36,17 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    getProductDetails() {
+      // 点击Card组件，通过路由传递商品id给Dtails组件，期间发起请求。
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: this.product.id
+        }
+      })
+    }
   }
 }
 </script>
@@ -49,11 +60,12 @@ export default {
 }
 .card {
   width: 200px;
-  height: 220px;
+  /* height: 220px; */
   transition: all 0.2s;
   margin-top: 10px;
   margin-left: 20px;
   padding-top: 0;
+  padding-bottom: 0;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 

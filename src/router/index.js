@@ -10,6 +10,7 @@ const Like = () => import('../views/Like.vue')
 const Cart = () => import('../views/Cart.vue')
 const Order = () => import('../views/Order.vue')
 const Profile = () => import('../views/Profile.vue')
+const Details = () => import('../views/details/Details.vue')
 
 Vue.use(VueRouter)
 
@@ -29,31 +30,59 @@ const routes = [
       },
       {
         path: '/product_list',
-        component: ProductList
+        component: ProductList,
+        meta: {
+          name: '商品列表'
+        }
       },
       {
         path: '/about',
-        component: About
+        component: About,
+        meta: {
+          name: '关于我们'
+        }
       },
       {
         path: '/notice',
-        component: Notice
+        component: Notice,
+        meta: {
+          name: '网站公告'
+        }
       },
       {
         path: '/like',
-        component: Like
+        component: Like,
+        meta: {
+          name: '我的收藏夹'
+        }
       },
       {
         path: '/cart',
-        component: Cart
+        component: Cart,
+        meta: {
+          name: '购物车'
+        }
       },
       {
         path: '/order',
-        component: Order
+        component: Order,
+        meta: {
+          name: '所有订单'
+        }
       },
       {
         path: '/profile',
-        component: Profile
+        component: Profile,
+        meta: {
+          name: '个人信息'
+        }
+      },
+      {
+        path: '/details',
+        component: Details,
+        meta: {
+          name: '商品详情'
+        }
       }
     ]
   }

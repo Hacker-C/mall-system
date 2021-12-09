@@ -7,8 +7,8 @@
       <el-tabs :tab-position="tabPosition" :lazy="true">
         <el-tab-pane label="零食蔬菜" class="tab-pane">
           <div class="card-bd">
-            <div v-for="i in 8" :key="i">
-              <Card />
+            <div v-for="(item, index) in foods" :key="index">
+              <Card :product="item" />
             </div>
           </div>
         </el-tab-pane>
@@ -68,8 +68,39 @@ export default {
         {
           id: 4,
           name: '活着',
+          price: 59.9,
           src: require('../../../assets/upload/book1.png'),
           desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
+        }
+      ],
+      foods: [
+        {
+          id: 5,
+          name: '汉堡',
+          src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+          price: 19.9,
+          desc: '现在可以特价购买'
+        },
+        {
+          id: 6,
+          name: '汉堡',
+          src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+          price: 19.9,
+          desc: '现在可以特价购买'
+        },
+        {
+          id: 7,
+          name: '汉堡',
+          src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+          price: 19.9,
+          desc: '现在可以特价购买'
+        },
+        {
+          id: 8,
+          name: '汉堡',
+          src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+          price: 19.9,
+          desc: '现在可以特价购买'
         }
       ]
     }
