@@ -1,5 +1,5 @@
 <template>
-  <div>我的收藏夹</div>
+  <div>收藏夹</div>
 </template>
 
 <script>

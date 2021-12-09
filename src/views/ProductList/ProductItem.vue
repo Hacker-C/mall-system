@@ -42,9 +42,7 @@ export default {
       return '￥' + this.cImage.price
     }
   },
-  created() {
-    console.log(props)
-  }
+  created() {}
 }
 </script>
 
