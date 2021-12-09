@@ -1,7 +1,23 @@
 <template>
   <el-row type="flex" class="line">
     <el-col :span="4">
-      <h3 style="padding-left: 20px; padding-top: 15px">在线商城</h3>
+      <img
+        src="../assets/upload/logo.svg"
+        alt=""
+        style="height: 40px; width: 40px; margin-left: 7px; margin-top: 7px"
+      />
+      <h3
+        style="
+          padding-left: 10px;
+          display: inline-block;
+          color: #409eff;
+          position: absolute;
+          bottom: 20px;
+          font-size: 15px;
+        "
+      >
+        在线商城
+      </h3>
     </el-col>
     <el-col flex="1">
       <el-menu
