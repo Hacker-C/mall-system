@@ -17,28 +17,28 @@
           <el-dropdown-menu slot="dropdown">
             <a
               href="javascript:;"
-              @click="change('上架时间')"
+              @click="change('上架时间', 0)"
               style="text-decoration: none; color: #333"
             >
               <el-dropdown-item>上架时间</el-dropdown-item>
             </a>
             <a
               href="javascript:;"
-              @click="change('价格')"
+              @click="change('价格', 1)"
               style="text-decoration: none; color: #333"
             >
               <el-dropdown-item>价格</el-dropdown-item>
             </a>
             <a
               href="javascript:;"
-              @click="change('已售量')"
+              @click="change('已售量', 2)"
               style="text-decoration: none; color: #333"
             >
               <el-dropdown-item>已售量</el-dropdown-item>
             </a>
             <a
               href="javascript:;"
-              @click="change('评价数')"
+              @click="change('评价数', 3)"
               style="text-decoration: none; color: #333"
             >
               <el-dropdown-item>评价数</el-dropdown-item>
@@ -50,29 +50,79 @@
         }}</el-button>
       </el-col>
     </el-row>
+    <el-row style="display: flex; flex-wrap: wrap">
+      <div v-for="(item, index) in data1" :key="index">
+        <ProductItem :cImage="item" />
+      </div>
+    </el-row>
   </div>
 </template>
 
 <script>
+const ProductItem = () => import('./ProductItem.vue')
+
 export default {
   data() {
     return {
       order: '上架时间',
-      rev: '升序'
+      orderNum: 0,
+      rev: '升序',
+      data1: [
+        {
+          name: '长袖',
+          time: '2021-9-2',
+          price: 39.9,
+          src: require('../../assets/upload/product1.webp')
+        },
+        {
+          name: '长袖',
+          time: '2021-10-2',
+          price: 29.9,
+          src: require('../../assets/upload/product1.webp')
+        },
+        {
+          name: '长袖',
+          time: '2021-11-2',
+          price: 59.9,
+          src: require('../../assets/upload/product1.webp')
+        }
+      ],
+      f: (a, b) => {
+        // if (this.orderNum === 0) {
+        //   return new Date(a.time) > new Date(b.time)
+        // } else if (this.orderNum === 1) {
+        return a.price > b.price
+        // }
+      }
     }
   },
   methods: {
-    change(s) {
+    change(s, num) {
       this.order = s
+      this.orderNum = num
+      console.log(this.orderNum)
+      this.sortBy()
     },
     reverse() {
       this.rev = this.rev == '升序' ? '逆序' : '升序'
+    },
+    sortBy() {
+      this.data1.sort((a, b) => a.price > b.price)
+      console.log(this.f)
     }
+  },
+  components: {
+    ProductItem
   }
 }
 </script>
 
 <style scoped>
+.test {
+  height: 200px;
+  width: 200px;
+  background-color: pink;
+}
 .header {
   height: 50px;
   border-bottom: 1px solid rgba(204, 204, 204, 0.5);

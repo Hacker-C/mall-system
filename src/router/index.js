@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 const Home = () => import('../views/home/Home.vue')
 const Layout = () => import('../layout/Layout.vue')
-const ProductList = () => import('../views/ProductList.vue')
+const ProductList = () => import('../views/ProductList/ProductList.vue')
 const About = () => import('../views/About.vue')
 const Notice = () => import('../views/Notice.vue')
 const Like = () => import('../views/Like.vue')
