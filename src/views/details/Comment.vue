@@ -2,15 +2,28 @@
   <div style="width: 100%" class="comment-bd">
     <h3 class="header">商品评论</h3>
     <div class="com-header" v-for="i in 3" :key="i">
-      <el-avatar :size="60" :src="circleUrl" class="avatar"></el-avatar>
-      <span class="uname">李华</span>
+      <el-avatar :size="60" :src="user.avatarUrl" class="avatar"></el-avatar>
+      <span class="uname">{{ user.username }}</span>
       <span class="text">非常好看的一本书，值得推荐！</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    cUser: {
+      type: Object,
+      default() {
+        return {
+          username: '李华',
+          avatarUrl:
+            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/avatar.4biaa36wslg0.jpg'
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

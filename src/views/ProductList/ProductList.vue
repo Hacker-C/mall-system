@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import request from '../../utils/request'
 const ProductItem = () => import('./ProductItem.vue')
 
 export default {
@@ -67,48 +68,29 @@ export default {
       order: '上架时间',
       orderNum: 0,
       rev: '升序',
-      data1: [
-        {
-          name: '长袖',
-          time: '2021-9-2',
-          price: 39.9,
-          src: require('../../assets/upload/product1.webp')
-        },
-        {
-          name: '长袖',
-          time: '2021-10-2',
-          price: 29.9,
-          src: require('../../assets/upload/product1.webp')
-        },
-        {
-          name: '长袖',
-          time: '2021-11-2',
-          price: 59.9,
-          src: require('../../assets/upload/product1.webp')
-        }
-      ],
-      f: (a, b) => {
-        // if (this.orderNum === 0) {
-        //   return new Date(a.time) > new Date(b.time)
-        // } else if (this.orderNum === 1) {
-        return a.price > b.price
-        // }
-      }
+      data1: []
     }
+  },
+  created() {
+    request
+      .get('/product')
+      .then((res) => {
+        res.forEach((e) => {
+          this.data1.push(e)
+        })
+        console.log(this.data1)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     change(s, num) {
       this.order = s
       this.orderNum = num
-      console.log(this.orderNum)
-      this.sortBy()
     },
     reverse() {
       this.rev = this.rev == '升序' ? '逆序' : '升序'
-    },
-    sortBy() {
-      this.data1.sort((a, b) => a.price > b.price)
-      console.log(this.f)
     }
   },
   components: {

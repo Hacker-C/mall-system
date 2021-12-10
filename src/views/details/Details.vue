@@ -106,7 +106,7 @@
         </el-row>
       </el-col>
     </el-row>
-    <Comment />
+    <Comment :cUser="user" />
   </div>
 </template>
 
@@ -129,7 +129,12 @@ export default {
         src: require('../../assets/upload/book1.png'),
         desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
       },
-      count: 0
+      count: 0,
+      user: {
+        avatarUrl:
+          'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/avatar.4biaa36wslg0.jpg',
+        username: '李华'
+      }
     }
   },
   mounted() {
