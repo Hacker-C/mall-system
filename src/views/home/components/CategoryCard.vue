@@ -4,7 +4,7 @@
     style="display: block; text-decoration: none"
     @click="getProductDetails"
   >
-    <el-card class="card">
+    <el-card class="card" title="点击可查看商品详情">
       <img :src="product.imgSrc" class="image" />
       <p style="text-align: center">{{ product.productName }}</p>
       <p class="desc">
@@ -14,8 +14,10 @@
         >￥{{ product.productPrice }}</span
       >
       <div>
-        <el-button size="small">加入购物车</el-button>
-        <el-button size="small">购买</el-button>
+        <el-button size="small" @click="addToCart(1, $event)"
+          >加入购物车</el-button
+        >
+        <el-button size="small" @click="buy">购买</el-button>
       </div>
     </el-card>
   </a>
@@ -46,6 +48,14 @@ export default {
           id: this.product.id
         }
       })
+    },
+    addToCart(i, e) {
+      console.log(i)
+      // 阻止事件冒泡
+      e.stopPropagation()
+    },
+    buy(e) {
+      e.stopPropagation()
     }
   }
 }
