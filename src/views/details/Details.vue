@@ -52,10 +52,13 @@
                 >上门换新 | 破损包退换 | 闪电退款</span
               >
             </div>
-            <div class="counts">
-              <div @click="decrease">-</div>
-              <div>{{ count }}</div>
-              <div @click="increase">+</div>
+            <div>
+              <el-input-number
+                size="small"
+                v-model="num"
+                :min="1"
+                :max="100"
+              ></el-input-number>
             </div>
           </el-col>
           <el-col :span="12" class="right">
@@ -116,6 +119,7 @@ const Comment = () => import('./Comment.vue')
 export default {
   data() {
     return {
+      num: 1,
       item: {
         id: 4,
         name: '活着',
