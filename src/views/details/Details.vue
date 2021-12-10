@@ -231,6 +231,12 @@ export default {
   text-indent: 2rem;
   padding: 15px;
   color: #787a89;
+  height: 140px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 .new-price {
   font-weight: 700;
