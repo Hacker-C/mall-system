@@ -6,10 +6,13 @@
     <el-col :span="3"> 《{{ cLikeProducts.name }} 》</el-col>
     <el-col :span="6" class="desc"> {{ cLikeProducts.desc }} </el-col>
     <el-col :span="3">￥{{ cLikeProducts.price }}</el-col>
-    <el-col :span="4">{{ cLikeProducts.counts }}</el-col>
-    <el-col :span="3"
+    <el-col :span="3">{{ cLikeProducts.counts }}</el-col>
+    <el-col :span="2"
       >￥{{ (cLikeProducts.price * cLikeProducts.counts).toFixed(2) }}</el-col
     >
+    <el-col :span="2">
+      <el-button class="move-out">删除</el-button>
+    </el-col>
   </el-row>
 </template>
 
@@ -38,5 +41,8 @@ export default {
 .desc {
   padding: 10px;
   line-height: 120%;
+}
+.move-out {
+  margin-top: 100%;
 }
 </style>
