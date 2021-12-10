@@ -13,30 +13,33 @@
         <div
           style="background-color: #f7f8fa; padding: 30px 0; text-align: center"
         >
-          <img :src="item.src" alt="" style="width: 180px" />
+          <img :src="product.imgSrc" alt="" style="width: 180px" />
         </div>
 
-        <div class="desc">{{ item.desc }}</div>
+        <div class="desc">{{ product.productDesc }}</div>
       </el-col>
       <el-col :span="1"></el-col>
       <el-col :span="13" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px">
-        <h3 class="header">《{{ item.name }}》</h3>
+        <h3 class="header">《{{ product.productName }}》</h3>
         <el-row type="flex">
           <el-col :span="12" style="color: #787a89; padding-left: 15px">
             <div class="common" style="padding-top: 20px">
-              上架时间：{{ item.time }}
+              上架时间：{{ product.createTime }}
             </div>
             <div class="common">
               折扣价：
               <span class="new-price"
-                >￥{{ (item.price * item.discount).toFixed(2) }}</span
+                >￥{{
+                  (product.productPrice * product.discount).toFixed(2)
+                }}</span
               >
             </div>
-            <div v-if="item.discount < 1" class="common">
-              原价：<span class="old-price">￥{{ item.price }}</span>
+            <div v-if="product.discount < 1" class="common">
+              原价：<span class="old-price">￥{{ product.productPrice }}</span>
             </div>
             <div class="common">
-              剩余库存：<span style="color: #409eff">{{ item.left }}</span> 件
+              剩余库存：<span style="color: #409eff">{{ product.left }}</span>
+              件
             </div>
             <div class="common">
               预计到件时间：<span style="color: #409eff">三天后</span>
@@ -76,20 +79,21 @@
                 class="nav-item"
                 style="border-right: none; color: #ff3036; font-size: 16px"
               >
-                {{ item.saled }}
+                {{ product.sold }}
               </el-col>
               <el-col
                 :span="8"
                 class="nav-item"
                 style="border-right: none; color: #ff3036; font-size: 16px"
               >
-                {{ item.comments }}
+                <!-- product.comments -->
+                {{ 111 }}
               </el-col>
               <el-col
                 :span="8"
                 class="nav-item"
                 style="font-size: 16px; color: #228800"
-                >{{ item.rate }}</el-col
+                >{{ product.rate }}</el-col
               >
             </el-row>
             <el-row style="text-align: center; margin-top: 20px">
@@ -115,24 +119,13 @@
 
 <script>
 const Comment = () => import('./Comment.vue')
+import request from '../../utils/request'
 
 export default {
   data() {
     return {
       num: 1,
-      item: {
-        id: 4,
-        name: '活着',
-        price: 59.9,
-        time: '2021-10-12',
-        discount: 0.9,
-        left: 999,
-        saled: 100,
-        rate: 4.5,
-        comments: 99,
-        src: require('../../assets/upload/book1.png'),
-        desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
-      },
+      product: {},
       count: 0,
       user: {
         avatarUrl:
@@ -141,8 +134,16 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     // 商品信息 this.$route.query.id，发送ajax请求数据
+    request
+      .get('/product/' + this.$route.query.id)
+      .then((res) => {
+        this.product = JSON.parse(JSON.stringify(res))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     decrease() {

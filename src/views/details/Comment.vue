@@ -2,8 +2,8 @@
   <div style="width: 100%" class="comment-bd">
     <h3 class="header">商品评论</h3>
     <div class="com-header" v-for="i in 3" :key="i">
-      <el-avatar :size="60" :src="user.avatarUrl" class="avatar"></el-avatar>
-      <span class="uname">{{ user.username }}</span>
+      <el-avatar :size="60" :src="cUser.avatarUrl" class="avatar"></el-avatar>
+      <span class="uname">{{ cUser.username }}</span>
       <span class="text">非常好看的一本书，值得推荐！</span>
     </div>
   </div>
