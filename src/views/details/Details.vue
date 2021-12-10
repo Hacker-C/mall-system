@@ -48,7 +48,9 @@
               收货地址：<span style="color: #409eff">湖南省衡阳市</span>
             </div>
             <div class="common">
-              货物重量：<span style="color: #409eff">0.3kg</span>
+              货物重量：<span style="color: #409eff"
+                >{{ product.weight }}kg</span
+              >
             </div>
             <div class="common">
               服务：<span style="color: #409eff; font-size: 14px"
@@ -140,6 +142,7 @@ export default {
       .get('/product/' + this.$route.query.id)
       .then((res) => {
         this.product = JSON.parse(JSON.stringify(res))
+        this.product.createTime = this.product.createTime.slice(0, 10)
       })
       .catch((err) => {
         console.log(err)

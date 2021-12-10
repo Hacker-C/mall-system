@@ -136,7 +136,7 @@ export default {
         console.log(err)
       })
     // 刷新页面则请求分类第一条
-    this.getProductById({ index: 1 })
+    this.getProductById({ index: 0 })
   }
 }
 </script>
