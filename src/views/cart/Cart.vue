@@ -1,13 +1,13 @@
 <template>
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <el-row type="flex" class="header">
-      <el-col class="nav" :span="5"> 商品图片 </el-col>
+      <el-col class="nav" :span="1"> </el-col>
+      <el-col class="nav" :span="4"> 商品图片 </el-col>
       <el-col class="nav" :span="3"> 商品名称 </el-col>
-      <el-col class="nav" :span="6"> 描述 </el-col>
-      <el-col class="nav" :span="3">单价</el-col>
-      <el-col class="nav" :span="3">数量</el-col>
-      <el-col class="nav" :span="2">总计</el-col>
-      <el-col class="nav" :span="2"> </el-col>
+      <el-col class="nav" :span="4">单价</el-col>
+      <el-col class="nav" :span="4">数量</el-col>
+      <el-col class="nav" :span="4">总计</el-col>
+      <el-col class="nav" :span="4">操作</el-col>
     </el-row>
     <div v-for="(item, index) in likeProducts" :key="index">
       <CartItem :cLikeProducts="item" />
