@@ -3,7 +3,14 @@
     <img :src="cImage.imgSrc" alt="" style="height: 150px" />
     <h3 style="text-align: center">{{ cImage.productName }}</h3>
     <div class="block">
-      <el-rate v-model="value"></el-rate>
+      <el-rate
+        v-model="cImage.rate"
+        disabled
+        show-score
+        text-color="#ff9900"
+        score-template="{value}"
+      >
+      </el-rate>
     </div>
     <div
       style="
@@ -36,7 +43,7 @@
 export default {
   data() {
     return {
-      value: 4
+      value: 4.5
     }
   },
   props: {

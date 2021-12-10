@@ -5,13 +5,13 @@
     @click="getProductDetails"
   >
     <el-card class="card">
-      <img :src="product.src" class="image" />
-      <p style="margin-left: 10%">{{ product.name }}</p>
+      <img :src="product.imgSrc" class="image" />
+      <p style="text-align: center">{{ product.productName }}</p>
       <p class="desc">
-        {{ product.desc }}
+        {{ product.productDesc }}
       </p>
       <span style="color: red; margin-left: 10%; font-size: 15px"
-        >￥{{ product.price }}</span
+        >￥{{ product.productPrice }}</span
       >
       <div>
         <el-button size="small">加入购物车</el-button>
@@ -54,7 +54,7 @@ export default {
 <style scoped>
 .image {
   margin-left: 50%;
-  width: 65%;
+  height: 120px;
   transform: translate(-50%);
   display: block;
 }

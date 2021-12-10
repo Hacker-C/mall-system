@@ -4,45 +4,39 @@
       <h3 class="header">商品分类</h3>
     </el-row>
     <el-row class="classify-container">
-      <el-tabs :tab-position="tabPosition" :lazy="true">
-        <el-tab-pane label="零食蔬菜" class="tab-pane">
+      <el-tabs
+        :tab-position="tabPosition"
+        :lazy="true"
+        @tab-click="getProductById"
+      >
+        <el-tab-pane
+          v-for="category in categories"
+          :key="category.categoryId"
+          :label="category.categoryName"
+          class="tab-pane"
+        >
           <div class="card-bd">
-            <div v-for="(item, index) in foods" :key="index">
-              <Card :product="item" />
+            <div v-for="(item, index) in products" :key="index">
+              <CategoryCard :product="item" />
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="图书教育" class="tab-pane">
-          <div class="card-bd">
-            <div v-for="(item, index) in books" :key="index">
-              <Card :product="item" />
-            </div>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="家用电器">
-          <div class="card-bd">123</div>
-        </el-tab-pane>
-        <el-tab-pane label="个护清洁">个护清洁</el-tab-pane>
-        <el-tab-pane label="电子数码">电子数码</el-tab-pane>
-        <el-tab-pane label="医药保健">医药保健</el-tab-pane>
-        <el-tab-pane label="玩具乐器">玩具乐器</el-tab-pane>
-        <el-tab-pane label="玩具乐器">玩具乐器</el-tab-pane>
-        <el-tab-pane label="玩具乐器">玩具乐器</el-tab-pane>
-        <el-tab-pane label="玩具乐器">玩具乐器</el-tab-pane>
-        <el-tab-pane label="玩具乐器">玩具乐器</el-tab-pane>
       </el-tabs>
     </el-row>
   </div>
 </template>
 
 <script>
-const Card = () => import('./CategoryCard.vue')
+import request from '../../../utils/request'
+const CategoryCard = () => import('./CategoryCard.vue')
 
 export default {
   data() {
     return {
       tabPosition: 'left',
+      closable: false,
       currentDate: new Date(),
+      categories: [],
       books: [
         {
           id: 1,
@@ -102,11 +96,47 @@ export default {
           price: 19.9,
           desc: '现在可以特价购买'
         }
-      ]
+      ],
+      products: []
     }
   },
   components: {
-    Card
+    CategoryCard
+  },
+  methods: {
+    getProductById(tab, event) {
+      // 根据商品类 category id 请求此类所有商品数据
+      let queryCategoryId = +tab.index + 1
+      // 清空原来的元素
+      this.products = []
+      request
+        .get('/category/' + queryCategoryId)
+        .then((res) => {
+          res.forEach((e) => {
+            this.products.push(e)
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    test() {
+      console.log(111)
+    }
+  },
+  created() {
+    request
+      .get('/category/all')
+      .then((res) => {
+        res.forEach((e) => {
+          this.categories.push(e)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    // 刷新页面则请求分类第一条
+    this.getProductById({ index: 1 })
   }
 }
 </script>

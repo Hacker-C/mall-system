@@ -73,7 +73,7 @@ export default {
   },
   created() {
     request
-      .get('/product')
+      .get('/product/all')
       .then((res) => {
         res.forEach((e) => {
           this.data1.push(e)
