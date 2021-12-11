@@ -19,8 +19,9 @@
       >￥{{ (cLikeProducts.price * cLikeProducts.counts).toFixed(2) }}</el-col
     >
     <el-col :span="5">
-      <el-button>删除</el-button>
-      <el-button>购买</el-button>
+      <el-button size="small">删除</el-button>
+      <el-button size="small">查看</el-button>
+      <el-button size="small">购买</el-button>
     </el-col>
   </el-row>
 </template>

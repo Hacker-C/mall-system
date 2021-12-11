@@ -120,7 +120,12 @@
         </el-row>
       </el-col>
     </el-row>
-    <Comment :cUser="user" />
+    <div style="width: 100%" class="comment-bd">
+      <h3 class="header1">商品评论</h3>
+      <div v-for="(detailsComment, index) in detailsComments" :key="index">
+        <Comment :cDetailsComment="detailsComment" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -134,11 +139,7 @@ export default {
       num: 1,
       product: {},
       count: 0,
-      user: {
-        avatarUrl:
-          'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/avatar.4biaa36wslg0.jpg',
-        username: '李华'
-      }
+      detailsComments: []
     }
   },
   created() {
@@ -148,6 +149,17 @@ export default {
       .then((res) => {
         this.product = JSON.parse(JSON.stringify(res))
         this.product.createTime = this.product.createTime.slice(0, 10)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    request
+      .get('/comment/' + this.$route.query.id)
+      .then((res) => {
+        this.detailsComments = []
+        res.forEach((e) => {
+          this.detailsComments.push(e)
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -168,6 +180,20 @@ export default {
 </script>
 
 <style scoped>
+.comment-bd {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+.header1 {
+  height: 50px;
+  line-height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  font-weight: 400;
+  border-bottom: 2px solid #f30213;
+}
 .nav {
   text-align: center;
   height: 50px;
