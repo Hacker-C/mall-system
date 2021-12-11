@@ -46,23 +46,27 @@
           :offset="2"
           style="line-height: 38px"
         >
-          <el-badge :value="12" class="item"> 收藏夹 </el-badge>
+          <el-badge :value="12" class="item" type="primary" v-if="false">
+            收藏夹
+          </el-badge>
+          <div v-else class="item2">收藏夹</div>
         </el-menu-item>
         <el-menu-item
           index="/cart"
           class="el-menu-right"
           style="line-height: 38px"
         >
-          <el-badge :value="12" class="item"> 购物车 </el-badge>
+          <el-badge :value="0" class="item"> 购物车 </el-badge>
         </el-menu-item>
         <el-menu-item
           index="/order"
           class="el-menu-right"
           style="line-height: 38px"
         >
-          <el-badge :value="12" class="item" style="height: 20px">
+          <el-badge :value="8" class="item" style="height: 20px" v-if="false">
             我的订单
           </el-badge>
+          <div v-else class="item2">我的订单</div>
         </el-menu-item>
         <el-menu-item index="/profile" class="el-menu-right">我的</el-menu-item>
         <el-submenu index="">
@@ -76,7 +80,9 @@
       </el-menu>
     </el-col>
     <el-col :span="3">
-      <el-button style="height: 35px; line-height: 10px; margin-top: 10px"
+      <el-button
+        style="height: 35px; line-height: 10px; margin-top: 10px"
+        @click="toLogin"
         >登录</el-button
       >
     </el-col>
@@ -106,7 +112,10 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
+    },
+    toLogin() {
+      this.$router.push('/login')
     }
   }
 }
@@ -115,6 +124,9 @@ export default {
 <style scoped>
 .item {
   height: 20px;
+}
+.item2 {
+  margin-top: 11px;
 }
 .line {
   border-bottom: 1px solid #ccc;

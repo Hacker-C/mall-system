@@ -11,6 +11,8 @@ const Cart = () => import('../views/cart/Cart.vue')
 const Order = () => import('../views/Order.vue')
 const Profile = () => import('../views/Profile.vue')
 const Details = () => import('../views/details/Details.vue')
+const Login = () => import('../views/Login.vue')
+const Register = () => import('../views/Register.vue')
 
 Vue.use(VueRouter)
 
@@ -85,6 +87,20 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/login',
+    component: Login,
+    meta: {
+      name: '欢迎登录！'
+    }
+  },
+  {
+    path: '/register',
+    component: Register,
+    meta: {
+      name: '欢迎注册！'
+    }
   }
 ]
 
