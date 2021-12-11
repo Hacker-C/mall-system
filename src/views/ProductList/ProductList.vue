@@ -2,9 +2,9 @@
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <el-row type="flex" class="header">
       <el-col :span="8" style="line-height: 50px">
-        <span class="nav-item">所有商品</span>
-        <span class="nav-item">最新上架</span>
-        <span class="nav-item">热销</span>
+        <span class="nav-item"><a @click="showAll">所有商品</a></span>
+        <span class="nav-item"><a @click="showNew">最新上架</a></span>
+        <span class="nav-item"><a @click="showHot">热销</a></span>
       </el-col>
       <el-col flex="1" style="line-height: 50px"></el-col>
       <el-col :span="10" style="line-height: 50px">
@@ -51,8 +51,8 @@
       </el-col>
     </el-row>
     <el-row style="display: flex; flex-wrap: wrap">
-      <div v-for="(item, index) in data1" :key="index">
-        <ProductItem :cImage="item" />
+      <div v-for="(item, index) in products" :key="index">
+        <ProductItem :product="item" :key="componentKey" />
       </div>
     </el-row>
   </div>
@@ -65,32 +65,87 @@ const ProductItem = () => import('./ProductItem.vue')
 export default {
   data() {
     return {
+      componentKey: 0,
       order: '上架时间',
       orderNum: 0,
       rev: '升序',
-      data1: []
+      products: [],
+      tempProducts: []
     }
   },
   created() {
-    request
-      .get('/product/all')
-      .then((res) => {
-        res.forEach((e) => {
-          this.data1.push(e)
-        })
-        console.log(this.data1)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.load()
   },
   methods: {
+    load() {
+      request
+        .get('/product/all')
+        .then((res) => {
+          this.products = []
+          res.forEach((e) => {
+            this.products.push(e)
+          })
+          this.sortBy()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    showAll() {
+      this.load()
+    },
+    showNew() {
+      // 最新上架是指时间早于或等于 2021-12-10的时间
+      // let newP = this.tempProducts.filter(
+      //   (obj) => obj.createTime >= '2021-12-10'
+      // )
+      // this.products = []
+      // newP.forEach((e) => {
+      //   this.products.push(e)
+      // })
+      // this.sortBy()
+    },
+    showHot() {
+      // 热销是指售货量大于或等于 500 的商品
+      // let newH = this.tempProducts.filter((obj) => obj.sold >= 500)
+      // this.products = []
+      // newH.forEach((e) => {
+      //   this.products.push(e)
+      // })
+      // this.sortBy()
+    },
     change(s, num) {
       this.order = s
       this.orderNum = num
+      this.sortBy()
     },
     reverse() {
       this.rev = this.rev == '升序' ? '逆序' : '升序'
+      this.sortBy()
+    },
+    forceRerender() {
+      this.componentKey += 1
+    },
+    cmp(c1, c2) {
+      // 按照时间排序
+      if (this.orderNum == 0) {
+        return this.rev == '升序'
+          ? new Date(c1.createTime) - new Date(c2.createTime)
+          : new Date(c2.createTime) - new Date(c1.createTime)
+      }
+      // 按照价格排序
+      else if (this.orderNum == 1) {
+        return this.rev == '升序'
+          ? c1.productPrice - c2.productPrice
+          : c2.productPrice - c1.productPrice
+        // 按照售货量时间
+      } else if (this.orderNum == 2) {
+        return this.rev == '升序' ? c1.sold - c2.sold : c2.sold - c1.sold
+      }
+    },
+    sortBy() {
+      this.products.sort(this.cmp)
+      this.forceRerender()
     }
   },
   components: {

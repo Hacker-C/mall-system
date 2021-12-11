@@ -1,10 +1,10 @@
 <template>
   <div class="item">
-    <img :src="cImage.imgSrc" alt="" style="height: 150px" />
-    <h3 style="text-align: center">{{ cImage.productName }}</h3>
+    <img :src="product.imgSrc" alt="" style="height: 150px" />
+    <h3 style="text-align: center">{{ product.productName }}</h3>
     <div class="block">
       <el-rate
-        v-model="cImage.rate"
+        v-model="product.rate"
         disabled
         show-score
         text-color="#ff9900"
@@ -22,18 +22,18 @@
       "
     >
       <span style="margin-right: 10px; color: #ccc">{{
-        cImage.createTime.slice(0, 10)
+        product.createTime
       }}</span>
       <el-link>商品详情>>></el-link>
     </div>
     <el-row type="flex" style="width: 60%; margin-left: 30px">
       <el-col :span="12" style="text-align: center">
         <span class="price1"
-          >￥{{ (cImage.productPrice * cImage.discount).toFixed(2) }}</span
+          >￥{{ (product.productPrice * product.discount).toFixed(2) }}</span
         >
       </el-col>
       <el-col :span="12" style="text-align: center">
-        <span class="price2">￥{{ cImage.productPrice }}</span>
+        <span class="price2">￥{{ product.productPrice }}</span>
       </el-col>
     </el-row>
   </div>
@@ -47,7 +47,7 @@ export default {
     }
   },
   props: {
-    cImage: {
+    product: {
       type: Object,
       default() {
         return {}
