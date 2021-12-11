@@ -24,7 +24,7 @@
       <span style="margin-right: 10px; color: #ccc">{{
         product.createTime
       }}</span>
-      <el-link>商品详情>>></el-link>
+      <el-link @click="toDetails">商品详情>>></el-link>
     </div>
     <el-row type="flex" style="width: 60%; margin-left: 30px">
       <el-col :span="12" style="text-align: center">
@@ -54,7 +54,17 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    toDetails() {
+      // 点击 ProductItem 组件，通过路由传递商品id给Dtails组件，期间发起请求。
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: this.product.productId
+        }
+      })
+    }
+  },
   computed: {},
   created() {}
 }
