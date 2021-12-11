@@ -237,7 +237,6 @@ export default {
   padding: 15px;
   color: #787a89;
   height: 140px;
-  background-color: pink;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;

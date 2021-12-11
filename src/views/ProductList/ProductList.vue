@@ -2,9 +2,21 @@
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <el-row type="flex" class="header">
       <el-col :span="8" style="line-height: 50px">
-        <span class="nav-item"><a @click="showAll">所有商品</a></span>
-        <span class="nav-item"><a @click="showNew">最新上架</a></span>
-        <span class="nav-item"><a @click="showHot">热销</a></span>
+        <span class="nav-item"
+          ><a @click="showAll" :class="{ active: isActive === 1 }"
+            >所有商品</a
+          ></span
+        >
+        <span class="nav-item"
+          ><a @click="showNew" :class="{ active: isActive === 2 }"
+            >最新上架</a
+          ></span
+        >
+        <span class="nav-item"
+          ><a @click="showHot" :class="{ active: isActive === 3 }"
+            >热销</a
+          ></span
+        >
       </el-col>
       <el-col flex="1" style="line-height: 50px"></el-col>
       <el-col :span="10" style="line-height: 50px">
@@ -70,7 +82,8 @@ export default {
       orderNum: 0,
       rev: '升序',
       products: [],
-      tempProducts: []
+      tempProducts: [],
+      isActive: 1
     }
   },
   created() {
@@ -93,26 +106,33 @@ export default {
     },
     showAll() {
       this.load()
+      this.isActive = 1
     },
     showNew() {
       // 最新上架是指时间早于或等于 2021-12-10的时间
-      // let newP = this.tempProducts.filter(
-      //   (obj) => obj.createTime >= '2021-12-10'
-      // )
-      // this.products = []
-      // newP.forEach((e) => {
-      //   this.products.push(e)
-      // })
-      // this.sortBy()
+      this.isActive = 2
+      request
+        .get('product/new')
+        .then((res) => {
+          this.products = []
+          res.forEach((e) => {
+            this.products.push(e)
+          })
+        })
+        .catch((err) => {})
     },
     showHot() {
       // 热销是指售货量大于或等于 500 的商品
-      // let newH = this.tempProducts.filter((obj) => obj.sold >= 500)
-      // this.products = []
-      // newH.forEach((e) => {
-      //   this.products.push(e)
-      // })
-      // this.sortBy()
+      this.isActive = 3
+      request
+        .get('product/hot')
+        .then((res) => {
+          this.products = []
+          res.forEach((e) => {
+            this.products.push(e)
+          })
+        })
+        .catch((err) => {})
     },
     change(s, num) {
       this.order = s
@@ -155,6 +175,9 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  color: red;
+}
 .test {
   height: 200px;
   width: 200px;
