@@ -11,7 +11,12 @@
     <el-row type="flex">
       <el-col :span="10" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px">
         <div
-          style="background-color: #f7f8fa; padding: 30px 0; text-align: center"
+          style="
+            background-color: #f7f8fa;
+            height: 300px;
+            padding: 30px 0;
+            text-align: center;
+          "
         >
           <img :src="product.imgSrc" alt="" style="width: 180px" />
         </div>
@@ -232,6 +237,7 @@ export default {
   padding: 15px;
   color: #787a89;
   height: 140px;
+  background-color: pink;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
