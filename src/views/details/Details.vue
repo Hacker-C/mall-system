@@ -94,7 +94,7 @@
                 style="border-right: none; color: #ff3036; font-size: 16px"
               >
                 <!-- product.comments -->
-                {{ 111 }}
+                {{ this.detailsComments.length }}
               </el-col>
               <el-col
                 :span="8"
