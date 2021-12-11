@@ -1,11 +1,13 @@
 <template>
   <el-row type="flex" class="line">
     <el-col :span="4">
-      <img
-        src="../assets/upload/logo.svg"
-        alt=""
-        style="height: 40px; width: 40px; margin-left: 7px; margin-top: 7px"
-      />
+      <a href="/">
+        <img
+          src="../assets/upload/logo.svg"
+          alt=""
+          style="height: 40px; width: 40px; margin-left: 7px; margin-top: 7px"
+        />
+      </a>
       <h3
         style="
           padding-left: 10px;
