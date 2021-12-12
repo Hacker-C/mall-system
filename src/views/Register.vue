@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import request from '../utils/request'
 export default {
   data() {
     return {
@@ -91,6 +92,29 @@ export default {
           message: '两次输入密码不一致！',
           type: 'warning'
         })
+      } else {
+        request
+          .post('/user/register', this.form)
+          .then((res) => {
+            // 用户名重复
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning'
+              })
+            } else if (res.code == '0') {
+              this.$message({
+                message: res.msg + '请前往登录！',
+                type: 'success'
+              })
+              this.$router.push('/login')
+            } else {
+              this.$message.error('注册失败！错误原因：服务器出现问题。')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
     }
   }
@@ -113,6 +137,7 @@ export default {
   color: #fff;
   cursor: pointer;
 }
+
 .wel {
   text-align: center;
   font-weight: normal;

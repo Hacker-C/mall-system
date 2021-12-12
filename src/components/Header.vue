@@ -83,7 +83,14 @@
       <el-button
         style="height: 35px; line-height: 10px; margin-top: 10px"
         @click="toLogin"
+        v-if="isLogin"
         >登录</el-button
+      >
+      <el-button
+        style="height: 35px; line-height: 10px; margin-top: 10px"
+        @click="logout"
+        v-else
+        >注销</el-button
       >
     </el-col>
     <el-col :span="3" style="padding-right: 0; padding-top: 18px">
@@ -93,7 +100,9 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
+          <el-dropdown-item>
+            <a href="javascript:;" @click="logout"> 退出 </a>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -107,7 +116,8 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       search: '',
-      path: this.$route.path
+      path: this.$route.path,
+      isLogin: false
     }
   },
   methods: {
@@ -116,7 +126,23 @@ export default {
     },
     toLogin() {
       this.$router.push('/login')
+    },
+    logout() {
+      sessionStorage.clear()
+      this.$router.push('/home')
+      this.$message({
+        message: '退出账号成功！',
+        type: 'success'
+      })
+      this.$emit('logout')
+    },
+    // 强制刷新本组件
+    reload() {
+      this.$forceUpdate()
     }
+  },
+  created() {
+    this.isLogin = sessionStorage.getItem('userId') ? false : true
   }
 }
 </script>
