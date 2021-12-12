@@ -1,10 +1,10 @@
 <template>
   <el-row type="flex" class="cart-item-bd">
     <el-col :span="5">
-      <img :src="cLikeProduct.imgSrc" alt="" class="image" />
+      <img :src="cartProduct.imgSrc" alt="" class="image" />
     </el-col>
-    <el-col :span="3"> 《{{ cLikeProduct.productName }} 》</el-col>
-    <el-col :span="3">￥{{ cLikeProduct.productPrice }}</el-col>
+    <el-col :span="3"> 《{{ cartProduct.productName }} 》</el-col>
+    <el-col :span="3">￥{{ cartProduct.productPrice }}</el-col>
     <el-col :span="5">
       <el-input-number
         v-model="num"
@@ -12,13 +12,11 @@
         style="width: 80%"
         @change="handleChange"
         :min="1"
-        :max="10"
+        :max="999"
       ></el-input-number>
     </el-col>
     <el-col :span="3"
-      >￥{{
-        (cLikeProduct.productPrice * cLikeProduct.count).toFixed(2)
-      }}</el-col
+      >￥{{ (cartProduct.productPrice * this.num).toFixed(2) }}</el-col
     >
     <el-col :span="5">
       <el-button size="small">删除</el-button>
@@ -29,6 +27,7 @@
 </template>
 
 <script>
+import request from '../../utils/request'
 export default {
   data() {
     return {
@@ -37,16 +36,25 @@ export default {
   },
   methods: {
     handleChange(value) {
-      console.log(value)
+      request
+        .patch('/cart/' + this.cartProduct.cartId, {
+          count: value
+        })
+        .then((res) => {
+          console.log('修改成功')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   props: {
-    cLikeProduct: {
+    cartProduct: {
       type: Object
     }
   },
   created() {
-    this.num = this.cLikeProduct.count
+    this.num = this.cartProduct.count
   }
 }
 </script>

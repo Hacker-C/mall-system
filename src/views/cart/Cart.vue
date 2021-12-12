@@ -10,8 +10,8 @@
         <el-col class="nav" :span="4">总计</el-col>
         <el-col class="nav" :span="4">操作</el-col>
       </el-row>
-      <div v-for="(item, index) in likeProducts" :key="index">
-        <CartItem :cLikeProduct="item" />
+      <div v-for="(item, index) in cartProducts" :key="index">
+        <CartItem :cartProduct="item" />
       </div>
     </div>
     <div v-else>请先登录</div>
@@ -26,23 +26,32 @@ export default {
   data() {
     return {
       isLogin: false,
-      likeProducts: []
+      cartProducts: []
     }
   },
-  created() {
+  mounted() {
     let userId = sessionStorage.getItem('userId')
     this.isLogin = userId ? true : false
-    request
-      .get('/cart/' + userId)
-      .then((res) => {
-        this.likeProducts = []
-        res.forEach((e) => {
-          this.likeProducts.push(e)
+    if (userId) {
+      request
+        .get('/cart/' + userId)
+        .then((res) => {
+          if (res.code == '0') {
+            this.$message({
+              message: res.msg,
+              type: 'success',
+              duration: 1000
+            })
+            this.cartProducts = []
+            res.data.forEach((e) => {
+              this.cartProducts.push(e)
+            })
+          }
         })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
   components: {
     CartItem
