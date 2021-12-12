@@ -1,71 +1,48 @@
 <template>
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
-    <el-row type="flex" class="header">
-      <el-col class="nav" :span="1"> </el-col>
-      <el-col class="nav" :span="4"> 商品图片 </el-col>
-      <el-col class="nav" :span="3"> 商品名称 </el-col>
-      <el-col class="nav" :span="4">单价</el-col>
-      <el-col class="nav" :span="4">数量</el-col>
-      <el-col class="nav" :span="4">总计</el-col>
-      <el-col class="nav" :span="4">操作</el-col>
-    </el-row>
-    <div v-for="(item, index) in likeProducts" :key="index">
-      <CartItem :cLikeProducts="item" />
+    <div v-if="isLogin">
+      <el-row type="flex" class="header">
+        <el-col class="nav" :span="1"> </el-col>
+        <el-col class="nav" :span="4"> 商品图片 </el-col>
+        <el-col class="nav" :span="3"> 商品名称 </el-col>
+        <el-col class="nav" :span="4">单价</el-col>
+        <el-col class="nav" :span="4">数量</el-col>
+        <el-col class="nav" :span="4">总计</el-col>
+        <el-col class="nav" :span="4">操作</el-col>
+      </el-row>
+      <div v-for="(item, index) in likeProducts" :key="index">
+        <CartItem :cLikeProduct="item" />
+      </div>
     </div>
+    <div v-else>请先登录</div>
   </div>
 </template>
 
 <script>
+import request from '../../utils/request'
 const CartItem = () => import('./CartItem.vue')
 
 export default {
   data() {
     return {
-      likeProducts: [
-        {
-          id: 10,
-          name: '活着',
-          price: 59.9,
-          time: '2021-10-12',
-          discount: 0.9,
-          left: 999,
-          saled: 100,
-          rate: 4.5,
-          counts: 3,
-          comments: 99,
-          src: require('../../assets/upload/book1.png'),
-          desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
-        },
-        {
-          id: 11,
-          name: '活着',
-          price: 59.9,
-          time: '2021-10-12',
-          discount: 0.9,
-          left: 999,
-          saled: 100,
-          rate: 4.5,
-          counts: 3,
-          comments: 99,
-          src: require('../../assets/upload/book1.png'),
-          desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
-        },
-        {
-          id: 12,
-          name: '活着',
-          price: 59.9,
-          time: '2021-10-12',
-          discount: 0.9,
-          left: 999,
-          saled: 100,
-          rate: 4.5,
-          counts: 3,
-          comments: 99,
-          src: require('../../assets/upload/book1.png'),
-          desc: '《活着》是当代作家余华的代表作，讲述了一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。'
-        }
-      ]
+      isLogin: false,
+      likeProducts: []
     }
+  },
+  created() {
+    let userId = sessionStorage.getItem('userId')
+    this.isLogin = userId ? true : false
+    request
+      .get('/cart/' + userId)
+      .then((res) => {
+        this.likeProducts = []
+        res.forEach((e) => {
+          this.likeProducts.push(e)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   components: {
     CartItem

@@ -132,7 +132,8 @@ export default {
       this.$router.push('/home')
       this.$message({
         message: '退出账号成功！',
-        type: 'success'
+        type: 'success',
+        duration: 2000
       })
       this.$emit('logout')
     },

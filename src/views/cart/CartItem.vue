@@ -1,10 +1,10 @@
 <template>
   <el-row type="flex" class="cart-item-bd">
     <el-col :span="5">
-      <img :src="cLikeProducts.src" alt="" class="image" />
+      <img :src="cLikeProduct.imgSrc" alt="" class="image" />
     </el-col>
-    <el-col :span="3"> 《{{ cLikeProducts.name }} 》</el-col>
-    <el-col :span="3">￥{{ cLikeProducts.price }}</el-col>
+    <el-col :span="3"> 《{{ cLikeProduct.productName }} 》</el-col>
+    <el-col :span="3">￥{{ cLikeProduct.productPrice }}</el-col>
     <el-col :span="5">
       <el-input-number
         v-model="num"
@@ -16,7 +16,9 @@
       ></el-input-number>
     </el-col>
     <el-col :span="3"
-      >￥{{ (cLikeProducts.price * cLikeProducts.counts).toFixed(2) }}</el-col
+      >￥{{
+        (cLikeProduct.productPrice * cLikeProduct.count).toFixed(2)
+      }}</el-col
     >
     <el-col :span="5">
       <el-button size="small">删除</el-button>
@@ -39,11 +41,13 @@ export default {
     }
   },
   props: {
-    cLikeProducts: {
+    cLikeProduct: {
       type: Object
     }
   },
-  created() {}
+  created() {
+    this.num = this.cLikeProduct.count
+  }
 }
 </script>
 

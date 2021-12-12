@@ -83,7 +83,8 @@ export default {
       ) {
         this.$message({
           message: '请输入用户名和密码！',
-          type: 'warning'
+          type: 'warning',
+          duration: 2000
         })
       } else {
         request
@@ -92,7 +93,8 @@ export default {
             if (res.code === '0') {
               this.$message({
                 message: res.msg,
-                type: 'success'
+                type: 'success',
+                duration: 2000
               })
               if (res.data.role === 0) {
                 // 普通用户
