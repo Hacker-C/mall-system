@@ -3,6 +3,12 @@
     <div class="container">
       <img class="left" src="../assets/upload/left.svg" alt="" />
       <img class="right" src="../assets/upload/right.svg" alt="" />
+      <div class="logo" @click="toHome" title="去往首页">
+        <div>
+          <img src="../assets/upload/logo.svg" alt="" style="margin-top: 2px" />
+        </div>
+        <div style="margin-left: 3px">在线商城</div>
+      </div>
       <div class="login">
         <el-form
           :rules="rules"
@@ -63,12 +69,35 @@ export default {
     toRegister() {
       this.$router.push('/register')
     },
+    toHome() {
+      this.$router.push('/home')
+    },
     login() {}
   }
 }
 </script>
 
 <style scoped>
+.logo {
+  position: relative;
+  left: 10px;
+  top: 5px;
+  height: 40px;
+  width: 120px;
+  border-radius: 40px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+}
+
+.logo:hover div {
+  text-decoration: underline;
+}
+
 .wel {
   text-align: center;
   font-weight: normal;
@@ -87,7 +116,7 @@ export default {
   margin-left: 50%;
   transform: translate(-50%);
   position: relative;
-  top: 15%;
+  top: 10%;
   display: flex;
   justify-content: center;
 }
@@ -100,7 +129,7 @@ export default {
 .container {
   height: 100vh;
   background: #00c6ff; /* fallback for old browsers */
-  background: #409eff;
+  /* background: #409eff; */
 }
 .left {
   position: absolute;
