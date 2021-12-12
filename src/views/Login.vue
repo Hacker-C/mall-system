@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import request from '../utils/request'
+
 export default {
   data() {
     return {
@@ -72,7 +74,45 @@ export default {
     toHome() {
       this.$router.push('/home')
     },
-    login() {}
+    login() {
+      if (
+        typeof this.form.username === 'undefined' ||
+        typeof this.form.password == 'undefined' ||
+        this.form.username.length === 0 ||
+        this.form.password.length === 0
+      ) {
+        this.$message({
+          message: '请输入用户名和密码！',
+          type: 'warning'
+        })
+      } else {
+        request
+          .post('/user/login', this.form)
+          .then((res) => {
+            if (res.code === '0') {
+              this.$message({
+                message: res.msg,
+                type: 'success'
+              })
+              if (res.data.role === 0) {
+                // 普通用户
+                this.$router.push('/home')
+                sessionStorage.setItem(
+                  'userId',
+                  JSON.stringify(res.data.userId)
+                )
+              } else {
+                // 管理员和店家
+              }
+            } else {
+              this.$message.error('登录失败！错误原因：' + res.msg)
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    }
   }
 }
 </script>
