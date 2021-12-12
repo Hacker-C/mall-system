@@ -48,7 +48,7 @@
             >注册</el-button
           >
           <el-row type="flex" justify="end">
-            <el-link type="primary" style="margin-top: 5px" @click="toRegister"
+            <el-link type="primary" style="margin-top: 5px" @click="toLogin"
               >已有账号？点我登录</el-link
             >
           </el-row>
@@ -79,7 +79,10 @@ export default {
     }
   },
   methods: {
-    toRegister() {
+    toHome() {
+      this.$router.push('/home')
+    },
+    toLogin() {
       this.$router.push('/login')
     },
     register() {
