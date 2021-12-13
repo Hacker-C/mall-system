@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :key="i" @logout="addKey" />
+    <Header :key="i" @reloadHeader="addKey" />
     <router-view></router-view>
   </div>
 </template>

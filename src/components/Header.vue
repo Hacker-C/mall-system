@@ -141,7 +141,8 @@ export default {
         type: 'success',
         duration: 2000
       })
-      this.$emit('logout')
+      // 触发父组件 Layout的 reloadHeader事件，刷新Header组件
+      this.$emit('reloadHeader')
     }
   },
   created() {

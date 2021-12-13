@@ -11,7 +11,7 @@
         <el-col class="nav" :span="4">操作</el-col>
       </el-row>
       <div v-for="(item, index) in cartProducts" :key="index">
-        <CartItem :cartProduct="item" />
+        <CartItem :cartProduct="item" @reload="load" />
       </div>
     </div>
     <div v-else>请先登录</div>
@@ -29,28 +29,33 @@ export default {
       cartProducts: []
     }
   },
-  mounted() {
-    let userId = sessionStorage.getItem('userId')
-    this.isLogin = userId ? true : false
-    if (userId) {
-      request
-        .get('/cart/' + userId)
-        .then((res) => {
-          if (res.code == '0') {
-            this.$message({
-              message: res.msg,
-              type: 'success',
-              duration: 1000
-            })
-            this.cartProducts = []
-            res.data.forEach((e) => {
-              this.cartProducts.push(e)
-            })
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+  created() {
+    this.load()
+  },
+  methods: {
+    load() {
+      let userId = sessionStorage.getItem('userId')
+      this.isLogin = userId ? true : false
+      if (userId) {
+        request
+          .get('/cart/' + userId)
+          .then((res) => {
+            if (res.code == '0') {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+              this.cartProducts = []
+              res.data.forEach((e) => {
+                this.cartProducts.push(e)
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   },
   components: {

@@ -19,7 +19,7 @@
       >￥{{ (cartProduct.productPrice * this.num).toFixed(2) }}</el-col
     >
     <el-col :span="5">
-      <el-button size="small">删除</el-button>
+      <el-button size="small" @click="deleteCartItem">删除</el-button>
       <el-button size="small" @click="toDetails">查看</el-button>
       <el-button size="small">购买</el-button>
     </el-col>
@@ -41,7 +41,29 @@ export default {
           count: value
         })
         .then((res) => {
-          console.log('修改成功')
+          // console.log('修改成功')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    deleteCartItem() {
+      let cId = this.cartProduct.cartId
+      // console.log(this.cartProduct.cartId)
+      request
+        .delete('/cart/' + cId)
+        .then((res) => {
+          if (res.code == '0') {
+            // 删除成功
+            this.$message({
+              message: res.msg,
+              type: 'success',
+              duration: 1000
+            })
+            this.$emit('reload')
+          } else {
+            this.$message.error('删除失败！服务器错误！')
+          }
         })
         .catch((err) => {
           console.log(err)
