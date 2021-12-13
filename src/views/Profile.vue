@@ -44,7 +44,7 @@
         <el-descriptions-item label="姓名">{{
           user.realName
         }}</el-descriptions-item>
-        <el-descriptions-item label="邮件">{{
+        <el-descriptions-item label="电子邮件">{{
           user.email
         }}</el-descriptions-item>
         <el-descriptions-item label="头像">
@@ -101,7 +101,7 @@
       :visible.sync="dialogFormVisible"
       append-to-body
     >
-      <el-form ref="form" :model="form" label-width="60px">
+      <el-form ref="form" :model="form" label-width="70px">
         <el-form-item label="用户名" style="margin-bottom: 7px">
           <el-input v-model="form.username" style="width: 200px"></el-input>
         </el-form-item>
@@ -120,6 +120,9 @@
         </el-form-item>
         <el-form-item label="姓名" style="margin-bottom: 7px">
           <el-input v-model="form.realName" style="width: 200px"></el-input>
+        </el-form-item>
+        <el-form-item label="电子邮件" style="margin-bottom: 7px">
+          <el-input v-model="form.email" style="width: 200px"></el-input>
         </el-form-item>
       </el-form>
       <el-button size="medium" @click="dialogFormVisible = false"
