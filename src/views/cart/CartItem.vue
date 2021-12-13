@@ -20,7 +20,7 @@
     >
     <el-col :span="5">
       <el-button size="small">删除</el-button>
-      <el-button size="small">查看</el-button>
+      <el-button size="small" @click="toDetails">查看</el-button>
       <el-button size="small">购买</el-button>
     </el-col>
   </el-row>
@@ -46,6 +46,15 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    toDetails() {
+      // 点击 CartItem 组件，通过路由传递商品id给Dtails组件，然后发起请求。
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: this.cartProduct.productId
+        }
+      })
     }
   },
   props: {
