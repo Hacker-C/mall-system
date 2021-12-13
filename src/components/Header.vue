@@ -56,7 +56,10 @@
           class="el-menu-right"
           style="line-height: 38px"
         >
-          <el-badge :value="0" class="item"> 购物车 </el-badge>
+          <el-badge :value="cartCount" class="item" v-if="cartCount">
+            购物车
+          </el-badge>
+          <div v-else class="item2">购物车</div>
         </el-menu-item>
         <el-menu-item
           index="/order"
@@ -110,6 +113,7 @@
 </template>
 
 <script>
+import request from '../utils/request'
 export default {
   data() {
     return {
@@ -117,7 +121,8 @@ export default {
       activeIndex2: '1',
       search: '',
       path: this.$route.path,
-      isLogin: false
+      isLogin: false,
+      cartCount: 0
     }
   },
   methods: {
@@ -136,14 +141,21 @@ export default {
         duration: 2000
       })
       this.$emit('logout')
-    },
-    // 强制刷新本组件
-    reload() {
-      this.$forceUpdate()
     }
   },
   created() {
-    this.isLogin = sessionStorage.getItem('userId') ? false : true
+    let userId = sessionStorage.getItem('userId')
+    this.isLogin = userId ? false : true
+    if (userId) {
+      request
+        .get('/cart/count/' + userId)
+        .then((res) => {
+          this.cartCount = res
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>
