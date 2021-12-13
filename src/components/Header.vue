@@ -99,7 +99,7 @@
     <el-col :span="3" style="padding-right: 0; padding-top: 18px">
       <el-dropdown style="width: 100%; padding: 0">
         <span class="el-dropdown-link">
-          游客<i class="el-icon-arrow-down el-icon--right"></i>
+          {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人信息</el-dropdown-item>
@@ -122,7 +122,8 @@ export default {
       search: '',
       path: this.$route.path,
       isLogin: false,
-      cartCount: 0
+      cartCount: 0,
+      username: '游客'
     }
   },
   methods: {
@@ -155,6 +156,9 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+      request.get('/user/' + userId).then((res) => {
+        this.username = res.data.username
+      })
     }
   }
 }
