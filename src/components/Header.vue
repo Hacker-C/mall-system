@@ -84,17 +84,15 @@
     </el-col>
     <el-col :span="3">
       <el-button
-        style="height: 35px; line-height: 10px; margin-top: 10px"
         @click="toLogin"
         v-if="isLogin"
+        size="mini"
+        style="margin-top: 15px"
         >登录</el-button
       >
-      <el-button
-        style="height: 35px; line-height: 10px; margin-top: 10px"
-        @click="logout"
-        v-else
-        >注销</el-button
-      >
+      <el-button @click="logout" v-else size="mini" style="margin-top: 15px">
+        注销
+      </el-button>
     </el-col>
     <el-col :span="3" style="padding-right: 0; padding-top: 18px">
       <el-dropdown style="width: 100%; padding: 0">
