@@ -14,9 +14,7 @@
         >￥{{ product.productPrice }}</span
       >
       <div>
-        <el-button size="small" @click="addToCart(1, $event)"
-          >加入购物车</el-button
-        >
+        <el-button size="small" @click="addToCart">加入购物车</el-button>
         <el-button size="small" @click="buy">购买</el-button>
       </div>
     </el-card>
@@ -24,18 +22,13 @@
 </template>
 
 <script>
+import request from '../../../utils/request'
 export default {
   props: {
     product: {
       type: Object,
       default() {
-        return {
-          id: 1,
-          name: '汉堡',
-          src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
-          price: 19.9,
-          desc: '现在可以特价购买'
-        }
+        return {}
       }
     }
   },
@@ -49,12 +42,55 @@ export default {
         }
       })
     },
-    addToCart(i, e) {
-      console.log(i)
+    // 将商品加入到购物车
+    addToCart(e) {
+      let pId = this.product.productId
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+        request
+          .post('/cart', {
+            userId: uId,
+            productId: pId
+          })
+          .then((res) => {
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning',
+                duration: 2000
+              })
+            } else {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 2000
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 2000
+        })
+      }
       // 阻止事件冒泡
       e.stopPropagation()
     },
     buy(e) {
+      let pId = this.product.productId
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 2000
+        })
+      }
       e.stopPropagation()
     }
   }
