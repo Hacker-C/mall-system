@@ -109,7 +109,7 @@
               >
             </el-row>
             <el-row style="text-align: center; margin-top: 20px">
-              <el-button style="width: 80%">
+              <el-button style="width: 80%" @click="addToCart">
                 <i class="el-icon-shopping-cart-1"></i> 加入购物车</el-button
               >
             </el-row>
@@ -166,11 +166,41 @@ export default {
       })
   },
   methods: {
-    decrease() {
-      this.count && this.count--
-    },
-    increase() {
-      this.count++
+    addToCart() {
+      let pId = this.product.productId
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+        request
+          .post('/cart', {
+            userId: uId,
+            productId: pId,
+            count: this.num
+          })
+          .then((res) => {
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning',
+                duration: 2000
+              })
+            } else {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 2000
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 2000
+        })
+      }
     }
   },
   components: {
