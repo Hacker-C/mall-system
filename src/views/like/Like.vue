@@ -28,6 +28,7 @@ export default {
           likeId: 1,
           productName: '活着',
           productPrice: 39.9,
+          productId: 1,
           likeTime: '2021-12-14',
           discount: 0.85,
           imgSrc:

@@ -1,14 +1,32 @@
 <template>
   <div class="item">
-    <div class="imgbox">
-      <img :src="likeProduct.imgSrc" alt="" />
-      <div class="add">加入购物车</div>
-      <div class="buy">直接购买</div>
-      <div class="del">
-        <i class="fas fa-trash-alt" style="color: #fff"></i>
+    <a href="javascript:;" @click="toDetails">
+      <div class="imgbox">
+        <img :src="likeProduct.imgSrc" alt="" />
+        <div class="add" @click="addToCart">加入购物车</div>
+        <div class="buy" @click="buy">直接购买</div>
+        <div class="del" @click="deleteItem">
+          <el-popover placement="top" width="160" v-model="visible">
+            <p>确定从收藏夹移出该商品吗？</p>
+            <div style="text-align: right; margin: 0">
+              <el-button size="mini" type="text" @click="visible = false"
+                >取消</el-button
+              >
+              <el-button type="primary" size="mini" @click="visible = false"
+                >确定</el-button
+              >
+            </div>
+            <i
+              slot="reference"
+              class="fas fa-trash-alt"
+              style="color: #fff"
+            ></i>
+          </el-popover>
+        </div>
       </div>
-    </div>
-    <div>
+    </a>
+
+    <div style="background-color: #f4f4f5">
       <div class="p-name">{{ likeProduct.productName }}</div>
       <div class="p-time">
         收藏时间：<span>{{ likeProduct.likeTime }}</span>
@@ -27,6 +45,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      visible: false
+    }
+  },
   props: {
     likeProduct: {
       type: Object,
@@ -34,22 +57,40 @@ export default {
         return {}
       }
     }
+  },
+  methods: {
+    toDetails() {
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: this.likeProduct.productId
+        }
+      })
+    },
+    addToCart(e) {
+      e.stopPropagation()
+    },
+    deleteItem(e) {
+      e.stopPropagation()
+    },
+    buy() {
+      e.stopPropagation()
+    }
   }
 }
 </script>
 
 <style scoped>
 .item {
-  height: 240px;
+  height: 235px;
   width: 180px;
   margin-left: 10px;
   margin-bottom: 10px;
-  background-color: #f4f4f5;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 .imgbox {
   height: 180px;
   width: 180px;
-  background-color: lightblue;
   position: relative;
 }
 .imgbox img {
