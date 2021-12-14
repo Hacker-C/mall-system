@@ -66,7 +66,8 @@ export default {
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+      },
+      timer: null
     }
   },
   methods: {
@@ -96,18 +97,21 @@ export default {
               this.$message({
                 message: res.msg,
                 type: 'success',
-                duration: 2000
+                duration: 1000
               })
-              if (res.data.role === 0) {
-                // 普通用户
-                this.$router.push('/home')
-                sessionStorage.setItem(
-                  'userId',
-                  JSON.stringify(res.data.userId)
-                )
-              } else {
-                // 管理员和店家
-              }
+              clearTimeout(this.timer)
+              this.timer = setTimeout(() => {
+                if (res.data.role === 0) {
+                  // 普通用户
+                  this.$router.push('/home')
+                  sessionStorage.setItem(
+                    'userId',
+                    JSON.stringify(res.data.userId)
+                  )
+                } else {
+                  // 管理员和店家
+                }
+              }, 1000)
             } else {
               this.$message.error('登录失败！错误原因：' + res.msg)
             }
