@@ -50,11 +50,11 @@ export default {
           .get('/cart/' + userId)
           .then((res) => {
             if (res.code == '0') {
-              this.$message({
-                message: res.msg,
-                type: 'success',
-                duration: 1000
-              })
+              // this.$message({
+              //   message: res.msg,
+              //   type: 'success',
+              //   duration: 1000
+              // })
               this.cartProducts = []
               res.data.forEach((e) => {
                 this.cartProducts.push(e)
