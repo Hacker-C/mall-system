@@ -29,7 +29,7 @@
     <div style="background-color: #f4f4f5">
       <div class="p-name">{{ likeProduct.productName }}</div>
       <div class="p-time">
-        收藏时间：<span>{{ likeProduct.likeTime }}</span>
+        收藏时间：<span style="color: #409eff">{{ likeProduct.likeTime }}</span>
       </div>
       <div class="p-price">
         <span class="price1">
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import request from '../../utils/request'
+
 export default {
   data() {
     return {
@@ -69,6 +71,40 @@ export default {
     },
     addToCart(e) {
       e.stopPropagation()
+      let pId = this.likeProduct.productId
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+        request
+          .post('/cart', {
+            userId: uId,
+            productId: pId,
+            count: this.num
+          })
+          .then((res) => {
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning',
+                duration: 2000
+              })
+            } else {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 2000
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 2000
+        })
+      }
     },
     deleteItem(e) {
       e.stopPropagation()
