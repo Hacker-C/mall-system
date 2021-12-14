@@ -1,5 +1,8 @@
 <template>
   <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
+    <h3 class="head">
+      <i class="fas fa-cart-plus" style="color: #909399"></i> 我的购物车
+    </h3>
     <div v-if="isLogin">
       <el-row type="flex" class="header">
         <el-col class="nav" :span="1"> </el-col>
@@ -14,7 +17,7 @@
         <CartItem :cartProduct="item" @reload="load" />
       </div>
     </div>
-    <div v-else>请先登录</div>
+    <div v-else style="color: #909399">请先登录（注册后登录即可成为会员）</div>
   </div>
 </template>
 
@@ -65,6 +68,13 @@ export default {
 </script>
 
 <style scoped>
+.head {
+  /* background-color: pink; */
+  height: 50px;
+  line-height: 60px;
+  font-weight: 400;
+  border-bottom: 1px dotted rgba(204, 204, 204, 0.5);
+}
 .header {
   height: 50px;
   line-height: 70px;
