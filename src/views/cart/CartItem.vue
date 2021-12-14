@@ -19,7 +19,18 @@
       >￥{{ (cartProduct.productPrice * this.num).toFixed(2) }}</el-col
     >
     <el-col :span="5">
-      <el-button size="small" @click="deleteCartItem">删除</el-button>
+      <el-popover placement="top" width="160" v-model="visible">
+        <p>确定从收藏夹移出该商品吗？</p>
+        <div style="text-align: right; margin: 0">
+          <el-button size="mini" type="text" @click="visible = false"
+            >取消</el-button
+          >
+          <el-button type="primary" size="mini" @click="deleteCartItem"
+            >确定</el-button
+          >
+        </div>
+      </el-popover>
+      <el-button size="small" @click="visible = true">删除</el-button>
       <el-button size="small" @click="toDetails">查看</el-button>
       <el-button size="small">购买</el-button>
     </el-col>
@@ -31,7 +42,8 @@ import request from '../../utils/request'
 export default {
   data() {
     return {
-      num: 1
+      num: 1,
+      visible: false
     }
   },
   methods: {
@@ -48,6 +60,7 @@ export default {
         })
     },
     deleteCartItem() {
+      this.visible = false
       let cId = this.cartProduct.cartId
       // console.log(this.cartProduct.cartId)
       request
