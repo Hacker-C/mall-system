@@ -18,41 +18,13 @@
 </template>
 
 <script>
+import request from '../../utils/request'
 const LikeItem = () => import('./LikeItem.vue')
 export default {
   data() {
     return {
       isLogin: false,
-      likeProducts: [
-        {
-          likeId: 1,
-          productName: '活着',
-          productPrice: 39.9,
-          productId: 1,
-          likeTime: '2021-12-14',
-          discount: 0.85,
-          imgSrc:
-            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
-        },
-        {
-          likeId: 2,
-          productName: '活着',
-          productPrice: 39.9,
-          likeTime: '2021-12-14',
-          discount: 1.0,
-          imgSrc:
-            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
-        },
-        {
-          likeId: 3,
-          productName: '活着',
-          productPrice: 39.9,
-          likeTime: '2021-12-14',
-          discount: 0.85,
-          imgSrc:
-            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
-        }
-      ]
+      likeProducts: []
     }
   },
   created() {
@@ -62,6 +34,14 @@ export default {
     load() {
       let userId = sessionStorage.getItem('userId')
       this.isLogin = userId ? true : false
+      if (userId) {
+        request.get('/like/' + userId).then((res) => {
+          this.likeProducts = []
+          res.data.forEach((e) => {
+            this.likeProducts.push(e)
+          })
+        })
+      }
     }
   },
   components: {

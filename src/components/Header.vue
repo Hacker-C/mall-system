@@ -46,7 +46,7 @@
           :offset="2"
           style="line-height: 38px"
         >
-          <el-badge :value="12" class="item" type="primary" v-if="false">
+          <el-badge :value="likeCount" class="item" v-if="likeCount">
             收藏夹
           </el-badge>
           <div v-else class="item2">收藏夹</div>
@@ -121,6 +121,7 @@ export default {
       path: this.$route.path,
       isLogin: false,
       cartCount: 0,
+      likeCount: 0,
       username: '游客'
     }
   },
@@ -157,6 +158,9 @@ export default {
         })
       request.get('/user/' + userId).then((res) => {
         this.username = res.data.username
+      })
+      request.get('like/count/' + userId).then((res) => {
+        this.likeCount = res.data
       })
     }
   }

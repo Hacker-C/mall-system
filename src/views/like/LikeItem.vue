@@ -92,11 +92,12 @@ export default {
   height: 180px;
   width: 180px;
   position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 .imgbox img {
-  height: 90%;
-  margin-left: 19%;
-  margin-top: 5%;
+  height: 120px;
+  margin-top: 30px;
   transition: all 0.5s;
 }
 .add,
