@@ -3,7 +3,7 @@
     <h3 class="head">
       <i class="fas fa-cart-plus" style="color: #909399"></i> 我的购物车
     </h3>
-    <div v-if="isLogin">
+    <div v-if="isLogin && cartProducts.length > 0">
       <el-row type="flex" class="header">
         <el-col class="nav" :span="1"> </el-col>
         <el-col class="nav" :span="4"> 商品图片 </el-col>
@@ -16,6 +16,12 @@
       <div v-for="(item, index) in cartProducts" :key="index">
         <CartItem :cartProduct="item" @reload="load" />
       </div>
+    </div>
+    <div
+      v-else-if="cartProducts.length == 0 && isLogin == true"
+      style="color: #909399"
+    >
+      您还没有添加任何商品到购物车，先去逛逛吧~
     </div>
     <div v-else style="color: #909399">请先登录（注册后登录即可成为会员）</div>
   </div>
