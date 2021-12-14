@@ -212,6 +212,7 @@ export default {
   /* background-color: pink; */
   height: 50px;
   line-height: 60px;
+  border-bottom: 1px dotted rgba(204, 204, 204, 0.5);
 }
 .sub-header {
   margin-top: 20px;

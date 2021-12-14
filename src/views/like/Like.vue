@@ -4,18 +4,11 @@
       <i class="fas fa-star" style="color: #909399"></i> 我的收藏夹
     </h3>
     <div v-if="isLogin && likeProducts.length > 0">
-      <el-row type="flex" class="header">
-        <el-col class="nav" :span="1"> </el-col>
-        <el-col class="nav" :span="4"> 商品图片 </el-col>
-        <el-col class="nav" :span="3"> 商品名称 </el-col>
-        <el-col class="nav" :span="4">单价</el-col>
-        <el-col class="nav" :span="4">数量</el-col>
-        <el-col class="nav" :span="4">总计</el-col>
-        <el-col class="nav" :span="4">操作</el-col>
-      </el-row>
-      <!-- <div v-for="(item, index) in likeProducts" :key="index">
-        <CartItem :cartProduct="item" @reload="load" />
-      </div> -->
+      <div class="like-bd">
+        <div v-for="(item, index) in likeProducts" :key="index">
+          <LikeItem :likeProduct="item" @reload="load" />
+        </div>
+      </div>
     </div>
     <div v-else-if="likeProducts.length == 0 && isLogin" style="color: #909399">
       您还没有添加任何商品到购物车，先去逛逛吧~
@@ -25,11 +18,40 @@
 </template>
 
 <script>
+const LikeItem = () => import('./LikeItem.vue')
 export default {
   data() {
     return {
       isLogin: false,
-      likeProducts: []
+      likeProducts: [
+        {
+          likeId: 1,
+          productName: '活着',
+          productPrice: 39.9,
+          likeTime: '2021-12-14',
+          discount: 0.85,
+          imgSrc:
+            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
+        },
+        {
+          likeId: 2,
+          productName: '活着',
+          productPrice: 39.9,
+          likeTime: '2021-12-14',
+          discount: 1.0,
+          imgSrc:
+            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
+        },
+        {
+          likeId: 3,
+          productName: '活着',
+          productPrice: 39.9,
+          likeTime: '2021-12-14',
+          discount: 0.85,
+          imgSrc:
+            'https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/book1.174aub6lmiu8.png'
+        }
+      ]
     }
   },
   created() {
@@ -40,6 +62,9 @@ export default {
       let userId = sessionStorage.getItem('userId')
       this.isLogin = userId ? true : false
     }
+  },
+  components: {
+    LikeItem
   }
 }
 </script>
@@ -51,5 +76,13 @@ export default {
   line-height: 60px;
   font-weight: 400;
   border-bottom: 1px dotted rgba(204, 204, 204, 0.5);
+}
+.like-bd {
+  padding: 15px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
