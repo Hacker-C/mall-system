@@ -27,7 +27,7 @@
         >
         <el-col class="discount" :span="3"> 优惠减：￥120.2 </el-col>
       </el-row>
-      <el-row type="flex" justify="end">
+      <el-row type="flex" justify="end" style="margin-bottom: 20px">
         <el-button type="primary" round style="width: 10%; margin-top: 10px"
           >去结算</el-button
         >
