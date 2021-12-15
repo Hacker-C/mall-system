@@ -14,10 +14,17 @@
         <el-col class="nav" :span="4">操作</el-col>
       </el-row>
       <div v-for="(item, index) in cartProducts" :key="index">
-        <CartItem :cartProduct="item" @reload="load" />
+        <CartItem
+          :cartProduct="item"
+          @reload="reloadCount"
+          @reload2="reloadItem"
+        />
       </div>
       <el-row type="flex" justify="end" class="total-bd">
-        <el-col class="total" :span="3"> 合计：￥999 </el-col>
+        <el-col :span="2" class="totalCount">共：{{ total }} 件</el-col>
+        <el-col class="total" :span="4">
+          合计：￥{{ money.toFixed(2) }} 元</el-col
+        >
         <el-col class="discount" :span="3"> 优惠减：￥120.2 </el-col>
       </el-row>
       <el-row type="flex" justify="end">
@@ -44,13 +51,33 @@ export default {
   data() {
     return {
       isLogin: false,
-      cartProducts: []
+      cartProducts: [],
+      totalCount: {},
+      totalPrice: {},
+      total: 0,
+      money: 0
     }
   },
   created() {
     this.load()
+    this.reloadCount()
   },
   methods: {
+    reloadCount(cId, count, p) {
+      this.totalCount[cId] = [count, p]
+      console.log(this.totalCount)
+      this.total = 0
+      this.money = 0
+      for (let v of Object.values(this.totalCount)) {
+        if (v[0]) {
+          this.total += v[0]
+          this.money += v[1]
+        }
+      }
+    },
+    reloadItem() {
+      this.load()
+    },
     load() {
       let userId = sessionStorage.getItem('userId')
       this.isLogin = userId ? true : false
@@ -59,19 +86,24 @@ export default {
           .get('/cart/' + userId)
           .then((res) => {
             if (res.code == '0') {
-              // this.$message({
-              //   message: res.msg,
-              //   type: 'success',
-              //   duration: 1000
-              // })
               this.cartProducts = []
               res.data.forEach((e) => {
                 this.cartProducts.push(e)
+                // 计算总数
+                console.log(e)
+                this.totalCount[e.cartId] = [
+                  e.count,
+                  e.count * e.productPrice * e.discount
+                ]
+                // 计算总价格
               })
             }
           })
           .catch((err) => {
             console.log(err)
+          })
+          .then(() => {
+            this.reloadCount()
           })
       }
     }
@@ -84,8 +116,10 @@ export default {
 
 <style scoped>
 .total,
-.discount {
+.discount,
+.totalCount {
   border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+  font-size: 15px;
 }
 .total-bd {
   height: 50px;

@@ -30,9 +30,13 @@
           >
         </div>
       </el-popover>
-      <el-button size="small" @click="visible = true">删除</el-button>
-      <el-button size="small" @click="toDetails">查看</el-button>
-      <el-button size="small">购买</el-button>
+      <el-button @click="visible = true" type="danger" size="small" plain
+        >删除</el-button
+      >
+      <el-button size="small" type="primary" @click="toDetails" plain
+        >查看</el-button
+      >
+      <el-button size="small" type="primary" plain>购买</el-button>
     </el-col>
   </el-row>
 </template>
@@ -58,11 +62,13 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+      let price =
+        this.num * this.cartProduct.productPrice * this.cartProduct.discount
+      this.$emit('reload', this.cartProduct.cartId, value, price)
     },
     deleteCartItem() {
       this.visible = false
       let cId = this.cartProduct.cartId
-      // console.log(this.cartProduct.cartId)
       request
         .delete('/cart/' + cId)
         .then((res) => {
@@ -73,7 +79,7 @@ export default {
               type: 'success',
               duration: 1000
             })
-            this.$emit('reload')
+            this.$emit('reload2')
           } else {
             this.$message.error('删除失败！服务器错误！')
           }
