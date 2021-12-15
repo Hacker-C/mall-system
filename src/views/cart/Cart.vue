@@ -66,13 +66,21 @@ export default {
     this.load()
     this.reloadCount()
   },
+  beforeDestroy() {
+    this.$bus.$off('updateMessage')
+  },
   methods: {
     toCheckout() {
+      let obj = {
+        total: this.total,
+        money: this.money,
+        cartProducts: this.cartProducts
+      }
+      sessionStorage.setItem('checkout', JSON.stringify(obj))
       this.$router.push('/checkout')
     },
     reloadCount(cId, count, p) {
       this.totalCount[cId] = [count, p]
-      console.log(this.totalCount)
       this.total = 0
       this.money = 0
       for (let v of Object.values(this.totalCount)) {
@@ -97,7 +105,6 @@ export default {
               res.data.forEach((e) => {
                 this.cartProducts.push(e)
                 // 计算总数
-                console.log(e)
                 this.totalCount[e.cartId] = [
                   e.count,
                   e.count * e.productPrice * e.discount

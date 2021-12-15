@@ -64,6 +64,7 @@ export default {
         })
       let price =
         this.num * this.cartProduct.productPrice * this.cartProduct.discount
+
       this.$emit('reload', this.cartProduct.cartId, value, price)
     },
     deleteCartItem() {
