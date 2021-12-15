@@ -86,6 +86,31 @@ export default {
       let pId = this.product.productId
       let uId = sessionStorage.getItem('userId')
       if (uId) {
+        request
+          .post('/like', {
+            productId: pId,
+            userId: uId
+          })
+          .then((res) => {
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning',
+                duration: 1000
+              })
+              return
+            }
+            if (res.code == '0') {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       } else {
         this.$message({
           message: '请先登录！',
