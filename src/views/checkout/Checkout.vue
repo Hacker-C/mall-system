@@ -74,7 +74,6 @@ export default {
     this.products = items.cartProducts
     this.total = items.total
     this.money = items.money
-    console.log(this.products)
   },
   components: {
     CheckoutItem

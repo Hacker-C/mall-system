@@ -243,7 +243,6 @@ export default {
     },
     toCheckout() {
       this.product.count = 1
-
       let obj = {
         total: 1,
         money: this.product.productPrice * this.product.discount,

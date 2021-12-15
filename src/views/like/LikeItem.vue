@@ -4,7 +4,7 @@
       <div class="imgbox">
         <img :src="likeProduct.imgSrc" alt="" />
         <div class="add" @click="addToCart">加入购物车</div>
-        <div class="buy" @click="buy">直接购买</div>
+        <div class="buy" @click="toCheckout">直接购买</div>
         <div class="del" @click="showDelete">
           <el-popover placement="top" width="160" v-model="visible">
             <p>确定从收藏夹移出该商品吗？</p>
@@ -128,8 +128,16 @@ export default {
         })
       this.visible = false
     },
-    buy() {
+    toCheckout(e) {
       e.stopPropagation()
+      this.likeProduct.count = 1
+      let obj = {
+        total: 1,
+        money: this.likeProduct.productPrice * this.likeProduct.discount,
+        cartProducts: [this.likeProduct]
+      }
+      sessionStorage.setItem('checkout', JSON.stringify(obj))
+      this.$router.push('/checkout')
     }
   }
 }
