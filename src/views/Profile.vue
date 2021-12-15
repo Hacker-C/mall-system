@@ -3,7 +3,7 @@
     <h3 class="header">我的账号中心</h3>
     <div v-if="isLogin">
       <div class="sub-header">
-        <h4>个人基本信息</h4>
+        <h4><i class="far fa-id-card"></i> 个人基本信息</h4>
         <div>
           <el-button size="mini" style="margin-left: 10px" @click="addUser"
             >修改信息</el-button
@@ -60,8 +60,10 @@
           </div>
         </el-descriptions-item>
       </el-descriptions>
+      <div class="sub-header">
+        <h4><i class="fas fa-user-shield"></i> 账户安全</h4>
+      </div>
       <el-descriptions
-        title="账号安全"
         direction="vertical"
         style="margin-top: 10px; margin-bottom: 50px"
         :column="3"
@@ -96,6 +98,7 @@
 
     <div v-else style="color: #909399">请先登录（注册后登录即可成为会员）</div>
     <!-- 添加信息弹出 -->
+
     <el-dialog
       title="填入个人信息"
       :visible.sync="dialogFormVisible"
@@ -192,7 +195,7 @@ export default {
               this.$message({
                 message: res.msg,
                 type: 'success',
-                duration: 2000
+                duration: 1000
               })
               this.user = Object.assign({}, this.user, res.data)
               this.form = Object.assign({}, this.form, res.data)
@@ -218,7 +221,8 @@ export default {
   margin-top: 20px;
   display: flex;
 }
-h3 {
+h3,
+h4 {
   font-weight: 400;
 }
 </style>

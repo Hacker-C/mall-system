@@ -231,6 +231,12 @@ export default {
           .catch((err) => {
             console.log(err)
           })
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 1000
+        })
       }
     }
   },

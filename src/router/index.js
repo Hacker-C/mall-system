@@ -13,6 +13,7 @@ const Profile = () => import('../views/Profile.vue')
 const Details = () => import('../views/details/Details.vue')
 const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
+const Checkout = () => import('../views/checkout/Checkout.vue')
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,13 @@ const routes = [
         component: Cart,
         meta: {
           name: '购物车'
+        }
+      },
+      {
+        path: '/checkout',
+        component: Checkout,
+        meta: {
+          name: '订单结算'
         }
       },
       {

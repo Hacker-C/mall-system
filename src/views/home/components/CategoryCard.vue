@@ -15,7 +15,7 @@
       >
       <div>
         <el-button size="small" @click="addToCart">加入购物车</el-button>
-        <el-button size="small" @click="buy">购买</el-button>
+        <el-button size="small" @click="addToLike">收藏</el-button>
       </div>
     </el-card>
   </a>
@@ -77,10 +77,12 @@ export default {
           duration: 2000
         })
       }
+      // 触发父组件 Layout的 logout，刷新Header组件
+      this.$emit('reloadHeader')
       // 阻止事件冒泡
       e.stopPropagation()
     },
-    buy(e) {
+    addToLike(e) {
       let pId = this.product.productId
       let uId = sessionStorage.getItem('userId')
       if (uId) {
@@ -88,7 +90,7 @@ export default {
         this.$message({
           message: '请先登录！',
           type: 'warning',
-          duration: 2000
+          duration: 1000
         })
       }
       e.stopPropagation()
