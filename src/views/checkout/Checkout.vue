@@ -46,7 +46,7 @@
         </el-col>
         <el-col :span="5" class="bottom-item bb"
           >应付金额：
-          <span class="m"> ￥{{ this.money }} </span>
+          <span class="m"> ￥{{ this.money.toFixed(2) }} </span>
         </el-col>
       </el-row>
     </div>

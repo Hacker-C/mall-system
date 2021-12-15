@@ -114,7 +114,9 @@
               >
             </el-row>
             <el-row style="text-align: center; margin-top: 20px">
-              <el-button style="width: 80%"> 直接购买</el-button>
+              <el-button style="width: 80%" @click="toCheckout">
+                直接购买</el-button
+              >
             </el-row>
           </el-col>
         </el-row>
@@ -238,6 +240,17 @@ export default {
           duration: 1000
         })
       }
+    },
+    toCheckout() {
+      this.product.count = 1
+
+      let obj = {
+        total: 1,
+        money: this.product.productPrice * this.product.discount,
+        cartProducts: [this.product]
+      }
+      sessionStorage.setItem('checkout', JSON.stringify(obj))
+      this.$router.push('/checkout')
     }
   },
   components: {
