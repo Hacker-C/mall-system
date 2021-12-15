@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     cancel() {
+      sessionStorage.setItem('checkout', null)
       this.$router.back()
     }
   }

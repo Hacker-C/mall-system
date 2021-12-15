@@ -57,13 +57,13 @@ export default {
               this.$message({
                 message: res.msg,
                 type: 'warning',
-                duration: 2000
+                duration: 1000
               })
             } else {
               this.$message({
                 message: res.msg,
                 type: 'success',
-                duration: 2000
+                duration: 1000
               })
             }
           })
@@ -74,7 +74,7 @@ export default {
         this.$message({
           message: '请先登录！',
           type: 'warning',
-          duration: 2000
+          duration: 1000
         })
       }
       // 触发父组件 Layout的 logout，刷新Header组件
