@@ -36,7 +36,9 @@
       <el-button size="small" type="primary" @click="toDetails" plain
         >查看</el-button
       >
-      <el-button size="small" type="primary" plain>购买</el-button>
+      <el-button size="small" type="primary" plain @click="toCheckout"
+        >购买</el-button
+      >
     </el-col>
   </el-row>
 </template>
@@ -97,6 +99,17 @@ export default {
           id: this.cartProduct.productId
         }
       })
+    },
+    toCheckout(e) {
+      e.stopPropagation()
+      this.cartProduct.count = 1
+      let obj = {
+        total: 1,
+        money: this.cartProduct.productPrice * this.cartProduct.discount,
+        cartProducts: [this.cartProduct]
+      }
+      sessionStorage.setItem('checkout', JSON.stringify(obj))
+      this.$router.push('/checkout')
     }
   },
   props: {
