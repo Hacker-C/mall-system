@@ -15,6 +15,8 @@ const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
 
+const Header = () => import('../admin/Header.vue')
+
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -114,6 +116,13 @@ const routes = [
     component: Register,
     meta: {
       name: '欢迎注册！'
+    }
+  },
+  {
+    path: '/admin',
+    component: Header,
+    meta: {
+      name: '管理'
     }
   }
 ]
