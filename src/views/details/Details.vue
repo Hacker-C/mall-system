@@ -104,7 +104,7 @@
               >
             </el-row>
             <el-row style="text-align: center; margin-top: 20px">
-              <el-button style="width: 80%"
+              <el-button style="width: 80%" @click="addToLike"
                 ><i class="far fa-heart"></i> 加入收藏夹</el-button
               >
             </el-row>
@@ -181,13 +181,13 @@ export default {
               this.$message({
                 message: res.msg,
                 type: 'warning',
-                duration: 2000
+                duration: 1000
               })
             } else {
               this.$message({
                 message: res.msg,
                 type: 'success',
-                duration: 2000
+                duration: 1000
               })
             }
           })
@@ -198,8 +198,39 @@ export default {
         this.$message({
           message: '请先登录！',
           type: 'warning',
-          duration: 2000
+          duration: 1000
         })
+      }
+    },
+    addToLike() {
+      let pId = this.product.productId
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+        request
+          .post('/like', {
+            productId: pId,
+            userId: uId
+          })
+          .then((res) => {
+            if (res.code == '1') {
+              this.$message({
+                message: res.msg,
+                type: 'warning',
+                duration: 1000
+              })
+              return
+            }
+            if (res.code == '0') {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
     }
   },
@@ -286,7 +317,7 @@ export default {
   border-bottom: 1px solid #ccc;
   padding: 15px;
   font-weight: 400;
-  color: #520000;
+  color: #510000;
 }
 .desc {
   text-indent: 2rem;

@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       isLogin: false,
-      likeProducts: []
+      likeProducts: [],
+      i: 0
     }
   },
   created() {

@@ -5,14 +5,14 @@
         <img :src="likeProduct.imgSrc" alt="" />
         <div class="add" @click="addToCart">加入购物车</div>
         <div class="buy" @click="buy">直接购买</div>
-        <div class="del" @click="deleteItem">
+        <div class="del" @click="showDelete">
           <el-popover placement="top" width="160" v-model="visible">
             <p>确定从收藏夹移出该商品吗？</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="visible = false"
                 >取消</el-button
               >
-              <el-button type="primary" size="mini" @click="visible = false"
+              <el-button type="primary" size="mini" @click="deleteItem"
                 >确定</el-button
               >
             </div>
@@ -106,8 +106,27 @@ export default {
         })
       }
     },
-    deleteItem(e) {
+    showDelete(e) {
+      this.visible = true
       e.stopPropagation()
+    },
+    deleteItem(e) {
+      request
+        .delete('/like/' + this.likeProduct.likeId)
+        .then((res) => {
+          if (res.code == '0') {
+            this.$message({
+              message: res.msg,
+              type: 'success',
+              duration: 1000
+            })
+            this.$emit('reload')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.visible = false
     },
     buy() {
       e.stopPropagation()
