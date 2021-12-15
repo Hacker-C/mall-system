@@ -172,7 +172,7 @@ export default {
             this.timer = setTimeout(() => {
               //设置延迟执行
               this.load()
-            }, 2000)
+            }, 1000)
             this.dialogFormVisible = false
           } else {
             this.$message.error('登录失败！服务器出错！')

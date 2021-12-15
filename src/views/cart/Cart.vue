@@ -16,6 +16,15 @@
       <div v-for="(item, index) in cartProducts" :key="index">
         <CartItem :cartProduct="item" @reload="load" />
       </div>
+      <el-row type="flex" justify="end" class="total-bd">
+        <el-col class="total" :span="3"> 合计：￥999 </el-col>
+        <el-col class="discount" :span="3"> 优惠减：￥120.2 </el-col>
+      </el-row>
+      <el-row type="flex" justify="end">
+        <el-button type="primary" round style="width: 10%; margin-top: 10px"
+          >去结算</el-button
+        >
+      </el-row>
     </div>
     <div
       v-else-if="cartProducts.length == 0 && isLogin == true"
@@ -74,6 +83,14 @@ export default {
 </script>
 
 <style scoped>
+.total,
+.discount {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+}
+.total-bd {
+  height: 50px;
+  line-height: 50px;
+}
 .head {
   /* background-color: pink; */
   height: 50px;
