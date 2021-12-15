@@ -13,13 +13,13 @@
         <el-col class="nav" :span="4">总计</el-col>
         <el-col class="nav" :span="4">操作</el-col>
       </el-row>
-      <div v-for="(item, index) in cartProducts" :key="index">
-        <CartItem
-          :cartProduct="item"
-          @reload="reloadCount"
-          @reload2="reloadItem"
-        />
-      </div>
+      <CartItem
+        v-for="(item, index) in cartProducts"
+        :key="index"
+        :cartProduct="item"
+        @reload="reloadCount"
+        @reload2="reloadItem"
+      />
       <el-row type="flex" justify="end" class="total-bd">
         <el-col :span="2" class="totalCount">共：{{ total }} 件</el-col>
         <el-col class="total" :span="4">
