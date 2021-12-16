@@ -18,8 +18,8 @@
           <el-menu-item index="/admin/all_roles">
             <span slot="title">所有角色</span>
           </el-menu-item>
-          <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
           <el-menu-item index="/admin/all_shops"> 商家管理 </el-menu-item>
+          <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="system">
