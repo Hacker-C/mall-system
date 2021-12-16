@@ -99,17 +99,19 @@ export default {
                 type: 'success',
                 duration: 1000
               })
+              sessionStorage.setItem('role', res.data.role)
+              sessionStorage.setItem('userId', JSON.stringify(res.data.userId))
               clearTimeout(this.timer)
               this.timer = setTimeout(() => {
-                if (res.data.role === 0) {
+                if (res.data.role == 'user') {
                   // 普通用户
                   this.$router.push('/home')
-                  sessionStorage.setItem(
-                    'userId',
-                    JSON.stringify(res.data.userId)
-                  )
-                } else {
-                  // 管理员和店家
+                } else if (res.data.role == 'admin') {
+                  // 管理员
+                  this.$router.push('/admin')
+                } else if (res.data.role == 'shop') {
+                  // 商家
+                  this.$router.push('/shop')
                 }
               }, 1000)
             } else {

@@ -15,7 +15,11 @@ const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
 
-const Header = () => import('../admin/Header.vue')
+// 管理员界面
+const Admin = () => import('../pages/admin/Admin.vue')
+
+// 商家界面
+const Shop = () => import('../pages/shop/Shop.vue')
 
 Vue.use(VueRouter)
 
@@ -31,11 +35,13 @@ const routes = [
     name: 'Layout',
     component: Layout,
     redirect: 'home',
+    requireAuth: false,
     children: [
       {
         path: '/home',
         component: Home,
         meta: {
+          requireAuth: false,
           name: '首页'
         }
       },
@@ -43,6 +49,7 @@ const routes = [
         path: '/product_list',
         component: ProductList,
         meta: {
+          requireAuth: false,
           name: '商品列表'
         }
       },
@@ -50,6 +57,7 @@ const routes = [
         path: '/about',
         component: About,
         meta: {
+          requireAuth: false,
           name: '关于我们'
         }
       },
@@ -57,6 +65,7 @@ const routes = [
         path: '/notice',
         component: Notice,
         meta: {
+          requireAuth: false,
           name: '网站公告'
         }
       },
@@ -64,6 +73,7 @@ const routes = [
         path: '/like',
         component: Like,
         meta: {
+          requireAuth: false,
           name: '我的收藏夹'
         }
       },
@@ -71,6 +81,7 @@ const routes = [
         path: '/cart',
         component: Cart,
         meta: {
+          requireAuth: false,
           name: '购物车'
         }
       },
@@ -78,6 +89,7 @@ const routes = [
         path: '/checkout',
         component: Checkout,
         meta: {
+          requireAuth: false,
           name: '订单结算'
         }
       },
@@ -85,6 +97,8 @@ const routes = [
         path: '/order',
         component: Order,
         meta: {
+          requireAuth: false,
+
           name: '所有订单'
         }
       },
@@ -92,6 +106,7 @@ const routes = [
         path: '/profile',
         component: Profile,
         meta: {
+          requireAuth: false,
           name: '个人信息'
         }
       },
@@ -99,6 +114,7 @@ const routes = [
         path: '/details',
         component: Details,
         meta: {
+          requireAuth: false,
           name: '商品详情'
         }
       }
@@ -108,6 +124,7 @@ const routes = [
     path: '/login',
     component: Login,
     meta: {
+      requireAuth: false,
       name: '欢迎登录！'
     }
   },
@@ -115,14 +132,26 @@ const routes = [
     path: '/register',
     component: Register,
     meta: {
+      requireAuth: false,
       name: '欢迎注册！'
     }
   },
   {
     path: '/admin',
-    component: Header,
+    component: Admin,
     meta: {
+      requireAuth: true,
+      roles: ['admin'],
       name: '管理'
+    }
+  },
+  {
+    path: '/shop',
+    component: Shop,
+    meta: {
+      requireAuth: true,
+      roles: ['shop'],
+      name: '开店'
     }
   }
 ]
@@ -135,7 +164,26 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.name
-  next()
+  let userId = sessionStorage.getItem('userId')
+  let role = sessionStorage.getItem('role')
+  // 判断要去的路由是否需要登录权限
+  if (to.meta.requireAuth) {
+    // 判断是否登录
+    if (userId) {
+      if (to.meta.roles.includes(role)) {
+        // 此角色拥有该页面的权限
+        next()
+      } else {
+        // 此角色不具有此权限则返回原来页面
+        next({ path: from.fullPath })
+      }
+    } else {
+      next({ path: '/login' })
+    }
+  } else {
+    // 不需要权限的直接去往
+    next()
+  }
 })
 
 export default router

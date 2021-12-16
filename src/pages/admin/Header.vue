@@ -36,6 +36,7 @@ export default {
   methods: {
     quit() {
       this.$router.push('/login')
+      sessionStorage.clear()
     },
     toProfile() {
       this.$router.push('/profile')
