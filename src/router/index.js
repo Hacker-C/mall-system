@@ -17,6 +17,13 @@ const Checkout = () => import('../views/checkout/Checkout.vue')
 
 // 管理员界面
 const Admin = () => import('../pages/admin/Admin.vue')
+const Welcome = () => import('../pages/admin/welcome/Welcome.vue')
+const AllUsers = () => import('../pages/admin/users/AllUsers.vue')
+const AllShops = () => import('../pages/admin/users/AllShops.vue')
+const AllRoles = () => import('../pages/admin/rights/AllRoles.vue')
+const Rights = () => import('../pages/admin/rights/Rights.vue')
+const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
+const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
 
 // 商家界面
 const Shop = () => import('../pages/shop/Shop.vue')
@@ -139,11 +146,78 @@ const routes = [
   {
     path: '/admin',
     component: Admin,
+    redirect: '/admin/welcome',
     meta: {
       requireAuth: true,
       roles: ['admin'],
       name: '管理'
-    }
+    },
+    children: [
+      {
+        path: '/admin/welcome',
+        component: Welcome,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '欢迎！',
+          title: '欢迎'
+        }
+      },
+      {
+        path: '/admin/all_users',
+        component: AllUsers,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '所有用户',
+        }
+      },
+      {
+        path: '/admin/all_shops',
+        component: AllShops,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '商家管理',
+        }
+      },
+      {
+        path: '/admin/all_roles',
+        component: AllRoles,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '所有角色'
+        }
+      },
+      {
+        path: '/admin/rights',
+        component: Rights,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '权限管理'
+        }
+      },
+      {
+        path: '/admin/home_set',
+        component: HomeSet,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '首页管理'
+        }
+      },
+      {
+        path: '/admin/all_products',
+        component: AllProducts,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '所有商品'
+        }
+      }
+    ]
   },
   {
     path: '/shop',
