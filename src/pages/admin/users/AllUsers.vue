@@ -83,12 +83,12 @@
             icon="el-icon-delete"
             circle
             size="mini"
-            @click.native.prevent="deleteRow(scope.$index, tableData)"
+            @click.native.prevent="deleteRow(scope.$index, scope.row)"
           ></el-button>
           <el-button
             type="warning"
             size="mini"
-            @click.native.prevent="deleteRow(scope.$index, tableData)"
+            @click.native.prevent="resetPassword(scope.row)"
           >
             重置密码
           </el-button>
@@ -186,17 +186,16 @@ export default {
       this.load()
     },
     // 删除
-    deleteRow(index, rows) {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+    deleteRow(index, row) {
+      this.$confirm('确认删除该用户吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(() => {
-          let deleteId = rows[index].id
-          rows.splice(index, 1)
+          let deleteId = row.userId
           request.delete('/user/' + deleteId).then((res) => {
-            if (res === 0) {
+            if (res.code === '0') {
               this.$message({
                 message: '删除成功！',
                 type: 'success'
@@ -248,7 +247,6 @@ export default {
             })
             this.total = res.data.total
             this.tableData = []
-            console.log(res.data.data)
             for (let i of res.data.data) {
               // if (i.age == 0) {
               //   i.age = ''
@@ -281,6 +279,31 @@ export default {
         .then(() => {
           // 刷新表格数据
           this.load()
+        })
+    },
+    resetPassword(user) {
+      this.$confirm('确定要重置该用户密码?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          let uId = user.userId
+          request.patch('/user/reset/' + uId).then((res) => {
+            if (res.code === '0') {
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+            }
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
         })
     }
   },

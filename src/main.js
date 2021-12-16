@@ -4,6 +4,7 @@ import router from './router'
 import './plugins/element.js'
 import './assets/css/base.css'
 import './assets/css/all.css'
+import 'default-passive-events'
 
 Vue.config.productionTip = false
 
