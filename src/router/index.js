@@ -24,9 +24,13 @@ const AllRoles = () => import('../pages/admin/rights/AllRoles.vue')
 const Rights = () => import('../pages/admin/rights/Rights.vue')
 const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
 const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
+const AllOrder = () => import('../pages/admin/order/AllOrder.vue')
 
 // 商家界面
 const Shop = () => import('../pages/shop/Shop.vue')
+const WelcomeShop = () => import('../pages/shop/welcome/Welcome.vue')
+const ShopProducts = () => import('../pages/shop/products/Product.vue')
+const ShopOrders = () => import('../pages/shop/oders/Order.vue')
 
 Vue.use(VueRouter)
 
@@ -216,17 +220,56 @@ const routes = [
           roles: ['admin'],
           name: '所有商品'
         }
+      },
+      {
+        path: '/admin/orders',
+        component: AllOrder,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '所有订单'
+        }
       }
     ]
   },
   {
     path: '/shop',
     component: Shop,
+    redirect: '/shop/welcome',
     meta: {
       requireAuth: true,
       roles: ['shop'],
       name: '开店'
-    }
+    },
+    children: [
+      {
+        path: '/shop/welcome',
+        component: WelcomeShop,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '欢迎'
+        },
+      },
+      {
+        path: '/shop/products',
+        component: ShopProducts,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '所有商品'
+        },
+      },
+      {
+        path: '/shop/orders',
+        component: ShopOrders,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '所有订单'
+        },
+      }
+    ]
   }
 ]
 
@@ -249,7 +292,8 @@ router.beforeEach((to, from, next) => {
         next()
       } else {
         // 此角色不具有此权限则返回原来页面
-        next({ path: from.fullPath })
+        // next({ path: from.fullPath })
+        router.back()
       }
     } else {
       next({ path: '/login' })

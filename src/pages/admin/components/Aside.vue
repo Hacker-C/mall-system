@@ -33,7 +33,7 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="2">
+      <el-submenu index="system">
         <template slot="title">
           <i class="fas fa-tablet-alt" style="margin-left: 5px"></i>
           <span style="margin-left: 12px">系统管理</span>
@@ -44,6 +44,17 @@
           </el-menu-item>
           <el-menu-item index="/admin/all_products">
             <span slot="title">所有商品</span>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="orders">
+        <template slot="title">
+          <i class="el-icon-s-order"></i>
+          <span>订单管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/admin/orders">
+            <span slot="title">所有订单</span>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
