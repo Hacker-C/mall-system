@@ -15,22 +15,11 @@
           <span style="margin-left: 12px">用户管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
-          <el-menu-item index="/admin/all_shops"> 商家管理 </el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="rights">
-        <template slot="title">
-          <i class="fas fa-edit" style="margin-left: 5px"></i>
-          <span style="margin-left: 12px">权限管理</span>
-        </template>
-        <el-menu-item-group>
           <el-menu-item index="/admin/all_roles">
             <span slot="title">所有角色</span>
           </el-menu-item>
-          <el-menu-item index="/admin/rights">
-            <span slot="title">权限管理</span>
-          </el-menu-item>
+          <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
+          <el-menu-item index="/admin/all_shops"> 商家管理 </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="system">

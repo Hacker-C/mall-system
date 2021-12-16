@@ -20,8 +20,7 @@ const Admin = () => import('../pages/admin/Admin.vue')
 const Welcome = () => import('../pages/admin/welcome/Welcome.vue')
 const AllUsers = () => import('../pages/admin/users/AllUsers.vue')
 const AllShops = () => import('../pages/admin/users/AllShops.vue')
-const AllRoles = () => import('../pages/admin/rights/AllRoles.vue')
-const Rights = () => import('../pages/admin/rights/Rights.vue')
+const AllRoles = () => import('../pages/admin/users/AllRoles.vue')
 const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
 const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
 const AllOrder = () => import('../pages/admin/order/AllOrder.vue')
@@ -192,15 +191,6 @@ const routes = [
           requireAuth: true,
           roles: ['admin'],
           name: '所有角色'
-        }
-      },
-      {
-        path: '/admin/rights',
-        component: Rights,
-        meta: {
-          requireAuth: true,
-          roles: ['admin'],
-          name: '权限管理'
         }
       },
       {
