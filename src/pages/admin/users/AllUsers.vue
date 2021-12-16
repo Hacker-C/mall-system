@@ -200,6 +200,7 @@ export default {
                 message: '删除成功！',
                 type: 'success'
               })
+              this.load()
             }
           })
         })
@@ -248,9 +249,6 @@ export default {
             this.total = res.data.total
             this.tableData = []
             for (let i of res.data.data) {
-              // if (i.age == 0) {
-              //   i.age = ''
-              // }
               this.tableData.push(i)
             }
           }
