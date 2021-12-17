@@ -91,7 +91,7 @@
           <el-button size="mini">修改密码</el-button>
         </el-descriptions-item>
         <el-descriptions-item label="身份角色">
-          <el-tag size="medium">会员客户</el-tag>
+          <el-tag size="medium">{{ roleText }}</el-tag>
         </el-descriptions-item>
       </el-descriptions>
     </div>
@@ -151,11 +151,6 @@ export default {
   created() {
     this.load()
   },
-  computed: {
-    statusText() {
-      return this.user.status === 1 ? '正常' : '异常'
-    }
-  },
   methods: {
     addUser() {
       this.dialogFormVisible = true
@@ -205,6 +200,20 @@ export default {
             console.log(err)
           })
       }
+    }
+  },
+  computed: {
+    statusText() {
+      return this.user.status === 1 ? '正常' : '异常'
+    },
+    roleText() {
+      if (this.user.role === 'admin') {
+        return '管理员'
+      }
+      if (this.user.role === 'shop') {
+        return '商家'
+      }
+      return '客户'
     }
   }
 }
