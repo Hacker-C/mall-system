@@ -100,7 +100,9 @@
           {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
+          <a href="javascript:;" style="display: block" @click="toProfile">
+            <el-dropdown-item> 个人信息 </el-dropdown-item>
+          </a>
           <el-dropdown-item>
             <a href="javascript:;" @click="logout"> 退出 </a>
           </el-dropdown-item>
@@ -142,6 +144,9 @@ export default {
       })
       // 触发父组件 Layout的 reloadHeader事件，刷新Header组件
       this.$emit('reloadHeader')
+    },
+    toProfile() {
+      this.$router.push('/profile')
     }
   },
   created() {

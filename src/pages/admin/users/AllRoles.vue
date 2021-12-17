@@ -30,7 +30,8 @@ h4 {
 p {
   color: #606266;
   text-indent: 2rem;
-  margin: 5px 0 10px 0;
+  margin: 5px 0 20px 0;
+  font-size: 14px;
 }
 .item {
   margin: 10px;
