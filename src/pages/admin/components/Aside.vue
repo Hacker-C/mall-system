@@ -16,7 +16,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/admin/all_roles">
-            <span slot="title">所有角色</span>
+            <span slot="title">权限说明</span>
           </el-menu-item>
           <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
           <el-menu-item index="/admin/all_shops"> 商家管理 </el-menu-item>
