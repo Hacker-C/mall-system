@@ -9,7 +9,7 @@ const Notice = () => import('../views/Notice.vue')
 const Like = () => import('../views/like/Like.vue')
 const Cart = () => import('../views/cart/Cart.vue')
 const Order = () => import('../views/Order.vue')
-const Profile = () => import('../views/Profile.vue')
+const Profile = () => import('../components/Profile.vue')
 const Details = () => import('../views/details/Details.vue')
 const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
@@ -218,6 +218,15 @@ const routes = [
           requireAuth: true,
           roles: ['admin'],
           name: '所有订单'
+        }
+      },
+      {
+        path: '/admin/profile',
+        component: Profile,
+        meta: {
+          requireAuth: true,
+          roles: ['admin', 'shop'],
+          name: '个人中心'
         }
       }
     ]

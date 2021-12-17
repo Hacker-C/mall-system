@@ -53,7 +53,7 @@ export default {
       sessionStorage.clear()
     },
     toProfile() {
-      this.$router.push('/profile')
+      this.$router.push('/admin/profile')
     }
   }
 }
