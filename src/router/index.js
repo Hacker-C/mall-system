@@ -24,6 +24,7 @@ const AllRoles = () => import('../pages/admin/users/AllRoles.vue')
 const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
 const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
 const AllOrder = () => import('../pages/admin/order/AllOrder.vue')
+const NoticeAdmin = () => import('../pages/admin/notice/NoticeAdmin.vue')
 
 // 商家界面
 const Shop = () => import('../pages/shop/Shop.vue')
@@ -227,6 +228,15 @@ const routes = [
           requireAuth: true,
           roles: ['admin', 'shop'],
           name: '个人中心'
+        }
+      },
+      {
+        path: '/admin/notice',
+        component: NoticeAdmin,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '公告栏管理'
         }
       }
     ]
