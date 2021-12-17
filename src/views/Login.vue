@@ -85,7 +85,7 @@ export default {
         title: '欢迎',
         dangerouslyUseHTMLString: true,
         message:
-          '<div>欢迎来到本系统!</div><div>管理员账号: admin, 密码: admin</div><div>商家账号: shop, 密码: shop</div><div>客户账号: user, 密码: user</div>',
+          '<div>欢迎来到本系统!</div><div>商家账号: shop, 密码: shop</div><div>客户账号: user, 密码: user</div>',
         duration: 5000
       })
     },

@@ -220,7 +220,6 @@ export default {
       this.load()
     },
     handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`)
       this.pageSize = val
       this.load()
     },
@@ -259,25 +258,43 @@ export default {
       this.form = {}
     },
     save() {
-      request
-        .post('user/account', this.form)
-        .then((res) => {
-          if (res.code === '0') {
-            this.dialogFormVisible = false
-          } else {
-            this.$message({
-              message: '修改失败，请联系管理员！',
-              type: 'failed'
-            })
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .then(() => {
-          // 刷新表格数据
-          this.load()
-        })
+      if (this.form.userId) {
+        request
+          .post('user/account', this.form)
+          .then((res) => {
+            if (res.code === '0') {
+              this.dialogFormVisible = false
+            } else {
+              this.$message({
+                message: '修改失败，请联系管理员！',
+                type: 'failed'
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+          .then(() => {
+            // 刷新表格数据
+            this.load()
+          })
+      } else {
+        // 添加新用户
+        request
+          .post('/user/add', this.form)
+          .then((res) => {
+            if (res.code === '0') {
+              this.dialogFormVisible = false
+              this.load()
+              this.$message({
+                message: res.msg,
+                type: 'success',
+                duration: 1000
+              })
+            }
+          })
+          .catch((err) => {})
+      }
     },
     resetPassword(user) {
       this.$confirm('确定要重置该用户密码?', '提示', {
