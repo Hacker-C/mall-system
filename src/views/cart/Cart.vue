@@ -25,9 +25,12 @@
         <el-col class="total" :span="4">
           合计：￥{{ money.toFixed(2) }} 元</el-col
         >
-        <el-col class="discount" :span="3"> 优惠减：￥120.2 </el-col>
+        <el-col class="discount" :span="3">
+          优惠减：￥{{ discountAmount }}
+        </el-col>
       </el-row>
       <el-row type="flex" justify="end" style="margin-bottom: 20px">
+        <el-button @click="log">打印</el-button>
         <el-button
           type="primary"
           round
@@ -59,34 +62,43 @@ export default {
       totalCount: {},
       totalPrice: {},
       total: 0,
-      money: 0
+      money: 0,
+      origin: 0
     }
   },
   created() {
     this.load()
     this.reloadCount()
   },
-  beforeDestroy() {
-    this.$bus.$off('updateMessage')
-  },
   methods: {
+    log() {
+      console.log(this.cartProducts[1].count)
+    },
     toCheckout() {
       let obj = {
         total: this.total,
         money: this.money,
         cartProducts: this.cartProducts
       }
+      this.load()
       sessionStorage.setItem('checkout', JSON.stringify(obj))
       this.$router.push('/checkout')
     },
-    reloadCount(cId, count, p) {
-      this.totalCount[cId] = [count, p]
+    reloadCount(cId, pId, count, p, d) {
+      this.totalCount[cId] = [count, p, d]
       this.total = 0
+      this.cartProducts.forEach((p, i) => {
+        if (p.productId == pId) {
+          this.cartProducts[i].count = count
+        }
+      })
       this.money = 0
+      this.origin = 0
       for (let v of Object.values(this.totalCount)) {
         if (v[0]) {
           this.total += v[0]
           this.money += v[1]
+          this.origin += v[2]
         }
       }
     },
@@ -107,7 +119,8 @@ export default {
                 // 计算总数
                 this.totalCount[e.cartId] = [
                   e.count,
-                  e.count * e.productPrice * e.discount
+                  e.count * e.productPrice * e.discount,
+                  e.count * e.productPrice
                 ]
                 // 计算总价格
               })
@@ -124,6 +137,11 @@ export default {
   },
   components: {
     CartItem
+  },
+  computed: {
+    discountAmount() {
+      return (this.origin - this.money).toFixed(2)
+    }
   }
 }
 </script>

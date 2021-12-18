@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import request from '../../utils/request'
 import CheckoutItem from './CheckoutItem.vue'
 export default {
   data() {
@@ -65,8 +66,8 @@ export default {
       products: [],
       total: 0,
       money: 0,
-      address: '江西南昌',
-      realName: '张三'
+      address: '',
+      realName: ''
     }
   },
   created() {
@@ -74,6 +75,11 @@ export default {
     this.products = items.cartProducts
     this.total = items.total
     this.money = items.money
+    let uId = sessionStorage.getItem('userId')
+    request.get('/user/' + uId).then((res) => {
+      this.realName = res.data.realName
+      this.address = res.data.address
+    })
   },
   components: {
     CheckoutItem

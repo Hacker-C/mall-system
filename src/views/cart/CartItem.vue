@@ -66,8 +66,15 @@ export default {
         })
       let price =
         this.num * this.cartProduct.productPrice * this.cartProduct.discount
-
-      this.$emit('reload', this.cartProduct.cartId, value, price)
+      let discountAmount = this.num * this.cartProduct.productPrice
+      this.$emit(
+        'reload',
+        this.cartProduct.cartId,
+        this.cartProduct.productId,
+        value,
+        price,
+        discountAmount
+      )
     },
     deleteCartItem() {
       this.visible = false
