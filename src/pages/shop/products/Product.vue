@@ -71,13 +71,16 @@
             circle
             size="mini"
           ></el-button>
-          <el-button
-            @click="handleEdit(scope.row)"
-            type="primary"
-            icon="el-icon-info"
-            circle
-            size="mini"
-          ></el-button>
+          <el-tooltip content="查看商品销售信息" placement="top">
+            <el-button
+              @click="showSale(scope.row)"
+              type="primary"
+              icon="el-icon-info"
+              circle
+              size="mini"
+            ></el-button>
+          </el-tooltip>
+
           <el-button
             type="danger"
             icon="el-icon-delete"
@@ -99,7 +102,7 @@
     >
     </el-pagination>
 
-    <!-- 添加信息弹出 -->
+    <!-- 修改商品弹出 -->
     <el-dialog
       title="修改商品信息"
       :visible.sync="dialogFormVisible"
@@ -164,6 +167,29 @@
         <el-button type="primary" @click="save">确 定</el-button>
       </div>
     </el-dialog>
+    <!-- 查看商品销售信息弹出 -->
+    <el-dialog
+      title="商品销售情况"
+      :visible.sync="dialogFormVisible2"
+      width="50%"
+    >
+      <el-descriptions
+        class="margin-top"
+        :column="2"
+        :border="true"
+        direction="vertical"
+      >
+        <el-descriptions-item label="已售量">{{
+          form.sold
+        }}</el-descriptions-item>
+        <el-descriptions-item label="商品评分">{{
+          form.rate
+        }}</el-descriptions-item>
+      </el-descriptions>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+      </div>
+    </el-dialog>
   </el-col>
 </template>
 
@@ -176,6 +202,7 @@ export default {
     return {
       form: {},
       dialogFormVisible: false,
+      dialogFormVisible2: false,
       // pageSize是表示一页最多可以装几条数据
       pageSize: 10,
       // 表示请求第几页数据
@@ -229,6 +256,11 @@ export default {
       this.$nextTick(() => {
         this.$refs['upload'].clearFiles()
       })
+    },
+    // 查看销售信息
+    showSale(row) {
+      this.form = JSON.parse(JSON.stringify(row))
+      this.dialogFormVisible2 = true
     },
     search() {
       this.load()
