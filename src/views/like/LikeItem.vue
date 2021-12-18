@@ -29,7 +29,9 @@
     <div style="background-color: #f4f4f5">
       <div class="p-name">{{ likeProduct.productName }}</div>
       <div class="p-time">
-        收藏时间：<span style="color: #409eff">{{ likeProduct.likeTime }}</span>
+        收藏时间：<span style="color: #409eff">{{
+          likeProduct.likeTime.slice(0, 10)
+        }}</span>
       </div>
       <div class="p-price">
         <span class="price1">

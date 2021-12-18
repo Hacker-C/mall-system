@@ -82,7 +82,10 @@
           <div style="position: relative">
             ￥{{ user.money }}
 
-            <el-button size="mini" style="position: absolute; right: 0"
+            <el-button
+              size="mini"
+              style="position: absolute; right: 0"
+              @click="toRecharge"
               >充值金额</el-button
             >
           </div>
@@ -97,8 +100,8 @@
     </div>
 
     <div v-else style="color: #909399">请先登录（注册后登录即可成为会员）</div>
-    <!-- 添加信息弹出 -->
 
+    <!-- 添加信息弹出 -->
     <el-dialog
       title="填入个人信息"
       :visible.sync="dialogFormVisible"
@@ -133,6 +136,31 @@
       >
       <el-button size="medium" type="primary" @click="save">确 定</el-button>
     </el-dialog>
+
+    <!-- 客户充值 -->
+    <el-dialog
+      title="请输入充值金额"
+      :visible.sync="dialogFormVisible2"
+      append-to-body
+    >
+      <div class="money">账户当前余额: ￥{{ user.money }}</div>
+      <el-form ref="form" :model="rechargeForm">
+        <h4>请输入充值金额</h4>
+        <el-form-item style="margin-bottom: 7px">
+          <el-input
+            v-model="rechargeForm.money"
+            style="width: 100px"
+            size="small"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button size="medium" @click="dialogFormVisible2 = false"
+        >取 消</el-button
+      >
+      <el-button size="medium" type="primary" @click="recharge"
+        >确 定</el-button
+      >
+    </el-dialog>
   </div>
 </template>
 
@@ -144,7 +172,9 @@ export default {
       isLogin: sessionStorage.getItem('userId'),
       user: {},
       form: {},
+      rechargeForm: {},
       dialogFormVisible: false,
+      dialogFormVisible2: false,
       timer: null
     }
   },
@@ -152,6 +182,25 @@ export default {
     this.load()
   },
   methods: {
+    toRecharge() {
+      this.dialogFormVisible2 = true
+      this.rechargeForm = {}
+    },
+    recharge() {
+      this.rechargeForm.userId = this.user.userId
+      console.log(this.rechargeForm)
+      request.patch('/user/recharge', this.rechargeForm).then((res) => {
+        if (res.code === '0') {
+          this.$message({
+            message: res.msg,
+            type: 'success',
+            duration: 1000
+          })
+          this.dialogFormVisible2 = false
+          this.load()
+        }
+      })
+    },
     addUser() {
       this.dialogFormVisible = true
     },
@@ -233,5 +282,8 @@ export default {
 h3,
 h4 {
   font-weight: 400;
+}
+.money {
+  margin-bottom: 20px;
 }
 </style>

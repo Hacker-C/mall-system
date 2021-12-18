@@ -30,7 +30,6 @@
         </el-col>
       </el-row>
       <el-row type="flex" justify="end" style="margin-bottom: 20px">
-        <el-button @click="log">打印</el-button>
         <el-button
           type="primary"
           round
@@ -71,9 +70,6 @@ export default {
     this.reloadCount()
   },
   methods: {
-    log() {
-      console.log(this.cartProducts[1].count)
-    },
     toCheckout() {
       let obj = {
         total: this.total,
