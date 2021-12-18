@@ -19,25 +19,62 @@
         label="ID"
         sortable
         width="70px"
+        align="center"
       ></el-table-column>
-      <el-table-column prop="productName" label="商品名"> </el-table-column>
-      <el-table-column prop="productPrice" label="单价"> </el-table-column>
+      <el-table-column
+        prop="productName"
+        label="商品名"
+        width="80px"
+        align="center"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="productPrice"
+        label="单价"
+        width="70px"
+        align="center"
+      >
+      </el-table-column>
       <!-- <el-table-column prop="imgSrc" label="封面"> </el-table-column> -->
-      <el-table-column prop="categoryId" label="分类"> </el-table-column>
-      <el-table-column prop="weight" label="重量"> </el-table-column>
-      <el-table-column prop="discount" label="折扣"> </el-table-column>
-      <el-table-column prop="left" label="剩余"> </el-table-column>
-      <el-table-column prop="sold" label="已售"> </el-table-column>
+      <el-table-column
+        prop="categoryId"
+        label="分类"
+        width="70px"
+        align="center"
+      >
+      </el-table-column>
+      <el-table-column prop="weight" label="重量" width="70px" align="center">
+      </el-table-column>
+      <el-table-column prop="discount" label="折扣" width="70px" align="center">
+      </el-table-column>
+      <el-table-column prop="left" label="剩余" width="70px" align="center">
+      </el-table-column>
+      <el-table-column label="封面" align="center">
+        <template #default="scope">
+          <el-image
+            style="height: 100px"
+            :src="scope.row.imgSrc"
+            :preview-src-list="[scope.row.imgSrc]"
+          >
+          </el-image>
+        </template>
+      </el-table-column>
       <el-table-column prop="productDesc" label="描述" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="rate" label="评分" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column fixed="right" label="操作">
+
+      <el-table-column fixed="right" label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             @click="handleEdit(scope.row)"
             type="primary"
             icon="el-icon-edit"
+            circle
+            size="mini"
+          ></el-button>
+          <el-button
+            @click="handleEdit(scope.row)"
+            type="primary"
+            icon="el-icon-info"
             circle
             size="mini"
           ></el-button>
@@ -108,13 +145,12 @@
             <el-form-item label="剩余" style="margin-bottom: 7px">
               <el-input v-model="form.left" style="width: 200px"></el-input>
             </el-form-item>
-            <el-form-item label="已售" style="margin-bottom: 7px">
-              <el-input v-model="form.sold" style="width: 200px"></el-input>
-            </el-form-item>
+
             <el-form-item label="封面">
               <el-upload
                 action="http://localhost:8081/files/upload"
                 :on-success="uploadSuccess"
+                ref="upload"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
               </el-upload>
@@ -190,6 +226,9 @@ export default {
     handleEdit(row) {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['upload'].clearFiles()
+      })
     },
     search() {
       this.load()
@@ -227,6 +266,8 @@ export default {
     addUser() {
       this.dialogFormVisible = true
       this.form = {}
+      // 清空原文件内容
+      this.$refs['upload'].clearFiles()
     },
     uploadSuccess(res) {
       this.form.imgSrc = res.data
