@@ -3,8 +3,8 @@
     <h3 class="header">网站公告</h3>
 
     <el-row type="flex">
-      <el-col :span="5" class="time">创建时间: {{ notice.createTime }}</el-col>
-      <el-col :span="5" class="time">更新时间: {{ notice.updateTime }}</el-col>
+      <el-col :span="7" class="time">创建时间: {{ notice.createTime }}</el-col>
+      <el-col :span="7" class="time">更新时间: {{ notice.updateTime }}</el-col>
     </el-row>
     <div class="notice-bd">
       <div class="notice-content">
