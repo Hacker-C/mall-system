@@ -14,6 +14,7 @@ const Details = () => import('../views/details/Details.vue')
 const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
+const SubmitSuccess = () => import('../views/checkout/SubmitSuccess.vue')
 
 // 管理员界面
 const Admin = () => import('../pages/admin/Admin.vue')
@@ -97,11 +98,21 @@ const routes = [
         }
       },
       {
+        path: '/submit_success',
+        component: SubmitSuccess,
+        meta: {
+          requireAuth: true,
+          roles: ['admin', 'user', 'shop'],
+          name: '订单提交结果'
+        }
+      },
+      {
         path: '/checkout',
         component: Checkout,
         meta: {
-          requireAuth: false,
-          name: '订单结算'
+          requireAuth: true,
+          name: '订单结算',
+          roles: ['admin', 'user', 'shop']
         }
       },
       {
@@ -292,6 +303,13 @@ router.beforeEach((to, from, next) => {
   window.document.title = to.meta.name
   let userId = sessionStorage.getItem('userId')
   let role = sessionStorage.getItem('role')
+  if (to.fullPath === '/submit_success') {
+    if (from.fullPath === '/checkout') {
+      next()
+    } else {
+      router.back()
+    }
+  }
   // 判断要去的路由是否需要登录权限
   if (to.meta.requireAuth) {
     // 判断是否登录

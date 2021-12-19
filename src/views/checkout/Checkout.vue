@@ -52,7 +52,7 @@
     </div>
     <el-row type="flex" justify="end" style="margin-top: 10px">
       <el-button type="info" @click="cancel">取消订单</el-button>
-      <el-button type="success">提交订单</el-button>
+      <el-button type="success" @click="submit">提交订单</el-button>
     </el-row>
   </div>
 </template>
@@ -67,7 +67,8 @@ export default {
       total: 0,
       money: 0,
       address: '',
-      realName: ''
+      realName: '',
+      timer: null
     }
   },
   created() {
@@ -93,8 +94,95 @@ export default {
   },
   methods: {
     cancel() {
-      sessionStorage.setItem('checkout', null)
+      sessionStorage.removeItem('checkout')
       this.$router.back()
+    },
+    submit() {
+      let uId = sessionStorage.getItem('userId')
+      // 产生订单号
+      let orderN = this.randomNo()
+      let orderMaster = {
+        orderNumber: orderN,
+        buyerId: uId,
+        orderAmount: this.money.toFixed(2)
+      }
+      let flag = 1
+      request
+        .post('/order/master', orderMaster)
+        .then((res) => {
+          if (res.code !== '0') {
+            flag = 0
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      // 对订单中每一天商品信息进行存储
+      this.products.forEach((p) => {
+        let item = {
+          orderNumber: orderN,
+          productId: p.productId,
+          count: p.count
+        }
+        request
+          .post('/order/detail', item)
+          .then((res) => {
+            if (res.code === '0') {
+              console.log(res.msg)
+            } else {
+              flag = 0
+            }
+          })
+          .catch((err) => {
+            flag = 0
+            console.log(err)
+          })
+      })
+      if (flag) {
+        this.$message({
+          message: '订单提交成功!',
+          type: 'success',
+          duration: 1000
+        })
+        // 清除本地存储中的订单信息
+        sessionStorage.removeItem('checkout')
+        // 清空购物车
+        request
+          .delete('/cart/all/' + uId)
+          .then((res) => {
+            console.log(res.msg)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          this.$router.push('/submit_success')
+        }, 1000)
+      }
+    },
+    // 当前时间序列+6位随机数产生订单号
+    randomNo(j = 6) {
+      let randomNo = ''
+      for (let i = 0; i < j; i++) {
+        randomNo += Math.floor(Math.random() * 10)
+      }
+      let newD = new Date()
+      let y = newD.getFullYear()
+      let m = newD.getMonth() + 1
+      let d = newD.getDate()
+      let h = newD.getHours()
+      let mi = newD.getMinutes()
+      let s = newD.getSeconds()
+      let arr = [y, m, d, h, mi, s]
+      arr.forEach((e, i) => {
+        if (e < 10) {
+          arr[i] = '0' + e
+        }
+      })
+      let newDateNo = arr.join('')
+      randomNo = newDateNo + randomNo
+      return randomNo
     }
   }
 }
