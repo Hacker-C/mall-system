@@ -210,7 +210,7 @@ export default {
       // 查询关键字
       key: '',
       // 总共几条数据
-      total: 100,
+      total: 0,
       tableData: []
     }
   },

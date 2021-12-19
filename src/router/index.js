@@ -16,6 +16,9 @@ const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
 const SubmitSuccess = () => import('../views/checkout/SubmitSuccess.vue')
 
+// 商家注册
+const ShopRegister = () => import('../views/ShopRegister.vue')
+
 // 管理员界面
 const Admin = () => import('../pages/admin/Admin.vue')
 const Welcome = () => import('../pages/admin/welcome/Welcome.vue')
@@ -290,6 +293,14 @@ const routes = [
         },
       }
     ]
+  },
+  {
+    path: '/shop/register',
+    component: ShopRegister,
+    meta: {
+      requireAuth: false,
+      name: '注册成为商家'
+    },
   }
 ]
 

@@ -76,7 +76,7 @@
           <template slot="title">更多</template>
           <el-menu-item index="/about">关于本网站</el-menu-item>
           <el-menu-item index="/notice">网站公告</el-menu-item>
-          <el-menu-item index="shopkeeper">
+          <el-menu-item index="/shop/register">
             <el-link>注册成为商家</el-link>
           </el-menu-item>
         </el-submenu>
