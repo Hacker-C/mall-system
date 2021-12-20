@@ -123,11 +123,21 @@
                 style="width: 200px"
               ></el-input>
             </el-form-item>
+
             <el-form-item label="分类" style="margin-bottom: 7px">
-              <el-input
+              <el-select
                 v-model="form.categoryId"
+                placeholder="请选择"
                 style="width: 200px"
-              ></el-input>
+              >
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="重量" style="margin-bottom: 7px">
               <el-input v-model="form.weight" style="width: 200px"></el-input>
@@ -211,8 +221,13 @@ export default {
       key: '',
       // 总共几条数据
       total: 0,
-      tableData: []
+      tableData: [],
+      options: [],
+      value: ''
     }
+  },
+  created() {
+    this.load()
   },
   methods: {
     // 刷新表格
@@ -253,6 +268,21 @@ export default {
     handleEdit(row) {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogFormVisible = true
+      console.log(this.form)
+
+      request
+        .get('/category/all')
+        .then((res) => {
+          this.options = []
+          res.forEach((c) => {
+            let [value, label] = [c.categoryId, c.categoryName]
+            let category = { value, label }
+            this.options.push(category)
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       this.$nextTick(() => {
         this.$refs['upload'].clearFiles()
       })
@@ -351,9 +381,6 @@ export default {
           })
       }
     }
-  },
-  created() {
-    this.load()
   }
 }
 </script>
