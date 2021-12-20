@@ -36,12 +36,10 @@
       >
       </el-table-column>
       <!-- <el-table-column prop="imgSrc" label="封面"> </el-table-column> -->
-      <el-table-column
-        prop="categoryId"
-        label="分类"
-        width="70px"
-        align="center"
-      >
+      <el-table-column label="分类" width="80px" align="center">
+        <template #default="scope">
+          <div>{{ getCategory(scope.row.categoryId) }}</div>
+        </template>
       </el-table-column>
       <el-table-column prop="weight" label="重量" width="70px" align="center">
       </el-table-column>
@@ -228,6 +226,19 @@ export default {
   },
   created() {
     this.load()
+    request
+      .get('/category/all')
+      .then((res) => {
+        this.options = []
+        res.forEach((c) => {
+          let [value, label] = [c.categoryId, c.categoryName]
+          let category = { value, label }
+          this.options.push(category)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     // 刷新表格
@@ -268,21 +279,7 @@ export default {
     handleEdit(row) {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogFormVisible = true
-      console.log(this.form)
 
-      request
-        .get('/category/all')
-        .then((res) => {
-          this.options = []
-          res.forEach((c) => {
-            let [value, label] = [c.categoryId, c.categoryName]
-            let category = { value, label }
-            this.options.push(category)
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
       this.$nextTick(() => {
         this.$refs['upload'].clearFiles()
       })
@@ -333,6 +330,16 @@ export default {
     },
     uploadSuccess(res) {
       this.form.imgSrc = res.data
+    },
+    getCategory(val) {
+      let res = ''
+      this.options.some((item) => {
+        if (val == item.value) {
+          res = item.label
+          return true
+        }
+      })
+      return res
     },
     save() {
       if (this.form.productId) {
