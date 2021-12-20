@@ -144,6 +144,9 @@ export default {
         })
       }
     },
+    sortData() {
+      this.tableData.sort((a, b) => a.index - b.index)
+    },
     getCategory() {
       return request.get('/category/all').then((res) => {
         this.$message({
@@ -159,11 +162,11 @@ export default {
         .then((res) => {
           this.tableData = []
           res.forEach((e, i) => {
-            // console.log(e)
             request.get('/category/' + e.categoryId).then((res2) => {
               e.index = i + 1
               e.count = res2.length
               this.tableData.push(e)
+              this.sortData()
             })
           })
           // console.log(datas)
