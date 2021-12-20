@@ -9,9 +9,9 @@
         <img src="../../../assets/upload/seckill.png" alt="" />
         <p>距离本场结束还剩</p>
         <div class="time">
-          <div>{{ hours }}</div>
-          <div>{{ minutes }}</div>
-          <div>{{ seconds }}</div>
+          <div>{{ hour }}</div>
+          <div>{{ minute }}</div>
+          <div>{{ second }}</div>
         </div>
       </el-col>
       <el-col :span="4">
@@ -38,36 +38,32 @@ const DiscountItem = () => import('./DiscountItem.vue')
 export default {
   data() {
     return {
-      count: '', //倒计时
-      leftSeconds: 36000, // 10天的秒数
-      hours: '',
-      minutes: '',
-      seconds: ''
+      inputTime: +new Date('2021-12-21 23:00:00'),
+      hour: '',
+      minute: '',
+      second: '',
+      timer: null
     }
   },
-  mounted() {
-    this.Time() //调用定时器
+  created() {
+    //调用定时器
+    this.timer = setInterval(() => {
+      this.countDown()
+    }, 1000)
   },
   methods: {
-    // 天 时 分 秒 格式化函数
     countDown() {
-      let h = parseInt((this.seconds / (60 * 60)) % 24)
+      var nowTime = +new Date() // 返回的是当前时间总的毫秒数
+      var times = (this.inputTime - nowTime) / 1000 // times是剩余时间总的秒数
+      var h = parseInt((times / 60 / 60) % 24) //时
       h = h < 10 ? '0' + h : h
-      let m = parseInt((this.leftSeconds / 60) % 60)
-      this.hours = h
+      this.hour = h // 把剩余的小时给 小时黑色盒子
+      var m = parseInt((times / 60) % 60) // 分
       m = m < 10 ? '0' + m : m
-      this.minutes = m
-      let s = parseInt(this.leftSeconds % 60)
+      this.minute = m
+      var s = parseInt(times % 60) // 当前的秒
       s = s < 10 ? '0' + s : s
-      this.seconds = s
-      // this.count = d + '天' + h + '时' + m + '分' + s + '秒'
-    },
-    //定时器没过1秒参数减1
-    Time() {
-      setInterval(() => {
-        this.leftSeconds -= 1
-        this.countDown()
-      }, 1000)
+      this.second = s
     }
   },
   components: {
