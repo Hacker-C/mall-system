@@ -86,7 +86,7 @@ export default {
         dangerouslyUseHTMLString: true,
         message:
           '<div>欢迎来到本系统!</div><div>商家账号: shop, 密码: shop</div><div>客户账号: user, 密码: user</div>',
-        duration: 5000
+        duration: 3000
       })
     },
     login() {

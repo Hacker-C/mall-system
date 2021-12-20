@@ -240,7 +240,7 @@ const routes = [
         component: Profile,
         meta: {
           requireAuth: true,
-          roles: ['admin', 'shop'],
+          roles: ['admin'],
           name: '个人中心'
         }
       },
@@ -291,6 +291,15 @@ const routes = [
           roles: ['shop'],
           name: '所有订单'
         },
+      },
+      {
+        path: '/shop/profile',
+        component: Profile,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '个人信息'
+        }
       }
     ]
   },

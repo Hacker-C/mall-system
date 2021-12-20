@@ -78,10 +78,10 @@ export default {
   font-size: 20px;
 }
 .sub-header {
-  color: #606266;
   font-weight: 700;
   margin-left: 5px;
   font-size: 16px;
+  color: #333;
 }
 .el-dropdown-link {
   cursor: pointer;
