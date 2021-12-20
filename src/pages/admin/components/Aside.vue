@@ -32,7 +32,7 @@
             <span slot="title">首页管理</span>
           </el-menu-item>
           <el-menu-item index="/admin/all_products">
-            <span slot="title">所有商品</span>
+            <span slot="title">商品分类</span>
           </el-menu-item>
           <el-menu-item index="/admin/notice">
             <span slot="title">公告栏管理</span>

@@ -7,7 +7,7 @@
     <el-col class="item" flex="1"></el-col>
     <el-col :span="3" class="item">
       <el-dropdown trigger="click">
-        <span class="el-dropdown-link">
+        <span class="el-dropdown-link fc">
           {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -61,15 +61,19 @@ export default {
 
 <style scoped>
 .row-bg {
-  box-shadow: 0 1px 1px 1px rgba(204, 204, 204, 0.5);
+  /* box-shadow: 0 1px 1px 1px rgba(204, 204, 204, 0.5); */
+  background-color: #459efd;
 }
 .item {
   height: 50px;
   line-height: 50px;
   padding-left: 20px;
+  color: #fff;
+}
+.fc {
+  color: #fff !important;
 }
 .item .header {
-  color: #409eff;
   font-weight: 700;
   font-size: 20px;
 }

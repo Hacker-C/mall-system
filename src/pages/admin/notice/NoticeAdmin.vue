@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h4>编辑公告:</h4>
     <el-input
       type="textarea"
@@ -65,5 +65,9 @@ export default {
 <style scoped>
 h4 {
   margin: 10px;
+}
+.container {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 </style>

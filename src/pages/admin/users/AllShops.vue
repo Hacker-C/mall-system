@@ -1,5 +1,5 @@
 <template>
-  <el-col style="padding: 10px">
+  <el-col style="padding: 10px" class="container">
     <el-button type="primary" @click="refreshTable">刷新</el-button>
     <el-form @submit.native.prevent>
       <el-input
@@ -291,5 +291,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.container {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 </style>

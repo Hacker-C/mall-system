@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <el-descriptions
       title="所有角色以及权限说明"
       :column="1"
@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 h4 {
   font-weight: 400;
 }
