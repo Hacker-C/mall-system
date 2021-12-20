@@ -15,8 +15,8 @@
     </el-form>
     <el-table :data="tableData" style="margin-top: 10px" border stripe>
       <el-table-column
-        prop="userId"
-        label="ID"
+        prop="index"
+        label="序号"
         sortable
         style="height: 30px"
         width="70px"
@@ -247,9 +247,10 @@ export default {
             })
             this.total = res.data.total
             this.tableData = []
-            for (let i of res.data.data) {
-              this.tableData.push(i)
-            }
+            res.data.data.forEach((item, index) => {
+              item.index = index + 1
+              this.tableData.push(item)
+            })
           }
         })
     },
