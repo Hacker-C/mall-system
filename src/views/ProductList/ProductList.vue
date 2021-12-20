@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
+  <div class="container">
     <el-row type="flex" class="header">
       <el-col :span="8" style="line-height: 50px">
         <span class="nav-item"
@@ -175,6 +175,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 80%;
+  margin-left: 50%;
+  transform: translate(-50%);
+  margin-bottom: 40px;
+}
 .active {
   color: red;
 }

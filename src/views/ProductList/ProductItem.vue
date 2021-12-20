@@ -22,7 +22,7 @@
       "
     >
       <span style="margin-right: 10px; color: #ccc">{{
-        product.createTime
+        product.createTime.slice(0, 10)
       }}</span>
       <el-link @click="toDetails">商品详情>>></el-link>
     </div>
