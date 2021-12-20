@@ -3,7 +3,7 @@
     <el-col :span="5">
       <img :src="cartProduct.imgSrc" alt="" class="image" />
     </el-col>
-    <el-col :span="3"> 《{{ cartProduct.productName }} 》</el-col>
+    <el-col :span="4"> {{ cartProduct.productName }} </el-col>
     <el-col :span="3">￥{{ cartProduct.productPrice }}</el-col>
     <el-col :span="5">
       <el-input-number

@@ -7,8 +7,8 @@
       <el-row type="flex" class="header">
         <el-col class="nav" :span="1"> </el-col>
         <el-col class="nav" :span="4"> 商品图片 </el-col>
-        <el-col class="nav" :span="3"> 商品名称 </el-col>
-        <el-col class="nav" :span="4">单价</el-col>
+        <el-col class="nav" :span="4"> 商品名称 </el-col>
+        <el-col class="nav" :span="3">单价</el-col>
         <el-col class="nav" :span="4">数量</el-col>
         <el-col class="nav" :span="4">总计</el-col>
         <el-col class="nav" :span="4">操作</el-col>
