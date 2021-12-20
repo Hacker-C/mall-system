@@ -58,8 +58,11 @@
               >
             </div>
             <div class="common">
-              服务：<span style="color: #409eff; font-size: 14px"
-                >上门换新 | 破损包退换 | 闪电退款</span
+              店铺：<el-link
+                @click="toShop"
+                type="primary"
+                style="font-size: 15px"
+                >{{ shop.shopName }}</el-link
               >
             </div>
             <div>
@@ -141,7 +144,10 @@ export default {
       num: 1,
       product: {},
       count: 0,
-      detailsComments: []
+      detailsComments: [],
+      shop: {
+        shopName: '哈哈'
+      }
     }
   },
   created() {
@@ -151,10 +157,15 @@ export default {
       .then((res) => {
         this.product = JSON.parse(JSON.stringify(res))
         this.product.createTime = this.product.createTime.slice(0, 10)
+        // 获取店铺信息
+        request.get('/shop/shop_id/' + this.product.shopId).then((res2) => {
+          this.shop = JSON.parse(JSON.stringify(res2.data))
+        })
       })
       .catch((err) => {
         console.log(err)
       })
+    // 获取评论信息
     request
       .get('/comment/' + this.$route.query.id)
       .then((res) => {
@@ -168,6 +179,9 @@ export default {
       })
   },
   methods: {
+    toShop() {
+      console.log(this.shop.shopId)
+    },
     addToCart() {
       let pId = this.product.productId
       let uId = sessionStorage.getItem('userId')

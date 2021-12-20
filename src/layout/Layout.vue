@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <Header :key="i" @reloadHeader="addKey" />
     <router-view></router-view>
   </div>
@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style>
+html {
+  /* overflow-y: scroll; */
+}
 </style>

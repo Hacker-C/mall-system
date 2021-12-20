@@ -7,6 +7,6 @@ a {
   text-decoration: none;
   color: #333;
 }
-html {
-  overflow-y: scroll;
+::-webkit-scrollbar{
+  display:none
 }

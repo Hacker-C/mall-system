@@ -104,7 +104,7 @@
     <el-dialog
       title="填写商品信息"
       :visible.sync="dialogFormVisible"
-      width="50%"
+      class="add"
     >
       <el-form ref="form" :model="form" label-width="60px">
         <el-row type="flex">
@@ -169,24 +169,14 @@
           </el-col>
         </el-row>
       </el-form>
-
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </div>
     </el-dialog>
     <!-- 查看商品销售信息弹出 -->
-    <el-dialog
-      title="商品销售情况"
-      :visible.sync="dialogFormVisible2"
-      width="50%"
-    >
-      <el-descriptions
-        class="margin-top"
-        :column="2"
-        :border="true"
-        direction="vertical"
-      >
+    <el-dialog title="商品销售情况" :visible.sync="dialogFormVisible2">
+      <el-descriptions :column="2" :border="true" direction="vertical">
         <el-descriptions-item label="已售量">{{
           form.sold
         }}</el-descriptions-item>
@@ -410,4 +400,7 @@ export default {
 </script>
 
 <style>
+.add::-webkit-scrollbar {
+  display: none;
+}
 </style>
