@@ -1,6 +1,6 @@
 <template>
   <el-col style="padding: 10px">
-    <el-button type="primary" @click="addUser">新增</el-button>
+    <el-button type="primary" @click="addProduct">新增</el-button>
     <el-button type="primary" @click="refreshTable">刷新</el-button>
     <el-form @submit.native.prevent>
       <el-input
@@ -102,7 +102,7 @@
 
     <!-- 修改商品弹出 -->
     <el-dialog
-      title="修改商品信息"
+      title="填写商品信息"
       :visible.sync="dialogFormVisible"
       width="50%"
     >
@@ -221,7 +221,9 @@ export default {
       total: 0,
       tableData: [],
       options: [],
-      value: ''
+      value: '',
+      timer: null,
+      uId: sessionStorage.getItem('userId')
     }
   },
   created() {
@@ -322,11 +324,13 @@ export default {
           }
         })
     },
-    addUser() {
+    addProduct() {
       this.dialogFormVisible = true
       this.form = {}
       // 清空原文件内容
-      this.$refs['upload'].clearFiles()
+      this.$nextTick(() => {
+        this.$refs['upload'].clearFiles()
+      })
     },
     uploadSuccess(res) {
       this.form.imgSrc = res.data
@@ -340,6 +344,11 @@ export default {
         }
       })
       return res
+    },
+    getShopInfo() {
+      return request.get('/shop/' + this.uId).then((res) => {
+        return res
+      })
     },
     save() {
       if (this.form.productId) {
@@ -368,24 +377,32 @@ export default {
             this.load()
           })
       } else {
-        request
-          .post('/user', this.form)
-          .then((res) => {
-            if (res === 0) {
-              this.dialogFormVisible = false
-              this.$message({
-                message: '恭喜你，添加成功！',
-                type: 'success'
-              })
-            }
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-          .then(() => {
-            // 刷新表格数据
-            this.load()
-          })
+        this.getShopInfo().then((res1) => {
+          this.form.shopId = res1.data.shopId
+          request
+            .post('/product', this.form)
+            .then((res) => {
+              if (res.code === '0') {
+                this.$message({
+                  message: res.msg,
+                  type: 'success',
+                  duration: 1000
+                })
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                  this.dialogFormVisible = false
+                  this.load()
+                }, 1000)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+            .then(() => {
+              // 刷新表格数据
+              this.load()
+            })
+        })
       }
     }
   }
