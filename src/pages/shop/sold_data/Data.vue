@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <header class="header">
-      商品销售情况数据统计
+    <SubHeader>
+      <template v-slot>商品销售情况数据统计</template>
+    </SubHeader>
 
-      <el-button
-        type="primary"
-        style="margin-left: 10px"
-        size="small"
-        @click="refresh"
-        >刷新</el-button
-      >
-    </header>
+    <!-- <el-button
+      type="primary"
+      style="margin-left: 10px"
+      size="small"
+      @click="refresh"
+      >刷新</el-button
+    > -->
     <div id="myChart1" style="width: 700px; height: 400px"></div>
     <div id="myChart2" style="width: 700px; height: 400px"></div>
   </div>
@@ -18,7 +18,12 @@
 
 <script>
 import request from '../../../utils/request'
+const SubHeader = () => import('../../components/SubHeader.vue')
+
 export default {
+  components: {
+    SubHeader
+  },
   methods: {
     drawChart() {
       let myChart1 = this.$echarts.init(document.getElementById('myChart1'))
@@ -185,15 +190,7 @@ export default {
   border-radius: 5px;
   /* background-color: #fff; */
 }
-.header {
-  color: #333;
-  height: 50px;
-  line-height: 50px;
-  border-bottom: 1px solid rgba(204, 204, 204, 0.5);
-  margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 20px;
-}
+
 #myChart1 {
   margin-bottom: 20px;
 }

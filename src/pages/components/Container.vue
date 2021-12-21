@@ -1,19 +1,11 @@
 <template>
   <div class="container">
-    <SubHeader>
-      <template v-slot> 欢迎光临！！！ </template>
-    </SubHeader>
-    <i> 这里是商家管理后台。 </i>
+    <slot></slot>
   </div>
 </template>
 
 <script>
-const SubHeader = () => import('../../components/SubHeader.vue')
-export default {
-  components: {
-    SubHeader
-  }
-}
+export default {}
 </script>
 
 <style scoped>

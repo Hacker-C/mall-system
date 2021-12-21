@@ -61,21 +61,18 @@ export default {
 
 <style scoped>
 .row-bg {
-  /* box-shadow: 0 1px 1px 1px rgba(204, 204, 204, 0.5); */
-  background-color: #459efd;
+  box-shadow: 0 1px 1px 1px rgba(204, 204, 204, 0.5);
+  /* background-color: #459efd; */
 }
 .item {
   height: 50px;
   line-height: 50px;
   padding-left: 20px;
-  color: #fff;
-}
-.fc {
-  color: #fff !important;
 }
 .item .header {
   font-weight: 700;
   font-size: 20px;
+  color: #409eff;
 }
 .sub-header {
   font-weight: 700;

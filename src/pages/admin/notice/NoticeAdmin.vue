@@ -1,26 +1,37 @@
 <template>
-  <div class="container">
-    <h4>编辑公告:</h4>
-    <el-input
-      type="textarea"
-      :rows="6"
-      style="width: 500px"
-      placeholder="请输入内容"
-      v-model="textarea"
-    >
-    </el-input>
-    <el-row style="margin-top: 10px">
-      <el-button style="width: 100px" @click="cancel">取消</el-button>
-      <el-button style="width: 100px" type="primary" @click="save"
-        >保存</el-button
+  <Container>
+    <template slot>
+      <SubHeader>
+        <template v-slot>编辑公告</template>
+      </SubHeader>
+      <el-input
+        type="textarea"
+        :rows="6"
+        style="width: 500px"
+        placeholder="请输入内容"
+        v-model="textarea"
       >
-    </el-row>
-  </div>
+      </el-input>
+      <el-row style="margin-top: 10px">
+        <el-button style="width: 100px" @click="cancel">取消</el-button>
+        <el-button style="width: 100px" type="primary" @click="save"
+          >保存</el-button
+        >
+      </el-row>
+    </template>
+  </Container>
 </template>
 
 <script>
 import request from '../../../utils/request'
+const SubHeader = () => import('../../components/SubHeader.vue')
+const Container = () => import('../../components/Container.vue')
+
 export default {
+  components: {
+    SubHeader,
+    Container
+  },
   data() {
     return {
       textarea: ''
@@ -61,13 +72,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h4 {
-  margin: 10px;
-}
-.container {
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-</style>
