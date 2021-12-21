@@ -17,17 +17,25 @@
       <el-table-column
         prop="index"
         label="序号"
-        sortable
         style="height: 30px"
         width="70px"
+        align="center"
       ></el-table-column>
-      <el-table-column prop="username" label="用户名"> </el-table-column>
-      <el-table-column prop="realName" label="真实姓名"> </el-table-column>
-      <el-table-column prop="telephone" label="联系电话"> </el-table-column>
+      <el-table-column prop="username" label="用户名" align="center">
+      </el-table-column>
+      <el-table-column prop="realName" label="真实姓名" align="center">
+      </el-table-column>
+      <el-table-column prop="telephone" label="联系电话" align="center">
+      </el-table-column>
+      <el-table-column prop="age" label="年龄" sortable align="center">
+      </el-table-column>
+      <el-table-column prop="sex" label="性别" align="center">
+      </el-table-column>
       <el-table-column
         prop="role"
         label="权限角色"
         width="100"
+        align="center"
         :filters="[
           { text: '管理员', value: 'admin' },
           { text: '商家', value: 'shop' },
@@ -56,7 +64,12 @@
           >
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="账号状态" width="100px">
+      <el-table-column
+        align="center"
+        prop="status"
+        label="账号状态"
+        width="100px"
+      >
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.status"
@@ -69,7 +82,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作">
+      <el-table-column align="center" fixed="right" label="操作">
         <template slot-scope="scope">
           <el-button
             @click="handleEdit(scope.row)"
@@ -85,13 +98,16 @@
             size="mini"
             @click.native.prevent="deleteRow(scope.$index, scope.row)"
           ></el-button>
-          <el-button
-            type="warning"
-            size="mini"
-            @click.native.prevent="resetPassword(scope.row)"
-          >
-            重置密码
-          </el-button>
+          <el-tooltip content="重置该用户密码" placement="top" effect="dark">
+            <el-button
+              type="warning"
+              size="mini"
+              circle=""
+              @click.native.prevent="resetPassword(scope.row)"
+            >
+              <i class="fas fa-shield-alt"></i>
+            </el-button>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -321,7 +337,7 @@ export default {
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: '已取消'
           })
         })
     }

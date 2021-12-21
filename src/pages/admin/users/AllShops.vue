@@ -31,6 +31,8 @@
       </el-table-column>
       <el-table-column align="center" prop="createTime" label="开店时间">
       </el-table-column>
+      <el-table-column align="center" prop="income" label="总收入">
+      </el-table-column>
       <el-table-column
         align="center"
         prop="status"
@@ -292,6 +294,7 @@ export default {
                 .then((res) => {
                   e.shopName = res.data.shopName
                   e.shopId = res.data.shopId
+                  e.income = res.data.income
                   e.index = index + 1
                   e.createTime = e.createTime.slice(0, 10)
                 })
