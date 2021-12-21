@@ -35,6 +35,8 @@ const Shop = () => import('../pages/shop/Shop.vue')
 const WelcomeShop = () => import('../pages/shop/welcome/Welcome.vue')
 const ShopProducts = () => import('../pages/shop/products/Product.vue')
 const ShopOrders = () => import('../pages/shop/oders/Order.vue')
+const Sold = () => import('../pages/shop/sold_data/Sold.vue')
+const Data = () => import('../pages/shop/sold_data/Data.vue')
 
 Vue.use(VueRouter)
 
@@ -299,6 +301,24 @@ const routes = [
           requireAuth: true,
           roles: ['shop'],
           name: '个人信息'
+        }
+      },
+      {
+        path: '/shop/sold',
+        component: Sold,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '销售情况'
+        }
+      },
+      {
+        path: '/shop/data',
+        component: Data,
+        meta: {
+          requireAuth: true,
+          roles: ['shop'],
+          name: '数据统计'
         }
       }
     ]
