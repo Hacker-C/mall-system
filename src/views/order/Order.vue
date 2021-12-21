@@ -7,7 +7,7 @@
       class="eltabs"
       v-model="activeName"
       @tab-click="handleClick"
-      v-if="isLogin"
+      v-if="orders.length"
     >
       <el-row type="flex" style="text-align: center">
         <el-col :span="3">序号</el-col>
@@ -34,6 +34,8 @@
         <OrderItem :cOrders="orders.filter((o) => o.orderStatus === 2)" />
       </el-tab-pane>
     </el-tabs>
+    <!--  -->
+    <div v-else-if="isLogin" style="color: #909399">暂时没有订单信息</div>
     <div v-else style="color: #909399">请先登录（注册后登录即可成为会员）</div>
   </div>
 </template>
@@ -53,10 +55,10 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     handleChange(val) {
-      console.log(val)
+      // console.log(val)
     },
     currentStatus(n) {
       if (n === 0) {
@@ -81,11 +83,6 @@ export default {
     if (uId) {
       request.get('/order/' + uId).then((res) => {
         if (res.code === '0') {
-          this.$message({
-            message: res.msg,
-            type: 'success',
-            duration: 1000
-          })
           this.orders = []
           res.data.forEach((e) => {
             this.orders.push(e)

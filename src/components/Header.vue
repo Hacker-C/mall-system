@@ -66,7 +66,12 @@
           class="el-menu-right"
           style="line-height: 38px"
         >
-          <el-badge :value="8" class="item" style="height: 20px" v-if="false">
+          <el-badge
+            :value="orderCount"
+            class="item"
+            style="height: 20px"
+            v-if="orderCount"
+          >
             我的订单
           </el-badge>
           <div v-else class="item2">我的订单</div>
@@ -124,6 +129,7 @@ export default {
       isLogin: false,
       cartCount: 0,
       likeCount: 0,
+      orderCount: 0,
       username: '游客'
     }
   },
@@ -163,6 +169,9 @@ export default {
         })
       request.get('/user/' + userId).then((res) => {
         this.username = res.data.username
+      })
+      request.get('/order/count/' + userId).then((res) => {
+        this.orderCount = res.data
       })
       request.get('like/count/' + userId).then((res) => {
         this.likeCount = res.data

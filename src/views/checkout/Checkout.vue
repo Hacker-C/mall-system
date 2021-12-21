@@ -124,6 +124,7 @@ export default {
           productId: p.productId,
           count: p.count
         }
+        console.log(item)
         request
           .post('/order/detail', item)
           .then((res) => {

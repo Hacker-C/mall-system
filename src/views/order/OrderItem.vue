@@ -6,7 +6,7 @@
       v-for="(order, index) in cOrders"
       :key="index"
     >
-      <OrderSubItem :cOrder="order" :cIndex="index" />
+      <OrderSubItem :cOrder="order" :cIndex="index" @cDelete="deleteItem" />
     </el-collapse>
   </div>
 </template>
@@ -30,6 +30,9 @@ export default {
   },
   created() {},
   methods: {
+    deleteItem(index) {
+      this.cOrders.splice(index, 1)
+    },
     handleClick(tab, event) {
       console.log(tab, event)
     },

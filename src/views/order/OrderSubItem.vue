@@ -38,7 +38,21 @@
               plain
               >取消</el-button
             >
-            <el-button type="danger" size="mini">删除</el-button>
+            <el-popconfirm
+              title="确定删除订单吗？"
+              @confirm="confirm"
+              @cancel="cancel"
+              placement="top"
+            >
+              <el-button
+                style="margin-left: 8px"
+                size="mini"
+                slot="reference"
+                type="danger"
+                @click="deleteOut"
+                >删除</el-button
+              >
+            </el-popconfirm>
           </el-col>
         </el-row>
       </div>
@@ -89,11 +103,30 @@ export default {
     }
   },
   methods: {
+    deleteOut(e) {
+      e.stopPropagation()
+    },
+    confirm() {
+      let oNumber = this.cOrder.orderNumber
+      request.delete('/order/' + oNumber).then((res) => {
+        if (res.code === '0') {
+          this.$message({
+            message: res.msg,
+            type: 'success',
+            duration: 1000
+          })
+          this.$emit('cDelete', this.cIndex)
+        } else {
+          this.$message.error('删除失败！请联系服务器管理员！')
+        }
+      })
+    },
+    cancel() {},
     handleClick(tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     handleChange(val) {
-      console.log(val)
+      // console.log(val)
     },
     currentStatus(n) {
       if (n === 0) {
