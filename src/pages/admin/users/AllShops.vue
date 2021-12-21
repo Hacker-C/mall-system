@@ -27,10 +27,9 @@
       </el-table-column>
       <el-table-column align="center" prop="telephone" label="联系电话">
       </el-table-column>
-      <el-table-column align="center" label="店铺名字">
-        <template slot-scope="scope">
-          <div>店铺名字</div>
-        </template>
+      <el-table-column align="center" prop="shopName" label="店铺名字">
+      </el-table-column>
+      <el-table-column align="center" prop="createTime" label="开店时间">
       </el-table-column>
       <el-table-column
         align="center"
@@ -69,13 +68,58 @@
           <el-button
             type="warning"
             size="mini"
-            @click.native.prevent="resetPassword(scope.row)"
+            circle=""
+            @click.native.prevent="seeDetail(scope.row)"
           >
-            重置密码
+            <i class="far fa-eye"></i>
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 查看商品 -->
+    <el-dialog
+      title="查看该店所有商品"
+      :visible.sync="dialogFormVisible2"
+      width="70%"
+    >
+      <el-table :data="shopProducts" border>
+        <el-table-column prop="index" label="序号" width="100px" align="center">
+        </el-table-column>
+        <el-table-column
+          prop="productName"
+          label="商品名称"
+          width="130px"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="productPrice"
+          label="单价"
+          width="70px"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column label="商品图片" align="center" width="100px">
+          <template #default="scope">
+            <el-image
+              style="height: 70px"
+              :src="scope.row.imgSrc"
+              :preview-src-list="[scope.row.imgSrc]"
+            >
+            </el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="productDesc" label="描述" show-overflow-tooltip>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+        <el-button type="primary">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 分页 -->
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -87,21 +131,21 @@
     >
     </el-pagination>
 
-    <!-- 添加信息弹出 -->
+    <!-- 修改信息弹出 -->
     <el-dialog
       title="填入个人信息"
       :visible.sync="dialogFormVisible"
       width="50%"
     >
       <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="用户名" style="margin-bottom: 7px">
-          <el-input v-model="form.username" style="width: 200px"></el-input>
-        </el-form-item>
         <el-form-item label="真实姓名" style="margin-bottom: 7px">
           <el-input v-model="form.realName" style="width: 200px"></el-input>
         </el-form-item>
         <el-form-item label="联系电话" style="margin-bottom: 7px">
           <el-input v-model="form.telephone" style="width: 200px"></el-input>
+        </el-form-item>
+        <el-form-item label="店铺名字" style="margin-bottom: 7px">
+          <el-input v-model="form.shopName" style="width: 200px"></el-input>
         </el-form-item>
         <el-form-item label="权限角色" style="margin-bottom: 7px">
           <el-radio-group v-model="form.role">
@@ -128,6 +172,7 @@ export default {
     return {
       form: {},
       dialogFormVisible: false,
+      dialogFormVisible2: false,
       // pageSize是表示一页最多可以装几条数据
       pageSize: 10,
       // 表示请求第几页数据
@@ -136,7 +181,8 @@ export default {
       key: '',
       // 总共几条数据
       total: 0,
-      tableData: []
+      tableData: [],
+      shopProducts: []
     }
   },
   methods: {
@@ -148,6 +194,16 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    seeDetail(row) {
+      this.dialogFormVisible2 = true
+      request.get('/product/shop_id/' + row.shopId).then((res) => {
+        this.shopProducts = []
+        res.data.forEach((e, i) => {
+          e.index = i + 1
+          this.shopProducts.push(e)
+        })
+      })
     },
     clearFilter() {
       this.$refs.filterTable.clearFilter()
@@ -231,8 +287,17 @@ export default {
             this.total = res.data.total
             this.tableData = []
             res.data.data.forEach((e, index) => {
-              e.index = index + 1
-              this.tableData.push(e)
+              request
+                .get('/shop/' + e.userId)
+                .then((res) => {
+                  e.shopName = res.data.shopName
+                  e.shopId = res.data.shopId
+                  e.index = index + 1
+                  e.createTime = e.createTime.slice(0, 10)
+                })
+                .then(() => {
+                  this.tableData.push(e)
+                })
             })
           }
         })
@@ -257,31 +322,6 @@ export default {
         .then(() => {
           // 刷新表格数据
           this.load()
-        })
-    },
-    resetPassword(user) {
-      this.$confirm('确定要重置该用户密码?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          let uId = user.userId
-          request.patch('/user/reset/' + uId).then((res) => {
-            if (res.code === '0') {
-              this.$message({
-                message: res.msg,
-                type: 'success',
-                duration: 1000
-              })
-            }
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
         })
     }
   },
