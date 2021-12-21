@@ -1,29 +1,39 @@
 <template>
-  <div class="container">
-    <SubHeader>
-      <template v-slot>商品销售总体情况</template>
-    </SubHeader>
-    <div class="head">
-      <el-button class="btn" type="primary" size="mini">刷新</el-button>
-    </div>
-    <el-descriptions class="margin-top" :column="1" style="width: 200px" border>
-      <el-descriptions-item>
-        <template slot="label"> 销售总额（元） </template>
-        {{ 9998 }}
-      </el-descriptions-item>
-      <el-descriptions-item>
-        <template slot="label"> 已售商品（件） </template>
-        1000
-      </el-descriptions-item>
-    </el-descriptions>
-  </div>
+  <Container>
+    <template v-slot>
+      <SubHeader>
+        <template v-slot>商品销售总体情况</template>
+      </SubHeader>
+      <div class="head">
+        <el-button class="btn" type="primary" size="mini">刷新</el-button>
+      </div>
+      <el-descriptions
+        class="margin-top"
+        :column="1"
+        style="width: 200px"
+        border
+      >
+        <el-descriptions-item>
+          <template slot="label"> 销售总额（元） </template>
+          {{ 9998 }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label"> 已售商品（件） </template>
+          1000
+        </el-descriptions-item>
+      </el-descriptions>
+    </template>
+  </Container>
 </template>
 
 <script>
 const SubHeader = () => import('../../components/SubHeader.vue')
+const Container = () => import('../../components/Container.vue')
+
 export default {
   components: {
-    SubHeader
+    SubHeader,
+    Container
   }
 }
 </script>

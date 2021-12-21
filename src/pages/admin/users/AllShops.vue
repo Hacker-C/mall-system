@@ -55,7 +55,12 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column align="center" fixed="right" label="操作">
+        <el-table-column
+          align="center"
+          fixed="right"
+          label="操作"
+          width="160px"
+        >
           <template slot-scope="scope">
             <el-button
               @click="handleEdit(scope.row)"
