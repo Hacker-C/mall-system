@@ -1,7 +1,6 @@
 <template>
   <el-col style="padding: 10px">
-    <el-button type="primary" @click="addProduct">新增</el-button>
-    <el-button type="primary" @click="refreshTable">刷新</el-button>
+    <h3 class="header">管理本店所有商品</h3>
     <el-form @submit.native.prevent>
       <el-input
         v-model="key"
@@ -12,12 +11,14 @@
       <el-button type="primary" style="margin-left: 10px" @click="search"
         >查询</el-button
       >
+      <el-button type="primary" @click="addProduct">新增</el-button>
+      <el-button type="primary" @click="refreshTable">刷新</el-button>
     </el-form>
+
     <el-table :data="tableData" style="margin-top: 10px" border stripe>
       <el-table-column
-        prop="productId"
-        label="ID"
-        sortable
+        prop="index"
+        label="序号"
         width="70px"
         align="center"
       ></el-table-column>
@@ -30,8 +31,9 @@
       </el-table-column>
       <el-table-column
         prop="productPrice"
+        sortable
         label="单价"
-        width="70px"
+        width="90px"
         align="center"
       >
       </el-table-column>
@@ -309,9 +311,10 @@ export default {
         .then((res) => {
           this.total = res.data.total
           this.tableData = []
-          for (let i of res.data.data) {
-            this.tableData.push(i)
-          }
+          res.data.data.forEach((e, i) => {
+            e.index = i + 1
+            this.tableData.push(e)
+          })
         })
     },
     addProduct() {
@@ -400,7 +403,8 @@ export default {
 </script>
 
 <style>
-.add::-webkit-scrollbar {
-  display: none;
+.header {
+  font-weight: 400;
+  color: #333;
 }
 </style>
