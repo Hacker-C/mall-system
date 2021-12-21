@@ -1,6 +1,5 @@
 <template>
   <el-col style="padding: 10px" class="container">
-    <el-button type="primary" @click="refreshTable">刷新</el-button>
     <el-form @submit.native.prevent>
       <el-input
         v-model="key"
@@ -11,6 +10,7 @@
       <el-button type="primary" style="margin-left: 10px" @click="search"
         >查询</el-button
       >
+      <el-button type="primary" @click="refreshTable">刷新</el-button>
     </el-form>
     <el-table :data="tableData" style="margin-top: 10px" border stripe>
       <el-table-column

@@ -113,7 +113,7 @@
       width="50%"
     >
       <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="用户名" style="margin-bottom: 7px">
+        <el-form-item label="用户名" style="margin-bottom: 7px" v-if="isAdd">
           <el-input v-model="form.username" style="width: 200px"></el-input>
         </el-form-item>
         <el-form-item label="真实姓名" style="margin-bottom: 7px">
@@ -155,7 +155,8 @@ export default {
       key: '',
       // 总共几条数据
       total: 100,
-      tableData: []
+      tableData: [],
+      isAdd: true
     }
   },
   methods: {
@@ -213,6 +214,7 @@ export default {
     },
     // 编辑
     handleEdit(row) {
+      this.isAdd = false
       this.form = row
       this.dialogFormVisible = true
     },
@@ -255,6 +257,7 @@ export default {
         })
     },
     addUser() {
+      this.isAdd = true
       this.dialogFormVisible = true
       this.form = {}
     },
