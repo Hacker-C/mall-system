@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-row type="flex" class="header">
-      <el-col :span="8" style="line-height: 50px">
+      <el-col :span="10" style="line-height: 50px">
         <span class="nav-item"
           ><a @click="showAll" :class="{ active: isActive === 1 }"
             >所有商品</a
@@ -180,6 +180,7 @@ export default {
   margin-left: 50%;
   transform: translate(-50%);
   margin-bottom: 40px;
+  margin-top: 30px;
 }
 .active {
   color: red;
@@ -192,7 +193,6 @@ export default {
 .header {
   height: 50px;
   border-bottom: 1px solid rgba(204, 204, 204, 0.5);
-  margin-top: 50px;
 }
 .nav-item {
   color: #8f8f96;

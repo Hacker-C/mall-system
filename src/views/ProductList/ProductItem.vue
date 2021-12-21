@@ -26,13 +26,14 @@
       }}</span>
       <el-link @click="toDetails">商品详情>>></el-link>
     </div>
-    <el-row type="flex" style="width: 60%; margin-left: 30px">
-      <el-col :span="12" style="text-align: center">
+    <el-row type="flex" style="width: 80%; margin-left: 15px">
+      <el-col :span="10" style="text-align: center">
         <span class="price1"
           >￥{{ (product.productPrice * product.discount).toFixed(2) }}</span
         >
       </el-col>
-      <el-col :span="12" style="text-align: center">
+      <el-col :span="4"></el-col>
+      <el-col :span="10" style="text-align: center">
         <span class="price2">￥{{ product.productPrice }}</span>
       </el-col>
     </el-row>
