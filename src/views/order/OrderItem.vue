@@ -6,7 +6,12 @@
       v-for="(order, index) in cOrders"
       :key="index"
     >
-      <OrderSubItem :cOrder="order" :cIndex="index" @cDelete="deleteItem" />
+      <OrderSubItem
+        @reload="reload1"
+        :cOrder="order"
+        :cIndex="index"
+        @cDelete="deleteItem"
+      />
     </el-collapse>
   </div>
 </template>
@@ -19,7 +24,8 @@ export default {
     return {
       activeName: 'first',
       activeNames: ['1'],
-      isLogin: false
+      isLogin: false,
+      index2: 0
     }
   },
   props: {
@@ -28,8 +34,13 @@ export default {
       default: []
     }
   },
-  created() {},
+  created() {
+    // console.log(this.cOrders)
+  },
   methods: {
+    reload1(oNumber) {
+      // this.cOrders = this.cOrders.filter((o) => o.orderNumber != oNumber)
+    },
     deleteItem(index) {
       this.cOrders.splice(index, 1)
     },
@@ -38,20 +49,6 @@ export default {
     },
     handleChange(val) {
       console.log(val)
-    },
-    currentStatus(n) {
-      if (n === 0) {
-        return '待付款'
-      }
-      if (n === 1) {
-        return '待收货'
-      }
-      if (n == 2) {
-        return '已取消'
-      }
-      if (n == 3) {
-        return '已完成'
-      }
     }
   },
   components: {

@@ -23,6 +23,7 @@
               {{ currentStatus(cOrder.orderStatus) }}
             </el-tag>
           </el-col>
+
           <el-col :span="5">
             <el-button
               type="success"
@@ -31,13 +32,23 @@
               plain
               >付款</el-button
             >
-            <el-button
-              type="warning"
-              size="mini"
-              v-show="cOrder.orderStatus < 3"
-              plain
-              >取消</el-button
+            <el-popconfirm
+              title="确定取消订单吗？"
+              @confirm="cancelOrder"
+              @cancel="cancel"
+              v-show="isCancel"
+              placement="top"
             >
+              <el-button
+                type="warning"
+                size="mini"
+                slot="reference"
+                @click="deleteOut"
+                style="margin-left: 8px"
+                plain
+                >取消</el-button
+              >
+            </el-popconfirm>
             <el-popconfirm
               title="确定删除订单吗？"
               @confirm="confirm"
@@ -99,12 +110,29 @@ export default {
   },
   data() {
     return {
-      orderProducts: []
+      orderProducts: [],
+      isCancel: this.cOrder.orderStatus < 2
     }
   },
   methods: {
     deleteOut(e) {
       e.stopPropagation()
+    },
+    cancelOrder() {
+      let oNumber = this.cOrder.orderNumber
+      request.patch('/order/cancel/' + oNumber).then((res) => {
+        if (res.code === '0') {
+          this.$message({
+            message: res.msg,
+            type: 'success',
+            duration: 1000
+          })
+          this.isCancel = false
+          this.cOrder.orderStatus = 2
+          this.$emit('reload', oNumber)
+        }
+      })
+      this.$emit('reload', oNumber)
     },
     confirm() {
       let oNumber = this.cOrder.orderNumber

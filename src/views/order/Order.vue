@@ -50,7 +50,8 @@ export default {
       activeName: 'first',
       activeNames: ['1'],
       orders: [],
-      isLogin: false
+      isLogin: false,
+      index1: 0
     }
   },
   methods: {
