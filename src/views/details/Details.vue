@@ -133,9 +133,12 @@
 
     <div style="width: 100%" class="comment-bd">
       <h3 class="header1">商品评论</h3>
-      <div v-for="(detailsComment, index) in detailsComments" :key="index">
-        <Comment :cDetailsComment="detailsComment" />
+      <div v-if="detailsComments.length">
+        <div v-for="(detailsComment, index) in detailsComments" :key="index">
+          <Comment :cDetailsComment="detailsComment" />
+        </div>
       </div>
+      <div v-else class="no-comment">暂无评论</div>
     </div>
 
     <!-- 弹出框评价商品 -->
@@ -347,6 +350,12 @@ export default {
 </script>
 
 <style scoped>
+.no-comment {
+  padding-left: 20px;
+  height: 40px;
+  line-height: 40px;
+  color: #666;
+}
 .comment-bd {
   margin-top: 20px;
   margin-bottom: 20px;
