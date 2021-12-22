@@ -49,12 +49,13 @@
         }}</el-descriptions-item>
         <el-descriptions-item label="头像">
           <div style="position: relative">
-            <el-avatar size="medium"
+            <el-avatar size="large"
               ><img :src="user.avatar" alt=""
             /></el-avatar>
             <el-button
               size="mini"
               style="position: absolute; top: 5px; left: 60px"
+              @click="uploadAvatar"
               >修改头像</el-button
             >
           </div>
@@ -161,6 +162,30 @@
         >确 定</el-button
       >
     </el-dialog>
+
+    <!-- 上传头像 -->
+    <el-dialog
+      title="上传头像"
+      :visible.sync="dialogFormVisible3"
+      append-to-body
+    >
+      <el-form ref="form" :model="form">
+        <h4>请选择图片</h4>
+        <el-form-item style="margin-bottom: 7px" label="头像">
+          <el-upload
+            action="http://localhost:8081/files/upload"
+            :on-success="uploadSuccess"
+            ref="upload"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <el-button size="medium" @click="dialogFormVisible3 = false"
+        >取 消</el-button
+      >
+      <el-button size="medium" type="primary" @click="save">确 定</el-button>
+    </el-dialog>
   </div>
 </template>
 
@@ -175,6 +200,7 @@ export default {
       rechargeForm: {},
       dialogFormVisible: false,
       dialogFormVisible2: false,
+      dialogFormVisible3: false,
       timer: null
     }
   },
@@ -183,9 +209,21 @@ export default {
     if (this.$route.query.from == 'order') {
       this.dialogFormVisible2 = true
     }
-    console.log()
   },
   methods: {
+    uploadAvatar() {
+      this.dialogFormVisible3 = true
+      this.form = {}
+      // 清空原文件内容
+      this.$nextTick(() => {
+        this.$refs['upload'].clearFiles()
+      })
+    },
+    uploadSuccess(res) {
+      this.form.avatar = res.data
+      console.log(this.form)
+      // this.load()
+    },
     toRecharge() {
       this.dialogFormVisible2 = true
       this.rechargeForm = {}
@@ -226,7 +264,7 @@ export default {
             }, 1000)
             this.dialogFormVisible = false
           } else {
-            this.$message.error('登录失败！服务器出错！')
+            this.$message.error('保存失败！服务器出错！')
           }
         })
         .catch((err) => {
