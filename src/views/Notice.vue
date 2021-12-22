@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 70%; margin-left: 50%; transform: translate(-50%)">
+  <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <h3 class="header">网站公告</h3>
 
     <el-row type="flex">

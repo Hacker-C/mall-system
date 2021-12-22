@@ -28,7 +28,7 @@
             <el-button
               type="success"
               size="mini"
-              v-show="cOrder.orderStatus == 0"
+              v-show="cOrder.orderStatus === 0"
               plain
               @click="payOut"
               >付 款</el-button

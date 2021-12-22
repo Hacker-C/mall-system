@@ -1,7 +1,7 @@
 <template>
-  <div style="width: 70%; margin-left: 50%; transform: translate(-50%)">
+  <div style="width: 80%; margin-left: 50%; transform: translate(-50%)">
     <h3 class="header">我的账号中心</h3>
-    <div v-if="isLogin">
+    <div v-if="isLogin" class="container">
       <div class="sub-header">
         <h4><i class="far fa-id-card"></i> 个人基本信息</h4>
         <div>
@@ -273,6 +273,16 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  margin-left: 50%;
+  transform: translate(-50%);
+  padding: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
 .header {
   /* background-color: pink; */
   height: 50px;
