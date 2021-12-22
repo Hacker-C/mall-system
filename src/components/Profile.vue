@@ -180,6 +180,10 @@ export default {
   },
   created() {
     this.load()
+    if (this.$route.query.from == 'order') {
+      this.dialogFormVisible2 = true
+    }
+    console.log()
   },
   methods: {
     toRecharge() {

@@ -6,12 +6,7 @@
       v-for="(order, index) in cOrders"
       :key="index"
     >
-      <OrderSubItem
-        @reload="reload1"
-        :cOrder="order"
-        :cIndex="index"
-        @cDelete="deleteItem"
-      />
+      <OrderSubItem :cOrder="order" :cIndex="index" @cDelete="deleteItem" />
     </el-collapse>
   </div>
 </template>
@@ -38,17 +33,14 @@ export default {
     // console.log(this.cOrders)
   },
   methods: {
-    reload1(oNumber) {
-      // this.cOrders = this.cOrders.filter((o) => o.orderNumber != oNumber)
-    },
     deleteItem(index) {
       this.cOrders.splice(index, 1)
     },
     handleClick(tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     handleChange(val) {
-      console.log(val)
+      // console.log(val)
     }
   },
   components: {

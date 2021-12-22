@@ -30,7 +30,8 @@
               size="mini"
               v-show="cOrder.orderStatus == 0"
               plain
-              >付款</el-button
+              @click="payOut"
+              >付 款</el-button
             >
             <el-popconfirm
               title="确定取消订单吗？"
@@ -46,7 +47,7 @@
                 @click="deleteOut"
                 style="margin-left: 8px"
                 plain
-                >取消</el-button
+                >取 消</el-button
               >
             </el-popconfirm>
             <el-popconfirm
@@ -61,7 +62,7 @@
                 slot="reference"
                 type="danger"
                 @click="deleteOut"
-                >删除</el-button
+                >删 除</el-button
               >
             </el-popconfirm>
           </el-col>
@@ -94,6 +95,48 @@
         >
       </el-row>
     </div>
+
+    <!-- 弹出框确认支付 -->
+    <el-dialog
+      title="请确认支付"
+      :visible.sync="dialogFormVisible"
+      :append-to-body="true"
+    >
+      <el-dialog
+        width="30%"
+        title="警告"
+        :visible.sync="innerVisible"
+        append-to-body
+      >
+        账户余额不足，请充值！
+        <div slot="footer" class="dialog-footer">
+          <el-button type="success" size="mini" @click="toProfile"
+            >前往充值</el-button
+          >
+          <el-button type="primary" size="mini" @click="innerConfirm"
+            >确认</el-button
+          >
+        </div>
+      </el-dialog>
+      <p class="tip">请您在 23时45分03秒 内完成支付，否则订单会被自动取消</p>
+      <el-form :model="form" class="form-bd">
+        <el-form-item label="订单编号" :label-width="formLabelWidth" class="bt">
+          <div class="item">{{ form.orderNumber }}</div>
+        </el-form-item>
+        <el-form-item label="应付金额" :label-width="formLabelWidth" class="bt">
+          <div class="money-bd">
+            <span class="payMoney">{{ form.payMoney }}</span>
+            <span class="yuan"> 元</span>
+          </div>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false" type="info"
+          >取 消</el-button
+        >
+        <el-button type="success" @click="pay">确认支付</el-button>
+      </div>
+    </el-dialog>
   </el-collapse-item>
 </template>
 
@@ -111,10 +154,53 @@ export default {
   data() {
     return {
       orderProducts: [],
-      isCancel: this.cOrder.orderStatus < 2
+      isCancel: this.cOrder.orderStatus < 2,
+      dialogFormVisible: false,
+      innerVisible: false,
+      form: {
+        userId: sessionStorage.getItem('userId'),
+        payMoney: this.cOrder.orderAmount,
+        orderNumber: this.cOrder.orderNumber
+      },
+      formLabelWidth: '120px',
+      timer: null
     }
   },
   methods: {
+    innerConfirm() {
+      this.innerVisible = false
+      this.dialogFormVisible = false
+    },
+    toProfile() {
+      this.$router.push({
+        path: '/profile',
+        query: {
+          from: 'order'
+        }
+      })
+    },
+    payOut(e) {
+      e.stopPropagation()
+      this.dialogFormVisible = true
+    },
+    pay() {
+      request.post('/order/pay', this.form).then((res) => {
+        if (res.code === '1') {
+          this.innerVisible = true
+        } else if (res.code === '0') {
+          this.$message({
+            message: res.msg,
+            type: 'success',
+            duration: 1000
+          })
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.dialogFormVisible = false
+            this.cOrder.orderStatus = 1
+          }, 1000)
+        }
+      })
+    },
     deleteOut(e) {
       e.stopPropagation()
     },
@@ -129,10 +215,8 @@ export default {
           })
           this.isCancel = false
           this.cOrder.orderStatus = 2
-          this.$emit('reload', oNumber)
         }
       })
-      this.$emit('reload', oNumber)
     },
     confirm() {
       let oNumber = this.cOrder.orderNumber
@@ -196,5 +280,33 @@ export default {
   height: 120px;
   text-align: center;
   border-bottom: 1px solid #ccc;
+}
+.money-bd {
+  margin-top: 5px;
+  height: 30px;
+  line-height: 30px;
+}
+.payMoney {
+  color: #e31613;
+  font-size: 20px;
+}
+.yuan {
+  position: relative;
+  bottom: 2px;
+}
+.bt {
+  margin-bottom: 0;
+}
+.item {
+  font-size: 16px;
+}
+.tip {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+.form-bd {
+  border: 1px solid rgba(27, 31, 35, 0.15);
 }
 </style>
