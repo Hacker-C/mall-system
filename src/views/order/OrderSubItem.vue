@@ -77,12 +77,18 @@
         :key="index"
       >
         <el-col :span="6">
-          <el-image
-            style="height: 100px; margin-top: 10px"
-            :src="item.imgSrc"
-            :preview-src-list="[item.imgSrc]"
+          <a
+            href="javascript:;"
+            style="diaplay: block"
+            @click="toDetail(item.productId)"
+            title="查看商品详情"
           >
-          </el-image>
+            <el-image
+              style="height: 100px; margin-top: 10px"
+              :src="item.imgSrc"
+            >
+            </el-image>
+          </a>
         </el-col>
         <el-col :span="6" style="line-height: 120px; font-size: 15px">{{
           item.productName
@@ -167,6 +173,15 @@ export default {
     }
   },
   methods: {
+    toDetail(pId) {
+      // console.log(pId)
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: pId
+        }
+      })
+    },
     innerConfirm() {
       this.innerVisible = false
       this.dialogFormVisible = false

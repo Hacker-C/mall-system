@@ -106,31 +106,71 @@
                 >{{ product.rate }}</el-col
               >
             </el-row>
-            <el-row style="text-align: center; margin-top: 20px">
+            <el-row style="text-align: center; margin-top: 15px">
               <el-button style="width: 80%" @click="addToLike"
                 ><i class="far fa-heart"></i> 加入收藏夹</el-button
               >
             </el-row>
-            <el-row style="text-align: center; margin-top: 20px">
+            <el-row style="text-align: center; margin-top: 15px">
               <el-button style="width: 80%" @click="addToCart">
                 <i class="el-icon-shopping-cart-1"></i> 加入购物车</el-button
               >
             </el-row>
-            <el-row style="text-align: center; margin-top: 20px">
+            <el-row style="text-align: center; margin-top: 15px">
               <el-button style="width: 80%" @click="toCheckout">
                 直接购买</el-button
+              >
+            </el-row>
+            <el-row style="text-align: center; margin-top: 15px">
+              <el-button style="width: 80%" @click="commentOut">
+                评价商品</el-button
               >
             </el-row>
           </el-col>
         </el-row>
       </el-col>
     </el-row>
+
     <div style="width: 100%" class="comment-bd">
       <h3 class="header1">商品评论</h3>
       <div v-for="(detailsComment, index) in detailsComments" :key="index">
         <Comment :cDetailsComment="detailsComment" />
       </div>
     </div>
+
+    <!-- 弹出框评价商品 -->
+    <el-dialog
+      title="请对商品进行评论或评分"
+      :visible.sync="dialogFormVisible"
+      :append-to-body="true"
+    >
+      <el-form :model="commentForm" class="form-bd">
+        <el-form-item
+          label="请给出评分"
+          :label-width="formLabelWidth"
+          class="bt"
+        >
+          <el-rate v-model="commentForm.rate" class="rate" show-text></el-rate>
+        </el-form-item>
+        <el-form-item label="评论商品" :label-width="formLabelWidth" class="bt">
+          <el-input
+            type="textarea"
+            :rows="5"
+            placeholder="请输入内容"
+            class="text"
+            resize="none"
+            v-model="commentForm.commentText"
+          >
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false" type="info"
+          >取 消</el-button
+        >
+        <el-button type="success" @click="comment">提 交</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -147,6 +187,14 @@ export default {
       detailsComments: [],
       shop: {
         shopName: '哈哈'
+      },
+      dialogFormVisible: false,
+      formLabelWidth: '120px',
+      commentForm: {
+        productId: null,
+        commentText: '',
+        userId: null,
+        rate: null
       }
     }
   },
@@ -179,6 +227,32 @@ export default {
       })
   },
   methods: {
+    comment() {
+      this.commentForm.productId = this.product.productId
+      console.log(this.commentForm)
+    },
+    commentOut(e) {
+      e.stopPropagation()
+      let uId = sessionStorage.getItem('userId')
+      let pId = this.product.productId
+      console.log(uId)
+      console.log(pId)
+      request.get('/user/check/' + uId + '/' + pId).then((res) => {
+        console.log(res)
+        if (res.code === '1') {
+          this.$message({
+            message: res.msg,
+            type: 'warning',
+            duration: 1000
+          })
+        } else {
+          this.commentForm = {}
+          this.commentForm.userId = uId
+          this.commentForm.productId = pId
+          this.dialogFormVisible = true
+        }
+      })
+    },
     toShop() {
       console.log(this.shop.shopId)
     },
@@ -375,5 +449,12 @@ export default {
 .common {
   padding-bottom: 20px;
   line-height: 20px;
+}
+.text {
+  width: 400px;
+}
+.rate {
+  position: relative;
+  top: 10px;
 }
 </style>
