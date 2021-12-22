@@ -87,32 +87,58 @@
         </el-submenu>
       </el-menu>
     </el-col>
-    <el-col :span="3">
+    <el-col :span="2">
       <el-button
         @click="toLogin"
-        v-if="isLogin"
+        v-if="!isLogin"
         size="mini"
         style="margin-top: 15px"
+        type="primary"
         >登录</el-button
       >
-      <el-button @click="logout" v-else size="mini" style="margin-top: 15px">
+      <el-button
+        @click="logout"
+        plain
+        v-else
+        size="mini"
+        style="margin-top: 16px"
+      >
         注销
       </el-button>
     </el-col>
-    <el-col :span="3" style="padding-right: 0; padding-top: 18px">
-      <el-dropdown style="width: 100%; padding: 0">
-        <span class="el-dropdown-link">
-          {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <a href="javascript:;" style="display: block" @click="toProfile">
-            <el-dropdown-item> 个人信息 </el-dropdown-item>
+    <el-col :span="4" style="padding-right: 0; padding-top: 18px">
+      <el-row type="flex">
+        <el-col>
+          <a
+            href="javascript:;"
+            style="display: block"
+            v-if="isLogin"
+            @click="toProfile"
+          >
+            <el-avatar size="large" class="avatar" :src="avatar"></el-avatar>
           </a>
-          <el-dropdown-item>
-            <a href="javascript:;" @click="logout"> 退出 </a>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+          <el-avatar
+            class="avatar"
+            v-else
+            icon="el-icon-user-solid"
+          ></el-avatar>
+        </el-col>
+        <el-col>
+          <el-dropdown style="width: 100%; padding: 0">
+            <span class="el-dropdown-link">
+              {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <a href="javascript:;" style="display: block" @click="toProfile">
+                <el-dropdown-item> 个人信息 </el-dropdown-item>
+              </a>
+              <el-dropdown-item>
+                <a href="javascript:;" @click="logout"> 退出 </a>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>
+      </el-row>
     </el-col>
   </el-row>
 </template>
@@ -130,7 +156,8 @@ export default {
       cartCount: 0,
       likeCount: 0,
       orderCount: 0,
-      username: '游客'
+      username: '游客',
+      avatar: ''
     }
   },
   methods: {
@@ -157,7 +184,7 @@ export default {
   },
   created() {
     let userId = sessionStorage.getItem('userId')
-    this.isLogin = userId ? false : true
+    this.isLogin = userId ? true : false
     if (userId) {
       request
         .get('/cart/count/' + userId)
@@ -169,6 +196,8 @@ export default {
         })
       request.get('/user/' + userId).then((res) => {
         this.username = res.data.username
+        this.avatar = res.data.avatar
+        console.log(this.avatar)
       })
       request.get('/order/count/' + userId).then((res) => {
         this.orderCount = res.data
@@ -207,5 +236,9 @@ export default {
 .badge__content {
   position: absolute;
   left: 0;
+}
+.avatar {
+  position: relative;
+  bottom: 7px;
 }
 </style>
