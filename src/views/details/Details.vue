@@ -135,7 +135,11 @@
       <h3 class="header1">商品评论</h3>
       <div v-if="detailsComments.length">
         <div v-for="(detailsComment, index) in detailsComments" :key="index">
-          <Comment :cDetailsComment="detailsComment" />
+          <Comment
+            @reload="addKey"
+            :cDetailsComment="detailsComment"
+            :key="k"
+          />
         </div>
       </div>
       <div v-else class="no-comment">暂无评论</div>
@@ -184,6 +188,7 @@ import request from '../../utils/request'
 export default {
   data() {
     return {
+      k: 0,
       num: 1,
       product: {},
       count: 0,
@@ -198,41 +203,33 @@ export default {
         commentText: '',
         userId: null,
         rate: null
-      }
+      },
+      timer: null
     }
   },
   created() {
-    // 商品信息 this.$route.query.id，发送ajax请求数据
-    request
-      .get('/product/' + this.$route.query.id)
-      .then((res) => {
-        this.product = JSON.parse(JSON.stringify(res))
-        this.product.createTime = this.product.createTime.slice(0, 10)
-        // 获取店铺信息
-        request.get('/shop/shop_id/' + this.product.shopId).then((res2) => {
-          this.shop = JSON.parse(JSON.stringify(res2.data))
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // 获取评论信息
-    request
-      .get('/comment/' + this.$route.query.id)
-      .then((res) => {
-        this.detailsComments = []
-        res.forEach((e) => {
-          this.detailsComments.push(e)
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.load()
   },
   methods: {
+    addKey(comId) {
+      this.detailsComments = this.detailsComments.filter(
+        (com) => com.commentId != comId
+      )
+    },
     comment() {
-      this.commentForm.productId = this.product.productId
-      console.log(this.commentForm)
+      request.post('/comment', this.commentForm).then((res) => {
+        if (res.code === '0') {
+          this.$message({
+            message: res.msg,
+            type: 'warning',
+            duration: 1000
+          })
+          this.timer = setTimeout(() => {
+            this.load()
+            this.dialogFormVisible = false
+          }, 0)
+        }
+      })
     },
     commentOut(e) {
       e.stopPropagation()
@@ -255,6 +252,34 @@ export default {
           this.dialogFormVisible = true
         }
       })
+    },
+    load() {
+      // 商品信息 this.$route.query.id，发送ajax请求数据
+      request
+        .get('/product/' + this.$route.query.id)
+        .then((res) => {
+          this.product = JSON.parse(JSON.stringify(res))
+          this.product.createTime = this.product.createTime.slice(0, 10)
+          // 获取店铺信息
+          request.get('/shop/shop_id/' + this.product.shopId).then((res2) => {
+            this.shop = JSON.parse(JSON.stringify(res2.data))
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      // 获取评论信息
+      request
+        .get('/comment/' + this.$route.query.id)
+        .then((res) => {
+          this.detailsComments = []
+          res.forEach((e) => {
+            this.detailsComments.push(e)
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     toShop() {
       console.log(this.shop.shopId)

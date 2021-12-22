@@ -239,5 +239,6 @@ export default {
 .avatar {
   position: relative;
   bottom: 7px;
+  border: 1px solid #ccc;
 }
 </style>

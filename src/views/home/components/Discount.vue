@@ -38,7 +38,7 @@ const DiscountItem = () => import('./DiscountItem.vue')
 export default {
   data() {
     return {
-      inputTime: +new Date('2021-12-21 23:00:00'),
+      inputTime: +new Date('2021-12-23 07:00:00'),
       hour: '',
       minute: '',
       second: '',
