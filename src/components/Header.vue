@@ -197,7 +197,6 @@ export default {
       request.get('/user/' + userId).then((res) => {
         this.username = res.data.username
         this.avatar = res.data.avatar
-        console.log(this.avatar)
       })
       request.get('/order/count/' + userId).then((res) => {
         this.orderCount = res.data

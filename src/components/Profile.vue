@@ -92,7 +92,9 @@
           </div>
         </el-descriptions-item>
         <el-descriptions-item label="密码安全" :span="1">
-          <el-button size="mini">修改密码</el-button>
+          <el-button size="mini" type="warning" @click="passwordOut"
+            >修改密码</el-button
+          >
         </el-descriptions-item>
         <el-descriptions-item label="身份角色">
           <el-tag size="medium">{{ roleText }}</el-tag>
@@ -186,6 +188,49 @@
       >
       <el-button size="medium" type="primary" @click="save">确 定</el-button>
     </el-dialog>
+
+    <!-- 修改密码 -->
+    <el-dialog
+      title="请填入相关信息"
+      :visible.sync="dialogFormVisible4"
+      append-to-body
+    >
+      <el-form :model="passwordForm" label-width="140px">
+        <el-form-item style="margin-bottom: 7px" label="请输入原密码">
+          <el-input
+            v-model="passwordForm.password"
+            style="width: 300px"
+            show-password
+            prefix-icon="el-icon-key"
+            type="password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item style="margin-bottom: 7px" label="请输入新密码">
+          <el-input
+            v-model="passwordForm.newPassword"
+            prefix-icon="el-icon-key"
+            style="width: 300px"
+            show-password
+            type="password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item style="margin-bottom: 7px" label="请再次输入新密码">
+          <el-input
+            v-model="passwordForm.twicePassword"
+            prefix-icon="el-icon-key"
+            style="width: 300px"
+            show-password
+            type="password"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button size="medium" @click="dialogFormVisible4 = false"
+        >取 消</el-button
+      >
+      <el-button size="medium" type="primary" @click="changePassword"
+        >确 定</el-button
+      >
+    </el-dialog>
   </div>
 </template>
 
@@ -198,9 +243,11 @@ export default {
       user: {},
       form: {},
       rechargeForm: {},
+      passwordForm: {},
       dialogFormVisible: false,
       dialogFormVisible2: false,
       dialogFormVisible3: false,
+      dialogFormVisible4: false,
       timer: null
     }
   },
@@ -211,6 +258,33 @@ export default {
     }
   },
   methods: {
+    passwordOut() {
+      this.dialogFormVisible4 = true
+      this.passwordForm = {
+        userId: sessionStorage.getItem('userId')
+      }
+    },
+    changePassword() {
+      request
+        .post('/user/password', this.passwordForm)
+        .then((res) => {
+          if (res.code === '0') {
+            this.$message({
+              message: res.msg,
+              type: 'success',
+              duration: 1000
+            })
+            this.timer = setTimeout(() => {
+              this.dialogFormVisible4 = false
+            }, 1000)
+          } else {
+            this.$message.error('登录失败！请联系服务器管理员！')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     uploadAvatar() {
       this.dialogFormVisible3 = true
       this.form = {}
