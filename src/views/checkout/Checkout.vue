@@ -68,12 +68,14 @@ export default {
       money: 0,
       address: '',
       realName: '',
-      timer: null
+      timer: null,
+      shopId: null
     }
   },
   created() {
     let items = JSON.parse(sessionStorage.getItem('checkout'))
     this.products = items.cartProducts
+    this.getShopId()
     this.total = items.total
     this.money = items.money
     let uId = sessionStorage.getItem('userId')
@@ -97,6 +99,13 @@ export default {
       sessionStorage.removeItem('checkout')
       this.$router.back()
     },
+    getShopId() {
+      request
+        .get('/shop/product_id/' + this.products[0].productId)
+        .then((res) => {
+          this.shopId = res
+        })
+    },
     submit() {
       let uId = sessionStorage.getItem('userId')
       // 产生订单号
@@ -104,7 +113,8 @@ export default {
       let orderMaster = {
         orderNumber: orderN,
         buyerId: uId,
-        orderAmount: this.money.toFixed(2)
+        orderAmount: this.money.toFixed(2),
+        shopId: this.shopId
       }
       let flag = 1
       request
