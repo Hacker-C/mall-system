@@ -3,15 +3,17 @@
     <h3 class="header">电子数码</h3>
     <el-row type="flex" class="bd">
       <el-col :span="5" class="left-bd">
-        <img
-          class="left-img"
-          src="../../../../assets/upload/leftP1.webp"
-          alt=""
-        />
+        <a href="javascript:;" style="display: block">
+          <img
+            class="left-img"
+            src="../../../../assets/upload/leftP1.webp"
+            alt=""
+          />
+        </a>
       </el-col>
       <el-col :span="1"></el-col>
       <el-col :span="18" class="right-bd">
-        <div v-for="i in 8" :key="i">
+        <div style="cursor: pointer" v-for="i in 8" :key="i" @click="a">
           <img
             class="item"
             src="../../../../assets/upload/phone1.webp"
@@ -27,7 +29,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    a() {}
+  }
+}
 </script>
 
 <style scoped>
@@ -48,9 +54,7 @@ export default {}
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   transform: translateY(-3px);
 }
-.bd {
-  margin-bottom: 50px;
-}
+
 .left-img {
   width: 100%;
 }

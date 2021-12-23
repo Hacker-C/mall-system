@@ -6,7 +6,8 @@
     <Category />
     <!-- 限时折扣 -->
     <Discount />
-    <ProductModule />
+    <EleModule />
+    <BookModule />
   </div>
 </template>
 
@@ -14,15 +15,16 @@
 const Carousel = () => import('./components/Carousel.vue')
 const Category = () => import('./components/category/Category.vue')
 const Discount = () => import('./components/Discount.vue')
-const ProductModule = () =>
-  import('./components/ProductModule/ProductModule.vue')
+const EleModule = () => import('./components/ProductModule/EleModule.vue')
+const BookModule = () => import('./components/ProductModule/BookModule.vue')
 
 export default {
   components: {
     Carousel,
     Category,
     Discount,
-    ProductModule
+    EleModule,
+    BookModule
   }
 }
 </script>
