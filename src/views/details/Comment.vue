@@ -8,7 +8,7 @@
     <span class="uname">{{ cDetailsComment.username }}</span>
     <span class="text">{{ cDetailsComment.commentText }}</span>
     <el-popconfirm
-      title="确定删除订单吗？"
+      title="确定删除此条评论吗？"
       @confirm="confirm"
       @cancel="cancel"
       placement="top"
