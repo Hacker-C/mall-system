@@ -1,8 +1,6 @@
 <template>
   <div>
-    <el-row>
-      <h3 class="header">限时折扣</h3>
-    </el-row>
+    <h3 class="header">限时折扣</h3>
     <el-row type="flex" class="discount-bd">
       <el-col :span="4" class="seckill">
         <h3>限时秒杀</h3>
@@ -80,8 +78,8 @@ export default {
 }
 .header {
   font-weight: 400;
-  line-height: 40px;
-  margin-top: 15px;
+  height: 60px;
+  line-height: 80px;
   color: 333;
 }
 .seckill {

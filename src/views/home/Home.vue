@@ -12,7 +12,7 @@
 
 <script>
 const Carousel = () => import('./components/Carousel.vue')
-const Category = () => import('./components/Category.vue')
+const Category = () => import('./components/category/Category.vue')
 const Discount = () => import('./components/Discount.vue')
 const ProductModule = () =>
   import('./components/ProductModule/ProductModule.vue')
@@ -27,5 +27,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

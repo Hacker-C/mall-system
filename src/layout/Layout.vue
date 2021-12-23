@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
-    <Header :key="i" @reloadHeader="addKey" />
-    <router-view></router-view>
+    <Header :key="i" @reloadHeader="addKey" style="background-color: #fff" />
+    <router-view style="background-color: #fff"></router-view>
     <el-backtop>
       <div class="backtop"><i class="fas fa-arrow-up"></i></div>
     </el-backtop>
