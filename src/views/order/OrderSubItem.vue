@@ -28,7 +28,7 @@
             <el-button
               type="success"
               size="mini"
-              v-show="cOrder.orderStatus === 0"
+              :disabled="!(cOrder.orderStatus === 0)"
               plain
               @click="payOut"
               >付 款</el-button
@@ -37,12 +37,12 @@
               title="确定取消订单吗？"
               @confirm="cancelOrder"
               @cancel="cancel"
-              v-show="isCancel"
               placement="top"
             >
               <el-button
                 type="warning"
                 size="mini"
+                :disabled="!isCancel"
                 slot="reference"
                 @click="deleteOut"
                 style="margin-left: 8px"
