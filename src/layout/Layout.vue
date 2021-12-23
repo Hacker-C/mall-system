@@ -2,6 +2,9 @@
   <div class="layout">
     <Header :key="i" @reloadHeader="addKey" />
     <router-view></router-view>
+    <el-backtop>
+      <div class="backtop"><i class="fas fa-arrow-up"></i></div>
+    </el-backtop>
   </div>
 </template>
 
@@ -25,5 +28,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.backtop {
+  height: 100%;
+  width: 100%;
+  background-color: #f2f5f6;
+  text-align: center;
+  line-height: 40px;
+  color: #1989fa;
+}
+.backtop:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 </style>

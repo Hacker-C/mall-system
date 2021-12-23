@@ -38,7 +38,7 @@ const DiscountItem = () => import('./DiscountItem.vue')
 export default {
   data() {
     return {
-      inputTime: +new Date('2021-12-23 07:00:00'),
+      inputTime: +new Date('2021-12-24 07:00:00'),
       hour: '',
       minute: '',
       second: '',
@@ -76,13 +76,13 @@ export default {
 .discount-bd {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
-  margin-bottom: 100px;
   height: 240px;
 }
 .header {
   font-weight: 400;
   line-height: 40px;
   margin-top: 15px;
+  color: 333;
 }
 .seckill {
   height: 240px;
