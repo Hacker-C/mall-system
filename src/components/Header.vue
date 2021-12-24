@@ -176,6 +176,7 @@ export default {
           key: this.search
         }
       })
+      this.search = ''
     },
     handleSelect(key, keyPath) {
       // console.log(key, keyPath)
