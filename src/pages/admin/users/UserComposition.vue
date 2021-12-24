@@ -32,12 +32,16 @@ export default {
     }
   },
   created() {
-    request.get('/user/role/count').then((res) => {
-      this.data[0].value = res.admin
-      this.data[1].value = res.shop
-      this.data[2].value = res.user
-    })
-    this.getNode()
+    request
+      .get('/user/role/count')
+      .then((res) => {
+        this.data[0].value = res.admin
+        this.data[1].value = res.shop
+        this.data[2].value = res.user
+      })
+      .then(() => {
+        this.getNode()
+      })
   },
   methods: {
     getNode() {
