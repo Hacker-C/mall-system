@@ -47,7 +47,6 @@ export default {
     getProductById(tab) {
       // 根据商品类 category id 请求此类所有商品数据
       let queryCategoryId = this.categories[Number(tab.index)].categoryId
-      console.log(queryCategoryId)
       // 清空原来的元素
       this.products = []
       request
@@ -76,8 +75,10 @@ export default {
       .catch((err) => {
         console.log(err)
       })
-    // 刷新页面则请求分类第一条
-    this.getProductById({ index: 0 })
+      .then(() => {
+        // 刷新页面则请求分类第一条
+        this.getProductById({ index: 0 })
+      })
   }
 }
 </script>
