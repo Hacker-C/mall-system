@@ -20,6 +20,8 @@
           </el-menu-item>
           <el-menu-item index="/admin/all_users"> 所有用户 </el-menu-item>
           <el-menu-item index="/admin/all_shops"> 商家管理 </el-menu-item>
+
+          <el-menu-item index="/admin/compose"> 用户组成 </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="system">
@@ -39,7 +41,8 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="orders">
+      <!-- TODO -->
+      <!-- <el-submenu index="orders">
         <template slot="title">
           <i class="el-icon-s-order"></i>
           <span>订单管理</span>
@@ -49,7 +52,7 @@
             <span slot="title">所有订单</span>
           </el-menu-item>
         </el-menu-item-group>
-      </el-submenu>
+      </el-submenu> -->
     </el-menu>
   </el-col>
 </template>

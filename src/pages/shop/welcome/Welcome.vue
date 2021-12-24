@@ -24,4 +24,7 @@ export default {
   border-radius: 5px;
   /* background-color: #fff; */
 }
+i {
+  color: #666;
+}
 </style>

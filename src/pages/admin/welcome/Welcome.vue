@@ -4,6 +4,7 @@
       <SubHeader>
         <template v-slot>欢迎光临！！！</template>
       </SubHeader>
+      <i>这里是在线商城的管理员后台。</i>
     </template>
   </Container>
 </template>
@@ -20,5 +21,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+i {
+  color: #666;
+}
 </style>

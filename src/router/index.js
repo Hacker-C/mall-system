@@ -31,6 +31,7 @@ const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
 const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
 const AllOrder = () => import('../pages/admin/order/AllOrder.vue')
 const NoticeAdmin = () => import('../pages/admin/notice/NoticeAdmin.vue')
+const UserComposition = () => import('../pages/admin/users/UserComposition.vue')
 
 // 商家界面
 const Shop = () => import('../pages/shop/Shop.vue')
@@ -218,6 +219,15 @@ const routes = [
           requireAuth: true,
           roles: ['admin'],
           name: '所有角色'
+        }
+      },
+      {
+        path: '/admin/compose',
+        component: UserComposition,
+        meta: {
+          requireAuth: true,
+          roles: ['admin'],
+          name: '用户组成'
         }
       },
       {
