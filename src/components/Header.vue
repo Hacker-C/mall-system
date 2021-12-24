@@ -31,15 +31,23 @@
       >
         <el-menu-item index="/home">首页</el-menu-item>
         <el-menu-item index="/product_list">所有商品</el-menu-item>
-        <el-col :span="10" style="text-align: center">
+        <el-col
+          v-if="!this.$route.query.key"
+          :span="10"
+          style="text-align: center"
+        >
           <el-input
             v-model="search"
             placeholder="请输入搜索内容"
             suffix-icon="el-icon-search"
-            style="width: 200px; margin-top: 10px"
+            style="width: 300px; margin-top: 13px"
+            size="medium"
           ></el-input>
-          <el-button style="margin-left: 5px">搜索</el-button>
+          <el-button size="medium" @click="toSearch" style="margin-left: 5px"
+            >搜索</el-button
+          >
         </el-col>
+        <el-col v-else :span="10"><span class="space">.</span></el-col>
         <el-menu-item
           index="/like"
           class="el-menu-right"
@@ -161,6 +169,14 @@ export default {
     }
   },
   methods: {
+    toSearch() {
+      this.$router.push({
+        path: '/search',
+        query: {
+          key: this.search
+        }
+      })
+    },
     handleSelect(key, keyPath) {
       // console.log(key, keyPath)
     },
@@ -183,6 +199,8 @@ export default {
     }
   },
   created() {
+    // 搜索
+    this.search = this.$route.query.key
     let userId = sessionStorage.getItem('userId')
     this.isLogin = userId ? true : false
     if (userId) {
@@ -240,5 +258,10 @@ export default {
   position: relative;
   bottom: 7px;
   border: 1px solid #ccc;
+}
+.space {
+  width: 1px;
+  height: 1px;
+  color: transparent;
 }
 </style>

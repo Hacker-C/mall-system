@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// 用户主页
 const Home = () => import('../views/home/Home.vue')
 const Layout = () => import('../layout/Layout.vue')
 const ProductList = () => import('../views/ProductList/ProductList.vue')
@@ -15,6 +16,7 @@ const Login = () => import('../views/Login.vue')
 const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
 const SubmitSuccess = () => import('../views/checkout/SubmitSuccess.vue')
+const Search = () => import('../views/search/Search.vue')
 
 // 商家注册
 const ShopRegister = () => import('../views/ShopRegister.vue')
@@ -76,6 +78,14 @@ const routes = [
         meta: {
           requireAuth: false,
           name: '关于我们'
+        }
+      },
+      {
+        path: '/search',
+        component: Search,
+        meta: {
+          requireAuth: false,
+          name: '搜索'
         }
       },
       {
