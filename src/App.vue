@@ -11,6 +11,11 @@ export default {
   name: 'app',
   components: {
     Layout
+  },
+  data() {
+    return {
+      filesUploadUrl: 'localhost'
+    }
   }
 }
 </script>

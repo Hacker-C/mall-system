@@ -163,7 +163,11 @@
 
             <el-form-item label="封面">
               <el-upload
-                action="http://localhost:8081/files/upload"
+                :action="
+                  'http://' +
+                  this.$root.$children[0]._data.filesUploadUrl +
+                  ':8081/files/upload'
+                "
                 :on-success="uploadSuccess"
                 ref="upload"
               >
@@ -350,6 +354,7 @@ export default {
       })
     },
     save() {
+      console.log(this.form)
       if (this.form.productId) {
         // 若此调数据有id，则进行更新操作，同步数据库，进行PUT请求
         request

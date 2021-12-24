@@ -15,12 +15,7 @@
         >刷新</el-button
       >
       <el-table :data="tableData" border style="width: 580px">
-        <el-table-column
-          align="center"
-          prop="categoryId"
-          label="ID"
-          width="50px"
-        >
+        <el-table-column align="center" prop="index" label="序号" width="50px">
         </el-table-column>
         <el-table-column
           align="center"

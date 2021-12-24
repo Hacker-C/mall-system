@@ -44,9 +44,10 @@ export default {
     CategoryCard
   },
   methods: {
-    getProductById(tab, event) {
+    getProductById(tab) {
       // 根据商品类 category id 请求此类所有商品数据
-      let queryCategoryId = +tab.index + 1
+      let queryCategoryId = this.categories[Number(tab.index)].categoryId
+      console.log(queryCategoryId)
       // 清空原来的元素
       this.products = []
       request

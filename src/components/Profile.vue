@@ -173,9 +173,14 @@
     >
       <el-form ref="form" :model="form">
         <h4>请选择图片</h4>
+        <!--  -->
         <el-form-item style="margin-bottom: 7px" label="头像">
           <el-upload
-            action="http://localhost:8081/files/upload"
+            :action="
+              'http://' +
+              this.$root.$children[0]._data.filesUploadUrl +
+              ':8081/files/upload'
+            "
             :on-success="uploadSuccess"
             ref="upload"
           >
@@ -252,6 +257,7 @@ export default {
     }
   },
   created() {
+    // console.log(this.$root)
     this.load()
     if (this.$route.query.from == 'order') {
       this.dialogFormVisible2 = true
@@ -295,7 +301,7 @@ export default {
     },
     uploadSuccess(res) {
       this.form.avatar = res.data
-      console.log(this.form)
+      this.dialogFormVisible3 = false
       // this.load()
     },
     toRecharge() {
