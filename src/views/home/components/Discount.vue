@@ -32,11 +32,12 @@
 </template>
 
 <script>
+import request from '../../../utils/request'
 const DiscountItem = () => import('./DiscountItem.vue')
 export default {
   data() {
     return {
-      inputTime: +new Date('2021-12-24 07:00:00'),
+      inputTime: +new Date('2021-12-24 23:00:00'),
       hour: '',
       minute: '',
       second: '',
@@ -45,6 +46,9 @@ export default {
   },
   created() {
     //调用定时器
+    request.get('/countdown').then((res) => {
+      this.inputTime = +new Date(res.data)
+    })
     this.timer = setInterval(() => {
       this.countDown()
     }, 1000)
