@@ -337,7 +337,7 @@ export default {
     },
     uploadSuccess(res) {
       console.log(res)
-      this.form.imgSrc = 'http://' + res.data
+      this.form.imgSrc = res.data
     },
     getCategory(val) {
       let res = ''

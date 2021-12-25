@@ -1,46 +1,60 @@
 <template>
-  <div class="container">
-    <div style="display: flex">
-      <a href="/" class="logo=l">
+  <el-row type="flex" class="line">
+    <el-col :span="2">
+      <a href="/">
         <img src="../assets/upload/logo.svg" alt="" class="logo" />
       </a>
       <span class="head">在线商城</span>
-    </div>
-    <div>
+    </el-col>
+    <el-col :span="10">
       <el-menu
         :default-active="path"
-        class="mmm"
+        class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
         router
       >
-        <el-menu-item style="flex: 1" index="/home">首页</el-menu-item>
+        <el-menu-item index="/home">首页</el-menu-item>
         <el-menu-item index="/product_list">所有商品</el-menu-item>
 
         <el-menu-item
           index="/like"
+          class="el-menu-right"
           :offset="2"
-          style="line-height: 38px; flex: 1"
+          style="line-height: 38px"
         >
           <el-badge :value="likeCount" class="item" v-if="likeCount">
             收藏夹
           </el-badge>
           <div v-else class="item2">收藏夹</div>
         </el-menu-item>
-        <el-menu-item index="/cart" style="line-height: 38px; flex: 1">
+        <el-menu-item
+          index="/cart"
+          class="el-menu-right"
+          style="line-height: 38px"
+        >
           <el-badge :value="cartCount" class="item" v-if="cartCount">
             购物车
           </el-badge>
           <div v-else class="item2">购物车</div>
         </el-menu-item>
-        <el-menu-item index="/order" style="line-height: 38px; flex: 1">
-          <el-badge :value="orderCount" class="item" v-if="orderCount">
+        <el-menu-item
+          index="/order"
+          class="el-menu-right"
+          style="line-height: 38px"
+        >
+          <el-badge
+            :value="orderCount"
+            class="item"
+            style="height: 20px"
+            v-if="orderCount"
+          >
             我的订单
           </el-badge>
           <div v-else class="item2">我的订单</div>
         </el-menu-item>
-        <el-menu-item index="/profile" style="flex: 1">我的</el-menu-item>
-        <el-submenu index="" style="flex: 1">
+        <el-menu-item index="/profile" class="el-menu-right">我的</el-menu-item>
+        <el-submenu index="">
           <template slot="title">更多</template>
           <el-menu-item index="/about">关于本网站</el-menu-item>
           <el-menu-item index="/notice">网站公告</el-menu-item>
@@ -49,32 +63,29 @@
           </el-menu-item>
         </el-submenu>
       </el-menu>
-    </div>
-    <div>
-      <div
-        v-if="!this.$route.query.key"
-        style="text-align: center; display: flex"
-      >
-        <el-input
-          v-model="search"
-          placeholder="请输入搜索内容"
-          suffix-icon="el-icon-search"
-          style="margin-top: 13px; width: 80%"
-          size="small"
-        ></el-input>
-        <div style="margin-left: 5px; width: 18%">
-          <el-button class="search-btn" size="small" @click="toSearch"
+    </el-col>
+    <el-col :span="5">
+      <el-row type="flex">
+        <el-col v-if="!this.$route.query.key" style="text-align: center">
+          <el-input
+            v-model="search"
+            placeholder="请输入搜索内容"
+            suffix-icon="el-icon-search"
+            style="margin-top: 13px; width: 80%"
+            size="small"
+          ></el-input>
+          <el-button size="small" @click="toSearch" style="margin-left: 5px"
             >搜索</el-button
           >
-        </div>
-      </div>
-    </div>
-    <div>
+        </el-col>
+      </el-row>
+    </el-col>
+    <el-col :span="2">
       <el-button
         @click="toLogin"
         v-if="!isLogin"
-        size="small"
-        style="margin-top: 13px"
+        size="mini"
+        style="margin-top: 15px"
         type="primary"
         >登录</el-button
       >
@@ -82,39 +93,47 @@
         @click="logout"
         plain
         v-else
-        size="small"
+        size="mini"
         style="margin-top: 16px"
       >
         注销
       </el-button>
-    </div>
-    <div style="display: flex; align-items: center">
-      <a
-        href="javascript:;"
-        style="display: block"
-        v-if="isLogin"
-        @click="toProfile"
-      >
-        <el-avatar size="large" class="avatar" :src="avatar"></el-avatar>
-      </a>
-      <div v-else>
-        <el-avatar class="avatar" icon="el-icon-user-solid"></el-avatar>
-      </div>
-      <el-dropdown style="width: 100%; padding: 0">
-        <span class="el-dropdown-link">
-          {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <a href="javascript:;" style="display: block" @click="toProfile">
-            <el-dropdown-item> 个人信息 </el-dropdown-item>
+    </el-col>
+    <el-col :span="2" style="padding-right: 0; padding-top: 18px">
+      <el-row type="flex">
+        <el-col>
+          <a
+            href="javascript:;"
+            style="display: block"
+            v-if="isLogin"
+            @click="toProfile"
+          >
+            <el-avatar size="large" class="avatar" :src="avatar"></el-avatar>
           </a>
-          <el-dropdown-item>
-            <a href="javascript:;" @click="logout"> 退出 </a>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
-  </div>
+          <el-avatar
+            class="avatar"
+            v-else
+            icon="el-icon-user-solid"
+          ></el-avatar>
+        </el-col>
+        <el-col>
+          <el-dropdown style="width: 100%; padding: 0">
+            <span class="el-dropdown-link">
+              {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <a href="javascript:;" style="display: block" @click="toProfile">
+                <el-dropdown-item> 个人信息 </el-dropdown-item>
+              </a>
+              <el-dropdown-item>
+                <a href="javascript:;" @click="logout"> 退出 </a>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>
+      </el-row>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -201,21 +220,10 @@ export default {
 .item2 {
   margin-top: 11px;
 }
-.container {
-  display: grid;
-  grid-template-columns: 2fr 5fr 5fr 1fr 2fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 5px;
-  grid-row-gap: px;
+.line {
   border-bottom: 1px solid #ccc;
 }
-.mmm {
-  display: flex;
-  width: 100%;
-}
-
 .el-dropdown-link {
-  margin-left: 20px;
   cursor: pointer;
   color: #409eff;
   font-size: 12px;
@@ -223,11 +231,18 @@ export default {
 .el-icon-arrow-down {
   font-size: 12px;
 }
+.el-menu-right {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 12px;
+}
 .badge__content {
   position: absolute;
   left: 0;
 }
 .avatar {
+  position: relative;
+  bottom: 7px;
   border: 1px solid #ccc;
 }
 .space {
@@ -236,19 +251,13 @@ export default {
   color: transparent;
 }
 .logo {
-  width: 40px;
+  width: 40%;
   margin-left: 7px;
   margin-top: 7px;
   float: left;
-  vertical-align: middle;
 }
 .head {
-  position: relative;
-  top: 20px;
-  left: 8px;
-  font-size: 1rem;
-}
-.search-btn {
-  margin-top: 13px;
+  float: left;
+  width: 60%;
 }
 </style>

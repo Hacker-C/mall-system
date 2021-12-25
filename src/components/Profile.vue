@@ -300,7 +300,7 @@ export default {
       })
     },
     uploadSuccess(res) {
-      this.form.avatar = 'http://' + res.data
+      this.form.avatar = res.data
       console.log(res)
       // this.dialogFormVisible3 = false
       // this.load()

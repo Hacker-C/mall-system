@@ -47,7 +47,14 @@ export default {
   created() {
     //调用定时器
     request.get('/countdown').then((res) => {
-      this.inputTime = +new Date(res.data)
+      let s = res.data
+      let a = s.slice(0, 11)
+      let b = s.slice(13)
+      let m = s.slice(11, 13)
+      m = (Number(m) + 8) % 24
+      m = m < 10 ? '0' + m : m
+      let t = a + m + b
+      this.inputTime = +new Date(t)
     })
     this.timer = setInterval(() => {
       this.countDown()

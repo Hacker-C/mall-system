@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <img :src="product.imgSrc" alt="" style="height: 150px" />
+    <img :src="product.imgSrc" alt="" style="width: 90%; height: 150px" />
     <h3 style="text-align: center">{{ product.productName }}</h3>
     <div class="block">
       <el-rate
