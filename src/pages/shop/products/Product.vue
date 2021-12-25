@@ -261,10 +261,10 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          let deleteId = rows[index].id
+          let deleteId = rows[index].productId
           rows.splice(index, 1)
-          request.delete('/user/' + deleteId).then((res) => {
-            if (res === 0) {
+          request.delete('/product/' + deleteId).then((res) => {
+            if (res.code === '0') {
               this.$message({
                 message: '删除成功！',
                 type: 'success'

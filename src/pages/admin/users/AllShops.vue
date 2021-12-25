@@ -132,6 +132,16 @@
             show-overflow-tooltip
           >
           </el-table-column>
+          <el-table-column label="操作" align="center" width="100px">
+            <template slot-scope="scope">
+              <el-button
+                @click.native.prevent="deleteP(scope.$index, shopProducts)"
+                type="danger"
+                icon="el-icon-delete"
+                circle
+              ></el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible2 = false">取 消</el-button>
@@ -220,6 +230,32 @@ export default {
         .then((res) => {})
         .catch((err) => {
           console.log(err)
+        })
+    },
+    deleteP(index, rows) {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          let deleteId = rows[index].productId
+          rows.splice(index, 1)
+          request.delete('/product/' + deleteId).then((res) => {
+            if (res.code === '0') {
+              this.$message({
+                message: '删除成功！',
+                type: 'success'
+              })
+            }
+          })
+          console.log(deleteId)
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
         })
     },
     seeDetail(row) {
