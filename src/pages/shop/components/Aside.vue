@@ -1,10 +1,6 @@
 <template>
   <el-col style="margin-top: 1px">
-    <el-menu
-      :default-active="path"
-      router
-      style="min-height: calc(100vh - 55px)"
-    >
+    <el-menu :default-active="path" router style="min-height: 100vh">
       <el-menu-item index="/shop/welcome">
         <i class="fas fa-fan" style="margin-left: 5px"></i>
         <span slot="title" style="margin-left: 12px">欢迎光临</span>

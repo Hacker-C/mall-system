@@ -121,7 +121,7 @@ export default {
   background-color: #000;
   color: #fff;
   font-weight: 700;
-  text-align: calc();
+  text-align: center;
   line-height: 30px;
 }
 .time::after {

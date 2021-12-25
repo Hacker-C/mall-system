@@ -179,7 +179,7 @@
             :action="
               'http://' +
               this.$root.$children[0]._data.filesUploadUrl +
-              ':8081/files/upload'
+              '/files/upload'
             "
             :on-success="uploadSuccess"
             ref="upload"
@@ -300,8 +300,9 @@ export default {
       })
     },
     uploadSuccess(res) {
-      this.form.avatar = res.data
-      this.dialogFormVisible3 = false
+      this.form.avatar = 'http://' + res.data
+      console.log(res)
+      // this.dialogFormVisible3 = false
       // this.load()
     },
     toRecharge() {
