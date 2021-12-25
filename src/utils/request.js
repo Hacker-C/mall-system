@@ -2,8 +2,8 @@ import axios from 'axios'
 // import router from '../router/index'
 
 const request = axios.create({
-  // baseURL: 'http://119.23.46.102:9090',
-  baseURL: 'http://localhost:8081',
+  baseURL: 'http://119.23.46.102:9090',
+  // baseURL: 'http://localhost:8081',
   timeout: 5000
 })
 
@@ -12,7 +12,7 @@ const request = axios.create({
 // 比如统一加token，对请求参数统一加密
 request.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json;charset=utf-8';
-  config.headers['Content-Security-Policy'] = 'upgrade-insecure-requests';
+  // config.headers['Content-Security-Policy'] = 'upgrade-insecure-requests';
 
   // config.headers['token'] = user.token;  // 设置请求头
 
