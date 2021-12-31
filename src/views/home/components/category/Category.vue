@@ -8,6 +8,7 @@
         :tab-position="tabPosition"
         :lazy="true"
         @tab-click="getProductById"
+        class="hhh"
       >
         <el-tab-pane
           v-for="category in categories"
@@ -16,9 +17,11 @@
           class="tab-pane"
         >
           <div class="card-bd">
-            <div v-for="(item, index) in products" :key="index">
-              <CategoryCard :product="item" />
-            </div>
+            <CategoryCard
+              v-for="(item, index) in products"
+              :key="index"
+              :product="item"
+            />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -104,7 +107,7 @@ h3 {
   transform: translate(-50%);
   display: block;
 }
-.card {
+/* .card {
   width: 200px;
   height: 220px;
   transition: all 0.2s;
@@ -116,17 +119,22 @@ h3 {
 
 .card:hover {
   transform: scale(1.05);
-}
+} */
 
 .card-bd {
   width: 100%;
-  padding-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
 .tab-pane {
   padding-right: 0;
+}
+.a-card {
+  width: 80px;
 }
 </style>

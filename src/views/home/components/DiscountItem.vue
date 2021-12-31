@@ -1,16 +1,40 @@
 <template>
   <div class="discount-item">
-    <img src="../../../assets/upload/seckill-item1.webp" alt="" />
-    <p>惠普(HP)暗影精灵7 游戏本</p>
-    <el-row class="row">
-      <el-col :span="12" class="price1"> ￥4999.00 </el-col>
-      <el-col :span="12" class="price2"> ￥5999.00 </el-col>
-    </el-row>
+    <a href="javascript:;" @click="toDetail(cProduct.productId)">
+      <img :src="cProduct.imgSrc" alt="" class="item-img" />
+    </a>
+    <p>{{ cProduct.productName }}</p>
+    <div class="cp">
+      <el-row class="row">
+        <el-col :span="12" class="price1">
+          ￥{{ cProduct.productPrice * cProduct.discount }}
+        </el-col>
+        <el-col :span="12" class="price2">
+          ￥{{ cProduct.productPrice }}
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    cProduct: {
+      type: Object
+    }
+  },
+  methods: {
+    toDetail(pId) {
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: pId
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -27,6 +51,9 @@ export default {}
 .discount-item p {
   font-weight: lighter;
   font-size: 15px;
+  position: absolute;
+  bottom: 40px;
+  width: 15%;
 }
 .price1 {
   background-color: #f02b2b;
@@ -46,5 +73,14 @@ export default {}
   color: #cccccc;
   text-decoration: line-through;
   border: 1px solid #f02b2b;
+}
+.cp {
+  position: absolute;
+  width: 15%;
+  bottom: 20px;
+}
+.item-img {
+  height: 150px;
+  width: 100px;
 }
 </style>

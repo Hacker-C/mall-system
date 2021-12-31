@@ -116,7 +116,21 @@ export default {
       this.dialogFormVisible = true
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      // console.log(index, row)
+      this.$confirm('此功能尚未完善！', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          let cId = row.categoryId
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     },
     refresh() {
       this.load()

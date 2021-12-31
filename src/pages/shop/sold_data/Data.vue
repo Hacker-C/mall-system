@@ -12,8 +12,8 @@
       @click="refresh"
       >刷新</el-button
     > -->
-      <div id="myChart1" style="width: 700px; height: 400px"></div>
-      <div id="myChart2" style="width: 700px; height: 400px"></div>
+      <div id="myChart1" style="width: 80%; height: 400px"></div>
+      <div id="myChart2" style="width: 80%; height: 400px"></div>
     </template>
   </Container>
 </template>
@@ -64,6 +64,9 @@ export default {
             data: this.xAxisData,
             axisTick: {
               alignWithLabel: true
+            },
+            axisLabel: {
+              rotate: 30
             }
           }
         ],
@@ -113,6 +116,9 @@ export default {
             data: this.xAxisData2,
             axisTick: {
               alignWithLabel: true
+            },
+            axisLabel: {
+              rotate: 30
             }
           }
         ],

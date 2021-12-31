@@ -301,7 +301,6 @@ export default {
     },
     uploadSuccess(res) {
       this.form.avatar = res.data
-      console.log(res)
       // this.dialogFormVisible3 = false
       // this.load()
     },
@@ -344,6 +343,7 @@ export default {
               this.load()
             }, 1000)
             this.dialogFormVisible = false
+            this.dialogFormVisible3 = false
           } else {
             this.$message.error('保存失败！服务器出错！')
           }

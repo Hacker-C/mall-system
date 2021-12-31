@@ -235,23 +235,29 @@ export default {
       e.stopPropagation()
       let uId = sessionStorage.getItem('userId')
       let pId = this.product.productId
-      console.log(uId)
-      console.log(pId)
-      request.get('/user/check/' + uId + '/' + pId).then((res) => {
-        console.log(res)
-        if (res.code === '1') {
-          this.$message({
-            message: res.msg,
-            type: 'warning',
-            duration: 1000
-          })
-        } else {
-          this.commentForm = {}
-          this.commentForm.userId = uId
-          this.commentForm.productId = pId
-          this.dialogFormVisible = true
-        }
-      })
+      if (uId) {
+        request.get('/user/check/' + uId + '/' + pId).then((res) => {
+          console.log(res)
+          if (res.code === '1') {
+            this.$message({
+              message: res.msg,
+              type: 'warning',
+              duration: 1000
+            })
+          } else {
+            this.commentForm = {}
+            this.commentForm.userId = uId
+            this.commentForm.productId = pId
+            this.dialogFormVisible = true
+          }
+        })
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 1000
+        })
+      }
     },
     load() {
       // 商品信息 this.$route.query.id，发送ajax请求数据
@@ -358,14 +364,23 @@ export default {
       }
     },
     toCheckout() {
-      this.product.count = 1
-      let obj = {
-        total: 1,
-        money: this.product.productPrice * this.product.discount,
-        cartProducts: [this.product]
+      let uId = sessionStorage.getItem('userId')
+      if (uId) {
+        this.product.count = 1
+        let obj = {
+          total: 1,
+          money: this.product.productPrice * this.product.discount,
+          cartProducts: [this.product]
+        }
+        sessionStorage.setItem('checkout', JSON.stringify(obj))
+        this.$router.push('/checkout')
+      } else {
+        this.$message({
+          message: '请先登录！',
+          type: 'warning',
+          duration: 1000
+        })
       }
-      sessionStorage.setItem('checkout', JSON.stringify(obj))
-      this.$router.push('/checkout')
     }
   },
   components: {

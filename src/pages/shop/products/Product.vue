@@ -384,6 +384,7 @@ export default {
       } else {
         this.getShopInfo().then((res1) => {
           this.form.shopId = res1.data.shopId
+          this.form.sold = Math.round(Math.random() * (500 - 100)) + 100
           request
             .post('/product', this.form)
             .then((res) => {

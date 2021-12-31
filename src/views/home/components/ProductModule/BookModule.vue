@@ -13,10 +13,15 @@
       </el-col>
       <el-col :span="1"></el-col>
       <el-col :span="6" class="right-bd">
-        <div style="cursor: pointer" v-for="i in 6" :key="i" @click="a">
-          <img class="item" src="../../../../assets/upload/book1.webp" alt="" />
-          <p class="name">中华经典书籍</p>
-          <div class="price">￥47.40</div>
+        <div
+          style="cursor: pointer"
+          v-for="(item, index) in showBooks"
+          :key="index"
+          @click="toDetail(item.productId)"
+        >
+          <img class="item" :src="item.imgSrc" alt="" />
+          <p class="name">{{ item.productName }}</p>
+          <div class="price">￥{{ item.productPrice }}</div>
         </div>
       </el-col>
       <el-col :span="1"></el-col>
@@ -38,12 +43,8 @@
               alt=""
             />
           </div>
-          <div class="rank-item">
-            <img
-              src="../../../../assets/upload/rank1.webp"
-              class="rank-img"
-              alt=""
-            />
+          <div class="rank-item" @click="toDetail(item.productId)">
+            <img :src="item.imgSrc" class="rank-img" alt="" />
             <div>
               <div style="font-size: 13px">{{ item.productName }}</div>
               <div class="rank-price">￥ {{ item.productPrice }}</div>
@@ -58,34 +59,91 @@
 <script>
 export default {
   methods: {
-    a() {}
+    toDetail(pId) {
+      console.log(pId)
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: pId
+        }
+      })
+    }
   },
   data() {
     return {
       books: [
         {
-          imgSrc: '../../../../assets/upload/rank1.webp',
-          productName: '郭论（郭德纲口述中国文化通史）',
-          productPrice: 49.8,
-          productId: 1
+          imgSrc:
+            'http://119.23.46.102:9090/files/423dabbdc10041f4bdf0b88479c6a8fc',
+          productName: '三国演义',
+          productPrice: 60,
+          productId: 18
         },
         {
-          imgSrc: import('../../../../assets/upload/rank1.webp'),
-          productName: '郭论（郭德纲口述中国文化通史）',
+          imgSrc:
+            'http://119.23.46.102:9090/files/26d9cf7364f54451a94f96098ce80297',
+          productName: '红楼梦',
           productPrice: 49.8,
+          productId: 19
+        },
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/1d60239509774a029bb1b1dfe0813145',
+          productName: '水浒传',
+          productPrice: 50,
+          productId: 15
+        },
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/d17e342459df4b77bca52d6b57924f00',
+          productName: '西游记',
+          productPrice: 49,
           productId: 2
+        }
+      ],
+      showBooks: [
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/b814af27129a4bee9a9bfa8f33da01cd',
+          productName: '三体全集',
+          productPrice: 50,
+          productId: 25
         },
         {
-          imgSrc: import('../../../../assets/upload/rank1.webp'),
-          productName: '郭论（郭德纲口述中国文化通史）',
-          productPrice: 49.8,
-          productId: 3
+          imgSrc:
+            'http://119.23.46.102:9090/files/bc1ea5b6afa34c5a996ddb637fa6d43f',
+          productName: '活着',
+          productPrice: 75,
+          productId: 27
         },
         {
-          imgSrc: import('../../../../assets/upload/rank1.webp'),
-          productName: '郭论（郭德纲口述中国文化通史）',
-          productPrice: 49.8,
-          productId: 4
+          imgSrc:
+            'http://119.23.46.102:9090/files/21455c71dccc445598488b34004ea1fe',
+          productName: '机器人短篇全集',
+          productPrice: 45,
+          productId: 28
+        },
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/bbd3dee3cb844700a03e6c62ee136b9d',
+          productName: '鬼谷子',
+          productPrice: 100,
+          productId: 44
+        },
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/75cecf6dfa654e07aa9cd726e4a28127',
+          productName: '图解HTTP',
+          productPrice: 45,
+          productId: 45
+        },
+        // 2
+        {
+          imgSrc:
+            'http://119.23.46.102:9090/files/d17e342459df4b77bca52d6b57924f00',
+          productName: '西游记',
+          productPrice: 49,
+          productId: 2
         }
       ]
     }
@@ -149,6 +207,7 @@ export default {
 }
 .item {
   width: 80%;
+  height: 140px;
   position: absolute;
   top: 10px;
 }
@@ -188,7 +247,7 @@ header > img {
 }
 .rank-item {
   display: flex;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 .rank-price {
   color: #f12b2b;

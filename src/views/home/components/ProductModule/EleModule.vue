@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="header">电子数码</h3>
+    <h3 class="header">热销产品</h3>
     <el-row type="flex" class="bd">
       <el-col :span="5" class="left-bd">
         <a href="javascript:;" style="display: block">
@@ -13,15 +13,18 @@
       </el-col>
       <el-col :span="1"></el-col>
       <el-col :span="18" class="right-bd">
-        <div style="cursor: pointer" v-for="i in 8" :key="i" @click="a">
-          <img
-            class="item"
-            src="../../../../assets/upload/phone1.webp"
-            alt=""
-          />
-          <h4 class="name">Xiaomi 11 青春活力版</h4>
-          <p class="desc">轻薄5G，内外皆出彩</p>
-          <div class="price">1999元起</div>
+        <div
+          style="cursor: pointer"
+          v-for="product in products"
+          :key="product.productId"
+          @click="toDetail(product.productId)"
+        >
+          <img class="item" :src="product.imgSrc" alt="" />
+          <div class="items">
+            <h4 class="name">{{ product.productName }}</h4>
+            <p class="desc">{{ product.productDesc }}</p>
+            <div class="price">{{ product.productPrice }}元起</div>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -31,7 +34,86 @@
 <script>
 export default {
   methods: {
-    a() {}
+    a() {},
+    toDetail(pId) {
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: pId
+        }
+      })
+    }
+  },
+  data() {
+    return {
+      products: [
+        {
+          productId: 20,
+          productName: '美的空调',
+          productPrice: 2700,
+          productDesc: '变频冷暖壁挂式空调',
+          imgSrc:
+            'http://119.23.46.102:9090/files/07f711c3df204da7a93d25712369aec5'
+        },
+        {
+          productId: 17,
+          productName: '小米电视',
+          productPrice: 2199,
+          productDesc: '4K高清HDR蓝牙语音遥控',
+          imgSrc:
+            'http://119.23.46.102:9090/files/4fa856f37b86466d9f57bc781bef4d99'
+        },
+        {
+          productId: 16,
+          productName: '家用榨汁机',
+          productPrice: 129,
+          productDesc: '榨汁机家用多功能料理机',
+          imgSrc:
+            'http://119.23.46.102:9090/files/a5e278c8a27844728ae73fa501d3a2ec'
+        },
+        {
+          productId: 24,
+          productName: '999感冒灵',
+          productPrice: 30,
+          productDesc: '三九999感冒灵颗粒9袋',
+          imgSrc:
+            'http://119.23.46.102:9090/files/b5e0e958a02947e8bc37ce1723e81ed0'
+        },
+        {
+          productId: 11,
+          productName: 'HUAWEI P50',
+          productPrice: 8888,
+          productDesc: '创新双屏操作体验',
+          imgSrc:
+            'http://119.23.46.102:9090/files/541dac7c289f4cfcb4c72db17b339c49'
+        },
+        {
+          productId: 25,
+          productName: '三体全集',
+          productPrice: 50,
+          productDesc: '中国科幻基石丛书',
+          imgSrc:
+            'http://119.23.46.102:9090/files/b814af27129a4bee9a9bfa8f33da01cd'
+        },
+        {
+          productId: 26,
+          productName: '水壶',
+          productPrice: 97,
+          productDesc: '1800W大功率开水壶双层',
+          imgSrc:
+            'http://119.23.46.102:9090/files/049dcd04a9534528a7643b9361caf0bd'
+        },
+        // 23
+        {
+          productId: 23,
+          productName: '洗手液',
+          productPrice: 97,
+          productDesc: '健康抑菌洗手液滋润',
+          imgSrc:
+            'http://119.23.46.102:9090/files/9b7d6561772d4c5988cee14b1681c496'
+        }
+      ]
+    }
   }
 }
 </script>
@@ -93,26 +175,31 @@ export default {
 }
 .item {
   width: 80%;
+  height: 150px;
   position: absolute;
   top: 10px;
 }
 .name,
 .desc,
 .price {
-  position: absolute;
+  /* position: absolute; */
 }
 .price {
-  bottom: 10px;
+  /* bottom: 8px; */
   color: #ff6700;
   font-weight: 100;
 }
 .desc {
-  bottom: 40px;
+  /* bottom: 30px; */
   color: #b0b0b0;
   font-size: 14px;
 }
 .name {
   font-weight: 100;
-  bottom: 60px;
+  /* bottom: 50px; */
+}
+.items {
+  position: absolute;
+  bottom: 10px;
 }
 </style>

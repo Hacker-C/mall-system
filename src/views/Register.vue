@@ -87,6 +87,17 @@ export default {
       this.$router.push('/login')
     },
     register() {
+      if (
+        this.form.username.length == 0 ||
+        this.form.password.length == 0 ||
+        this.form.repeatPassword.length == 0
+      ) {
+        this.$message({
+          message: '相关信息不能为空',
+          type: 'warning'
+        })
+        return
+      }
       if (this.form.password != this.form.repeatPassword) {
         this.$message({
           message: '两次输入密码不一致！',

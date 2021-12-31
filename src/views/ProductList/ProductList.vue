@@ -62,7 +62,7 @@
         }}</el-button>
       </el-col>
     </el-row>
-    <el-row style="display: flex; flex-wrap: wrap">
+    <el-row style="display: flex; flex-wrap: wrap; justify-content: center">
       <div v-for="(item, index) in products" :key="index">
         <ProductItem :product="item" :key="componentKey" />
       </div>

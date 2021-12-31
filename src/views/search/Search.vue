@@ -66,7 +66,13 @@ export default {
       })
     },
     toDetails(id) {
-      console.log(id)
+      // 点击 ProductItem 组件，通过路由传递商品id给Dtails组件，期间发起请求。
+      this.$router.push({
+        path: '/details',
+        query: {
+          id: id
+        }
+      })
     }
   }
 }
@@ -108,7 +114,7 @@ export default {
   cursor: pointer;
 }
 .img {
-  width: 75%;
+  height: 60%;
   margin-top: 15px;
 }
 .name {

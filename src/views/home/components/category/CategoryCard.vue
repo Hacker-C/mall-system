@@ -1,24 +1,18 @@
 <template>
-  <a
-    href="javascript:;"
-    style="display: block; text-decoration: none"
-    @click="getProductDetails"
+  <el-card
+    class="card"
+    title="点击可查看商品详情"
+    @click.native="getProductDetails"
   >
-    <el-card class="card" title="点击可查看商品详情">
-      <img :src="product.imgSrc" class="image" />
-      <p style="text-align: center">{{ product.productName }}</p>
-      <p class="desc">
-        {{ product.productDesc }}
-      </p>
-      <span style="color: red; margin-left: 10%; font-size: 15px"
-        >￥{{ product.productPrice }}</span
-      >
-      <div>
-        <el-button size="small" @click="addToCart">加入购物车</el-button>
-        <el-button size="small" @click="addToLike">收藏</el-button>
-      </div>
-    </el-card>
-  </a>
+    <img :src="product.imgSrc" class="image" />
+    <p style="text-align: center">{{ product.productName }}</p>
+    <p class="desc">
+      {{ product.productDesc }}
+    </p>
+    <span style="color: red; margin-left: 10%; font-size: 15px"
+      >￥{{ product.productPrice }}</span
+    >
+  </el-card>
 </template>
 
 <script>
@@ -132,18 +126,17 @@ export default {
   display: block;
 }
 .card {
-  width: 200px;
-  /* height: 220px; */
+  /* width: 20%; */
+  height: 200px;
   transition: all 0.2s;
-  margin-top: 10px;
-  margin-left: 20px;
   padding-top: 0;
   padding-bottom: 0;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .desc {

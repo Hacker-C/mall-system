@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-carousel
-      :interval="5000"
+      :interval="3000"
       arrow="hover"
       height="500px"
       style="width: 100%"
@@ -29,6 +29,10 @@ export default {
         {
           id: 3,
           src: require('../../../assets/upload/bg3.png')
+        },
+        {
+          id: 4,
+          src: require('../../../assets/upload/bg4.png')
         }
       ]
     }

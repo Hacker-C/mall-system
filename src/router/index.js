@@ -17,6 +17,8 @@ const Register = () => import('../views/Register.vue')
 const Checkout = () => import('../views/checkout/Checkout.vue')
 const SubmitSuccess = () => import('../views/checkout/SubmitSuccess.vue')
 const Search = () => import('../views/search/Search.vue')
+//  新登录页面
+const NewLogin = () => import('../views/login/Login.vue')
 
 // 商家注册
 const ShopRegister = () => import('../views/ShopRegister.vue')
@@ -160,7 +162,7 @@ const routes = [
   },
   {
     path: '/login',
-    component: Login,
+    component: NewLogin,
     meta: {
       requireAuth: false,
       name: '欢迎登录！'

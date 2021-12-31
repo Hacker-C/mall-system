@@ -88,7 +88,7 @@
         注销
       </el-button>
     </div>
-    <div style="display: flex; align-items: center">
+    <div style="display: flex; align-items: center; justify-content: end">
       <a
         href="javascript:;"
         style="display: block"
@@ -104,7 +104,7 @@
         <span class="el-dropdown-link">
           {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
-        <el-dropdown-menu slot="dropdown">
+        <el-dropdown-menu slot="dropdown" class="down">
           <a href="javascript:;" style="display: block" @click="toProfile">
             <el-dropdown-item> 个人信息 </el-dropdown-item>
           </a>
@@ -215,7 +215,9 @@ export default {
 }
 
 .el-dropdown-link {
-  margin-left: 20px;
+  position: absolute;
+  right: 20px;
+  top: -10px;
   cursor: pointer;
   color: #409eff;
   font-size: 12px;
@@ -228,7 +230,9 @@ export default {
   left: 0;
 }
 .avatar {
-  border: 1px solid #ccc;
+  border: 1px solid #666;
+  position: relative;
+  left: 0px;
 }
 .space {
   width: 1px;
@@ -250,5 +254,9 @@ export default {
 }
 .search-btn {
   margin-top: 13px;
+}
+.down {
+  position: relative;
+  top: 10px;
 }
 </style>

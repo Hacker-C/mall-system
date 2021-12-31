@@ -12,20 +12,8 @@
           <div>{{ second }}</div>
         </div>
       </el-col>
-      <el-col :span="4">
-        <DiscountItem />
-      </el-col>
-      <el-col :span="4">
-        <DiscountItem />
-      </el-col>
-      <el-col :span="4">
-        <DiscountItem />
-      </el-col>
-      <el-col :span="4">
-        <DiscountItem />
-      </el-col>
-      <el-col :span="4">
-        <DiscountItem />
+      <el-col :span="4" v-for="product in products" :key="product.productId">
+        <DiscountItem :cProduct="product" />
       </el-col>
     </el-row>
   </div>
@@ -41,7 +29,50 @@ export default {
       hour: '',
       minute: '',
       second: '',
-      timer: null
+      timer: null,
+      products: [
+        {
+          productId: 19,
+          productName: '红楼梦',
+          productPrice: 80,
+          discount: 0.9,
+          imgSrc:
+            'http://119.23.46.102:9090/files/26d9cf7364f54451a94f96098ce80297'
+        },
+
+        {
+          productId: 22,
+          productName: '投影仪',
+          productPrice: 20,
+          discount: 0.9,
+          imgSrc:
+            'http://119.23.46.102:9090/files/d1ea171a0b5b4d29913895f992e09d96'
+        },
+        {
+          productId: 20,
+          productName: '美的空调',
+          productPrice: 2700,
+          discount: 0.9,
+          imgSrc:
+            'http://119.23.46.102:9090/files/07f711c3df204da7a93d25712369aec5'
+        },
+        {
+          productId: 13,
+          productName: 'T恤',
+          productPrice: 29.9,
+          discount: 1,
+          imgSrc:
+            'http://119.23.46.102:9090/files/c7c2a39d10f54d40a98db1c42565e799'
+        },
+        {
+          productId: 23,
+          productName: '洗手液',
+          productPrice: 20.0,
+          discount: 1,
+          imgSrc:
+            'http://119.23.46.102:9090/files/9b7d6561772d4c5988cee14b1681c496'
+        }
+      ]
     }
   },
   created() {
