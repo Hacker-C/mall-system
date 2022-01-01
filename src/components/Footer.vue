@@ -40,7 +40,18 @@
       <div class="item">
         <h4>关于本站</h4>
         <ul>
-          <li><a href="">Github项目地址</a></li>
+          <li>
+            <el-link
+              target="blank"
+              href="https://github.com/Hacker-C/Mall-FrontEnd"
+              >Github项目地址</el-link
+            >
+          </li>
+          <li>
+            <h4>小组成员</h4>
+          </li>
+          <li>组长：陈桂</li>
+          <li>组员：唐承 李志贤</li>
         </ul>
       </div>
     </footer>
