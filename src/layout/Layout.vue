@@ -10,14 +10,17 @@
 
 <script>
 const Header = () => import('../components/Header.vue')
+const Footer = () => import('../components/Footer.vue')
 
 export default {
   components: {
-    Header
+    Header,
+    Footer
   },
   data() {
     return {
-      i: 0
+      i: 0,
+      path: this.$route.path === '/home'
     }
   },
   methods: {
@@ -35,6 +38,7 @@ export default {
   background-color: #f2f5f6;
   text-align: center;
   line-height: 40px;
+  /* top: 100vh; */
   color: #1989fa;
 }
 .backtop:hover {

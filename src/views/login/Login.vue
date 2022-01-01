@@ -44,7 +44,7 @@
         <div class="content">
           <button id="sign-in-btn">登录</button>
         </div>
-        <img src="../../assets/upload/right.svg" alt="" />
+        <img style="width: 80%" src="../../assets/upload/right.svg" alt="" />
       </div>
     </div>
   </div>
