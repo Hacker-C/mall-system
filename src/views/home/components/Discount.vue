@@ -93,15 +93,18 @@ export default {
   },
   methods: {
     countDown() {
-      var nowTime = +new Date() // 返回的是当前时间总的毫秒数
-      var times = (this.inputTime - nowTime) / 1000 // times是剩余时间总的秒数
-      var h = parseInt((times / 60 / 60) % 24) //时
+      // 返回的是当前时间总的毫秒数
+      var nowTime = +new Date()
+      // times是剩余时间总的秒数
+      var times = (this.inputTime - nowTime) / 1000
+      var h = parseInt((times / 60 / 60) % 24)
       h = h < 10 ? '0' + h : h
-      this.hour = h // 把剩余的小时给 小时黑色盒子
-      var m = parseInt((times / 60) % 60) // 分
+      // 把剩余的小时给 小时黑色盒子
+      this.hour = h
+      var m = parseInt((times / 60) % 60)
       m = m < 10 ? '0' + m : m
       this.minute = m
-      var s = parseInt(times % 60) // 当前的秒
+      var s = parseInt(times % 60)
       s = s < 10 ? '0' + s : s
       this.second = s
     }

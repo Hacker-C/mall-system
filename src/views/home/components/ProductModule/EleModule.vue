@@ -179,11 +179,7 @@ export default {
   position: absolute;
   top: 10px;
 }
-.name,
-.desc,
-.price {
-  /* position: absolute; */
-}
+
 .price {
   /* bottom: 8px; */
   color: #ff6700;
