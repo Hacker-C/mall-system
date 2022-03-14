@@ -336,7 +336,7 @@ export default {
       })
     },
     uploadSuccess(res) {
-      console.log(res)
+      // console.log(res)
       this.form.imgSrc = res.data
     },
     getCategory(val) {
@@ -355,7 +355,7 @@ export default {
       })
     },
     save() {
-      console.log(this.form)
+      // console.log(this.form)
       if (this.form.productId) {
         // 若此调数据有id，则进行更新操作，同步数据库，进行PUT请求
         request

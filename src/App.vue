@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      filesUploadUrl: '119.23.46.102:9090'
+      filesUploadUrl: '124.222.44.115:9092'
     }
   }
 }
