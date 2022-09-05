@@ -5,12 +5,9 @@
     @click.native="getProductDetails"
   >
     <img :src="product.imgSrc" class="image" />
-    <p style="text-align: center">{{ product.productName }}</p>
-    <p class="desc">
-      {{ product.productDesc }}
-    </p>
-    <span style="color: red; margin-left: 10%; font-size: 15px"
-      >￥{{ product.productPrice }}</span
+    <p class="pname">{{ product.productName }}</p>
+    <div class="price"
+      >￥{{ product.productPrice }}</div
     >
   </el-card>
 </template>
@@ -121,14 +118,15 @@ export default {
 <style scoped>
 .image {
   margin-left: 50%;
-  height: 120px;
+  width: 100%;
   transform: translate(-50%);
   display: block;
 }
 .card {
-  /* width: 20%; */
   height: 200px;
-  transition: all 0.2s;
+  width: 150px;
+  margin-left: 15px;
+  margin-top: 10px;
   padding-top: 0;
   padding-bottom: 0;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -136,15 +134,19 @@ export default {
 }
 
 .card:hover {
-  transform: scale(1.04);
+  transform: translateY(-1.5px);
 }
 
-.desc {
-  font-size: 10px;
-  color: #333;
+.price {
+  color: red;
   margin-left: 10%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  font-size: 15px;
+  text-align: center;
+}
+
+.pname {
+  text-align: center;
+  font-size: 13px;
+  padding: 3px 0 3px 0;
 }
 </style>

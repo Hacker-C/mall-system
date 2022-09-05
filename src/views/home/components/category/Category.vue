@@ -107,28 +107,13 @@ h3 {
   transform: translate(-50%);
   display: block;
 }
-/* .card {
-  width: 200px;
-  height: 220px;
-  transition: all 0.2s;
-  margin-top: 10px;
-  margin-left: 20px;
-  padding-top: 0;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.card:hover {
-  transform: scale(1.05);
-} */
 
 .card-bd {
   width: 100%;
+  height: 100%;
   padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .tab-pane {
