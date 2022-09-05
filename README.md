@@ -1,51 +1,51 @@
-# 在线商城系统
-
-Web期末大作业前端项目仓库
-<a href="http://119.23.46.102:8081/home" target="blank">查看Demo</a>
-
-两个分支：
-
-- dev：开发分支，一个功能开发完后，合并到 master 分支，部署上线
-- master：稳定分支，部署的分支
+# 商城系统（带后台管理）
 
 ## 关于
 
-期末大作业前端，一个在线商城平台。
+一个基于 Vue2 + ElementUI 的具有客户、商家、管理员三种模式的商城系统。
 
-![a](https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/home.4cevksvgsy60.webp)
+这里是前端部分，后端及数据库文件：https://github.com/Hacker-C/mall-system-backend
+
+<a href="" target="blank">在线地址</a>
+
+用户模块：
+
+![home](./.github/img/home.png)
+
+管理员后台模块:
+
+![admin](./.github/img/admin.png)
 
 
+商家模块：
+
+![shop](./.github/img/shop.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ## 技术栈
 
-项目前端所使用的技术栈。
-
-![前端技术栈](https://cdn.jsdelivr.net/gh/Hacker-C/Picture-Bed@main/javaweb/前端技术栈.5e37vlgqut00.webp)
+- 前端：`Vue2` `ElementUI` `Vue Router` `Axios`
+- 后端：`SpringBoot` `MySQL`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## 基本环境
-
-项目开发环境。
+## 开发环境
 
 - Vue: `v2.1.6`
 - vue/cli: `v4.5.15`
 - vue-router: `v3.2.0`
-* Node.js: `v16.13.0`
-* Echarts:  `v5.2.2`
-* ElementUI: `v2.4.5`
-* 浏览器：支持 `CSS3` 和 `ES6/ES7+` 的浏览器
+- Node.js: `v16.13.0`
+- Echarts:  `v5.2.2`
+- ElementUI: `v2.4.5`
+
 
 ## 本地运行
 
 1. git clone
 
    ```git
-   git clone git@github.com:Hacker-C/Mall-FrontEnd.git mall
+   git clone git@github.com:Hacker-C/mall-system.git
    ```
 
 2. npm install
@@ -111,6 +111,8 @@ Web期末大作业前端项目仓库
   - [x] 编辑订单状态
     - [x] 取消订单
     - [x] 对订单进行发货
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### 管理员模块
 
