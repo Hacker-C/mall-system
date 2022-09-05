@@ -7,7 +7,7 @@
     <img :src="product.imgSrc" class="image" />
     <p class="pname">{{ product.productName }}</p>
     <div class="price"
-      >￥{{ product.productPrice }}</div
+      >￥{{ finalPrice }}</div
     >
   </el-card>
 </template>
@@ -21,6 +21,12 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  computed: {
+    finalPrice() {
+      const {productPrice, discount} = this.product
+      return (productPrice*discount).toFixed(2)
     }
   },
   methods: {
@@ -125,7 +131,7 @@ export default {
 .card {
   height: 200px;
   width: 150px;
-  margin-left: 15px;
+  margin-left: 20px;
   margin-top: 10px;
   padding-top: 0;
   padding-bottom: 0;

@@ -2,7 +2,11 @@
   <div class="container1">
     <div class="form-warp">
       <form class="sign-in-form">
-        <h2 class="logo">在线商城系统</h2>
+        <h2 class="logo">
+          <a href="/home" style="color: #6266f5;">
+            在线商城系统
+          </a>
+        </h2>
         <h2 class="form-title">登录</h2>
         <input v-model="form.username" placeholder="用户名" />
         <input
@@ -14,7 +18,11 @@
         <div class="submit-btn" @click="login">立即登录</div>
       </form>
       <form class="sign-up-form">
-        <h2 class="logo">在线商城系统</h2>
+        <h2 class="logo">
+          <a href="/home" style="color: #6266f5;">
+            在线商城系统
+          </a>
+        </h2>
         <h2 class="form-title">注册</h2>
         <input v-model="form.username" placeholder="用户名" />
         <input

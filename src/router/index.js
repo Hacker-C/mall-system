@@ -2,46 +2,46 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 用户主页
-const Home = () => import('../views/home/Home.vue')
-const Layout = () => import('../layout/Layout.vue')
-const ProductList = () => import('../views/ProductList/ProductList.vue')
-const About = () => import('../views/About.vue')
-const Notice = () => import('../views/Notice.vue')
-const Like = () => import('../views/like/Like.vue')
-const Cart = () => import('../views/cart/Cart.vue')
-const Order = () => import('../views/order/Order.vue')
-const Profile = () => import('../components/Profile.vue')
-const Details = () => import('../views/details/Details.vue')
-const Login = () => import('../views/Login.vue')
-const Register = () => import('../views/Register.vue')
-const Checkout = () => import('../views/checkout/Checkout.vue')
-const SubmitSuccess = () => import('../views/checkout/SubmitSuccess.vue')
-const Search = () => import('../views/search/Search.vue')
+const Home = () => import('@/views/home/Home.vue')
+const Layout = () => import('@/layout/Layout.vue')
+const ProductList = () => import('@/views/ProductList/ProductList.vue')
+const About = () => import('@/views/About.vue')
+const Notice = () => import('@/views/Notice.vue')
+const Like = () => import('@/views/like/Like.vue')
+const Cart = () => import('@/views/cart/Cart.vue')
+const Order = () => import('@/views/order/Order.vue')
+const Profile = () => import('@/components/Profile.vue')
+const Details = () => import('@/views/details/Details.vue')
+const Login = () => import('@/views/Login.vue')
+const Register = () => import('@/views/Register.vue')
+const Checkout = () => import('@/views/checkout/Checkout.vue')
+const SubmitSuccess = () => import('@/views/checkout/SubmitSuccess.vue')
+const Search = () => import('@/views/search/Search.vue')
 //  新登录页面
-const NewLogin = () => import('../views/login/Login.vue')
+const NewLogin = () => import('@/views/login/Login.vue')
 
 // 商家注册
-const ShopRegister = () => import('../views/ShopRegister.vue')
+const ShopRegister = () => import('@/views/ShopRegister.vue')
 
 // 管理员界面
-const Admin = () => import('../pages/admin/Admin.vue')
-const Welcome = () => import('../pages/admin/welcome/Welcome.vue')
-const AllUsers = () => import('../pages/admin/users/AllUsers.vue')
-const AllShops = () => import('../pages/admin/users/AllShops.vue')
-const AllRoles = () => import('../pages/admin/users/AllRoles.vue')
-const AllProducts = () => import('../pages/admin/system/AllProducts.vue')
-const HomeSet = () => import('../pages/admin/system/HomeSet.vue')
-const AllOrder = () => import('../pages/admin/order/AllOrder.vue')
-const NoticeAdmin = () => import('../pages/admin/notice/NoticeAdmin.vue')
-const UserComposition = () => import('../pages/admin/users/UserComposition.vue')
+const Admin = () => import('@/pages/admin/Admin.vue')
+const Welcome = () => import('@/pages/admin/welcome/Welcome.vue')
+const AllUsers = () => import('@/pages/admin/users/AllUsers.vue')
+const AllShops = () => import('@/pages/admin/users/AllShops.vue')
+const AllRoles = () => import('@/pages/admin/users/AllRoles.vue')
+const AllProducts = () => import('@/pages/admin/system/AllProducts.vue')
+const HomeSet = () => import('@/pages/admin/system/HomeSet.vue')
+const AllOrder = () => import('@/pages/admin/order/AllOrder.vue')
+const NoticeAdmin = () => import('@/pages/admin/notice/NoticeAdmin.vue')
+const UserComposition = () => import('@/pages/admin/users/UserComposition.vue')
 
 // 商家界面
-const Shop = () => import('../pages/shop/Shop.vue')
-const WelcomeShop = () => import('../pages/shop/welcome/Welcome.vue')
-const ShopProducts = () => import('../pages/shop/products/Product.vue')
-const ShopOrders = () => import('../pages/shop/oders/Order.vue')
-const Sold = () => import('../pages/shop/sold_data/Sold.vue')
-const Data = () => import('../pages/shop/sold_data/Data.vue')
+const Shop = () => import('@/pages/shop/Shop.vue')
+const WelcomeShop = () => import('@/pages/shop/welcome/Welcome.vue')
+const ShopProducts = () => import('@/pages/shop/products/Product.vue')
+const ShopOrders = () => import('@/pages/shop/oders/Order.vue')
+const Sold = () => import('@/pages/shop/sold_data/Sold.vue')
+const Data = () => import('@/pages/shop/sold_data/Data.vue')
 
 Vue.use(VueRouter)
 
@@ -202,7 +202,7 @@ const routes = [
         meta: {
           requireAuth: true,
           roles: ['admin'],
-          name: '所有用户',
+          name: '所有用户'
         }
       },
       {
@@ -211,7 +211,7 @@ const routes = [
         meta: {
           requireAuth: true,
           roles: ['admin'],
-          name: '商家管理',
+          name: '商家管理'
         }
       },
       {
@@ -296,7 +296,7 @@ const routes = [
           requireAuth: true,
           roles: ['shop'],
           name: '欢迎'
-        },
+        }
       },
       {
         path: '/shop/products',
@@ -305,7 +305,7 @@ const routes = [
           requireAuth: true,
           roles: ['shop'],
           name: '所有商品'
-        },
+        }
       },
       {
         path: '/shop/orders',
@@ -314,7 +314,7 @@ const routes = [
           requireAuth: true,
           roles: ['shop'],
           name: '所有订单'
-        },
+        }
       },
       {
         path: '/shop/profile',
@@ -351,7 +351,7 @@ const routes = [
     meta: {
       requireAuth: false,
       name: '注册成为商家'
-    },
+    }
   }
 ]
 

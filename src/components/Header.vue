@@ -83,7 +83,7 @@
         plain
         v-else
         size="small"
-        style="margin-top: 16px"
+        style="margin-top: 13px"
       >
         注销
       </el-button>
@@ -242,7 +242,7 @@ export default {
 .logo {
   width: 40px;
   margin-left: 7px;
-  margin-top: 7px;
+  margin-top: 10px;
   float: left;
   vertical-align: middle;
 }
@@ -251,6 +251,8 @@ export default {
   top: 20px;
   left: 8px;
   font-size: 1rem;
+  color: #333;
+  cursor: pointer;
 }
 .search-btn {
   margin-top: 13px;

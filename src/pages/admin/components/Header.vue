@@ -1,7 +1,8 @@
 <template>
   <el-row type="flex" class="row-bg" justify="space-around">
-    <el-col :span="5" class="item">
-      <span class="header">后台管理</span>
+    <el-col :span="7" class="item">
+      <a href="/home" class="home-link">商城系统</a>
+      <div class="header">后台管理</div>
       <span class="sub-header">[管理员]</span>
     </el-col>
     <el-col class="item" flex="1"></el-col>
@@ -64,7 +65,14 @@ export default {
   box-shadow: 0 1px 1px 1px rgba(204, 204, 204, 0.5);
   /* background-color: #459efd; */
 }
+
+.home-link {
+  margin-right: 5px;
+  font-size: 18px;
+}
 .item {
+  display: flex;
+  align-items: center;
   height: 50px;
   line-height: 50px;
   padding-left: 20px;

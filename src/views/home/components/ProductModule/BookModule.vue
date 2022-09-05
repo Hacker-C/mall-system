@@ -15,7 +15,7 @@
       <el-col :span="6" class="right-bd">
         <div
           style="cursor: pointer"
-          v-for="(item, index) in showBooks"
+          v-for="(item, index) in hotBooks"
           :key="index"
           @click="toDetail(item.productId)"
         >
@@ -31,7 +31,7 @@
           排行榜
         </header>
         <div
-          v-for="(item, index) in books"
+          v-for="(item, index) in topBooks"
           :key="item.productId"
           class="num-bd"
         >
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { getHotBook, getTopBook } from '@/api/product.js'
+
 export default {
   methods: {
     toDetail(pId) {
@@ -71,82 +73,17 @@ export default {
   },
   data() {
     return {
-      books: [
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/423dabbdc10041f4bdf0b88479c6a8fc',
-          productName: '三国演义',
-          productPrice: 60,
-          productId: 18
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/26d9cf7364f54451a94f96098ce80297',
-          productName: '红楼梦',
-          productPrice: 49.8,
-          productId: 19
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/1d60239509774a029bb1b1dfe0813145',
-          productName: '水浒传',
-          productPrice: 50,
-          productId: 15
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/d17e342459df4b77bca52d6b57924f00',
-          productName: '西游记',
-          productPrice: 49,
-          productId: 2
-        }
-      ],
-      showBooks: [
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/b814af27129a4bee9a9bfa8f33da01cd',
-          productName: '三体全集',
-          productPrice: 50,
-          productId: 25
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/bc1ea5b6afa34c5a996ddb637fa6d43f',
-          productName: '活着',
-          productPrice: 75,
-          productId: 27
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/21455c71dccc445598488b34004ea1fe',
-          productName: '机器人短篇全集',
-          productPrice: 45,
-          productId: 28
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/bbd3dee3cb844700a03e6c62ee136b9d',
-          productName: '鬼谷子',
-          productPrice: 100,
-          productId: 44
-        },
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/75cecf6dfa654e07aa9cd726e4a28127',
-          productName: '图解HTTP',
-          productPrice: 45,
-          productId: 45
-        },
-        // 2
-        {
-          imgSrc:
-            'http://119.23.46.102:9090/files/d17e342459df4b77bca52d6b57924f00',
-          productName: '西游记',
-          productPrice: 49,
-          productId: 2
-        }
-      ]
+      topBooks: [],
+      hotBooks: []
     }
+  },
+  mounted() {
+    getHotBook().then(res => {
+      this.hotBooks.push(...res)
+    })
+    getTopBook().then(res => {
+      this.topBooks.push(...res)
+    })
   }
 }
 </script>
@@ -229,6 +166,7 @@ export default {
 .name {
   font-weight: 100;
   bottom: 30px;
+  padding: 0 10px;
 }
 .rank-bd {
   padding: 10px;

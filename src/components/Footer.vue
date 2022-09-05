@@ -41,20 +41,18 @@
         <h4>关于本站</h4>
         <ul>
           <li>
-            <el-link
-              target="blank"
-              href="https://github.com/Hacker-C/Mall-FrontEnd"
-              >Github项目地址</el-link
-            >
+            <el-link target="blank" href="https://github.com/Hacker-C/Mall-FrontEnd">
+              Github项目地址
+            </el-link>
           </li>
-          <li>
-            <h4>小组成员</h4>
-          </li>
-          <li>组长：陈桂</li>
-          <li>组员：唐承 李志贤</li>
         </ul>
       </div>
     </footer>
+    <div class="beian">
+      <a href="https://beian.miit.gov.cn" target="_blank">
+        ©MurphyChen 2022 | 湘ICP备 2022004296号
+      </a>
+    </div>
   </div>
 </template>
 
@@ -87,5 +85,11 @@ li {
   font-size: 13px;
   color: #666666;
   margin: 8px;
+}
+.beian {
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  padding-bottom: 5px;
 }
 </style>

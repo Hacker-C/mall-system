@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import request from '../../../../utils/request'
+import request from '@/utils/request'
 const CategoryCard = () => import('./CategoryCard.vue')
 
 export default {
@@ -55,25 +55,21 @@ export default {
       request
         .get('/category/' + queryCategoryId)
         .then((res) => {
-          res.forEach((e) => {
-            this.products.push(e)
-          })
+          if (res.length > 5) {
+            res = res.slice(0, 5)
+          }
+          this.products.push(...res)
         })
         .catch((err) => {
           console.log(err)
         })
-    },
-    test() {
-      console.log(111)
     }
   },
   created() {
     request
       .get('/category/all')
       .then((res) => {
-        res.forEach((e) => {
-          this.categories.push(e)
-        })
+        this.categories.push(...res)
       })
       .catch((err) => {
         console.log(err)

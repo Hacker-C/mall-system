@@ -20,7 +20,7 @@ const Category = () => import('./components/category/Category.vue')
 const Discount = () => import('./components/Discount.vue')
 const EleModule = () => import('./components/ProductModule/EleModule.vue')
 const BookModule = () => import('./components/ProductModule/BookModule.vue')
-const Footer = () => import('../../components/Footer.vue')
+const Footer = () => import('@/components/Footer.vue')
 
 export default {
   components: {

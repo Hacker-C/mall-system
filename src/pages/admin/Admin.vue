@@ -27,8 +27,6 @@ export default {
   data() {
     return {}
   },
-  computed: {},
-  created() {},
   components: {
     Header,
     Aside

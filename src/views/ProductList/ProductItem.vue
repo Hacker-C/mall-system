@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <img :src="product.imgSrc" alt="" style="width: 90%; height: 150px" />
-    <h3 style="text-align: center">{{ product.productName }}</h3>
+    <h3 class="title">{{ product.productName }}</h3>
     <div class="block">
       <el-rate
         v-model="product.rate"
@@ -101,5 +101,11 @@ export default {
   font-size: 14px;
   text-decoration: line-through;
   color: #787a89;
+}
+
+.title {
+  text-align: center;
+  font-size: 15px;
+  padding: 0 5px;
 }
 </style>

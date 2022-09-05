@@ -13,9 +13,7 @@
           style="margin-top: 10px; width: 250px"
           clearable
         ></el-input>
-        <el-button type="primary" style="margin-left: 10px" @click="search"
-          >查询</el-button
-        >
+        <el-button type="primary" style="margin-left: 10px" @click="search">查询</el-button>
       </el-form>
       <el-table :data="tableData" style="margin-top: 10px" border stripe>
         <el-table-column
@@ -25,16 +23,11 @@
           width="70px"
           align="center"
         ></el-table-column>
-        <el-table-column prop="username" label="用户名" align="center">
-        </el-table-column>
-        <el-table-column prop="realName" label="真实姓名" align="center">
-        </el-table-column>
-        <el-table-column prop="telephone" label="联系电话" align="center">
-        </el-table-column>
-        <el-table-column prop="age" label="年龄" sortable align="center">
-        </el-table-column>
-        <el-table-column prop="sex" label="性别" align="center">
-        </el-table-column>
+        <el-table-column prop="username" label="用户名" align="center"></el-table-column>
+        <el-table-column prop="realName" label="真实姓名" align="center"></el-table-column>
+        <el-table-column prop="telephone" label="联系电话" align="center"></el-table-column>
+        <el-table-column prop="age" label="年龄" sortable align="center"></el-table-column>
+        <el-table-column prop="sex" label="性别" align="center"></el-table-column>
         <el-table-column
           prop="role"
           label="权限角色"
@@ -58,22 +51,14 @@
                   : 'success'
               "
               disable-transitions
-              >{{
-                scope.row.role === 'admin'
-                  ? '管理员'
-                  : scope.row.role === 'shop'
-                  ? '商家'
-                  : '客户'
-              }}</el-tag
             >
+              {{
+                scope.row.role === 'admin' ? '管理员' : scope.row.role === 'shop' ? '商家' : '客户'
+              }}
+            </el-tag>
           </template>
         </el-table-column>
-        <el-table-column
-          align="center"
-          prop="status"
-          label="账号状态"
-          width="100px"
-        >
+        <el-table-column align="center" prop="status" label="账号状态" width="100px">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.status"
@@ -82,8 +67,7 @@
               active-color="#13ce66"
               inactive-color="#ff4949"
               @change="setStatus($event, scope.row.userId)"
-            >
-            </el-switch>
+            ></el-switch>
           </template>
         </el-table-column>
         <el-table-column align="center" fixed="right" label="操作">
@@ -123,15 +107,10 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
         style="margin-top: 10px"
-      >
-      </el-pagination>
+      ></el-pagination>
 
       <!-- 添加信息弹出 -->
-      <el-dialog
-        title="填入个人信息"
-        :visible.sync="dialogFormVisible"
-        width="50%"
-      >
+      <el-dialog title="填入个人信息" :visible.sync="dialogFormVisible" width="50%">
         <el-form ref="form" :model="form" label-width="100px">
           <el-form-item label="用户名" style="margin-bottom: 7px" v-if="isAdd">
             <el-input v-model="form.username" style="width: 200px"></el-input>
@@ -191,8 +170,8 @@ export default {
     setStatus(status, uId) {
       request
         .patch('/user/' + uId + '/' + status)
-        .then((res) => {})
-        .catch((err) => {
+        .then(res => {})
+        .catch(err => {
           console.log(err)
         })
     },
@@ -222,7 +201,7 @@ export default {
       })
         .then(() => {
           let deleteId = row.userId
-          request.delete('/user/' + deleteId).then((res) => {
+          request.delete('/user/' + deleteId).then(res => {
             if (res.code === '0') {
               this.$message({
                 message: '删除成功！',
@@ -267,7 +246,7 @@ export default {
             key: this.key
           }
         })
-        .then((res) => {
+        .then(res => {
           if (res.code == '0') {
             this.$message({
               message: res.msg,
@@ -276,7 +255,8 @@ export default {
             })
             this.total = res.data.total
             this.tableData = []
-            res.data.data.forEach((item, index) => {
+            console.log(res.data)
+            res?.data?.data?.forEach((item, index) => {
               item.index = index + 1
               this.tableData.push(item)
             })
@@ -292,7 +272,7 @@ export default {
       if (this.form.userId) {
         request
           .post('user/account', this.form)
-          .then((res) => {
+          .then(res => {
             if (res.code === '0') {
               this.dialogFormVisible = false
             } else {
@@ -302,7 +282,7 @@ export default {
               })
             }
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err)
           })
           .then(() => {
@@ -313,7 +293,7 @@ export default {
         // 添加新用户
         request
           .post('/user/add', this.form)
-          .then((res) => {
+          .then(res => {
             if (res.code === '0') {
               this.dialogFormVisible = false
               this.load()
@@ -324,7 +304,7 @@ export default {
               })
             }
           })
-          .catch((err) => {})
+          .catch(err => {})
       }
     },
     resetPassword(user) {
@@ -335,7 +315,7 @@ export default {
       })
         .then(() => {
           let uId = user.userId
-          request.patch('/user/reset/' + uId).then((res) => {
+          request.patch('/user/reset/' + uId).then(res => {
             if (res.code === '0') {
               this.$message({
                 message: res.msg,
